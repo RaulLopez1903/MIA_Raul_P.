@@ -16,6 +16,7 @@ Para cada una indica:
 ## Formato sugerido
 
 1. **Nombre:**  Google Finance Agent
+
    **Uso:**  En la plataforma de Google Finance está integrado un Agente, mediante el cual, por medio de chat textual, puedo asignar mis nuevas adquisiciones de acciones a mi portafolio, preguntar como se ha comportado recientemente, las noticias que impactan a su estructura o las fechas de reportes futuros de la empresas que integran el portafolio en cuestión.
 
 2. **Nombre:**  Gemini Pro
