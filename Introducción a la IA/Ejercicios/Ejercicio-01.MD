@@ -15,14 +15,14 @@ Para cada una indica:
 
 ## Formato sugerido
 
-1. **Nombre:**  
-   **Uso:**
+1. **Nombre:**  Google Finance Agent
+   **Uso:**  En la plataforma de Google Finance está integrado un Agente, mediante el cual, por medio de chat textual, puedo asignar mis nuevas adquisiciones de acciones a mi portafolio, preguntar como se ha comportado recientemente, las noticias que impactan a su estructura o las fechas de reportes futuros de la empresas que integran el portafolio en cuestión.
 
-2. **Nombre:**  
-   **Uso:**
+2. **Nombre:**  Gemini Pro
+   **Uso:**  La empresa donde trabajo tiene licencia de este modelo de IA, generalmente creo GEMs (chats personalizados) para dudas de código, semántica de fórmulas o links de documentación específica para un problema. Tengo por ejemplo GEMs para Python, Power BI, Excel y SQL.
 
-3. **Nombre:**  
-   **Uso:**
+3. **Nombre:**  Chat GPT
+   **Uso:**  Tengo descargada la app de ChatGPT en mi celular y la uso para dudas de actividades cotidianas, por ejemplo; precios aproximados de piezas de repuesto para mi vehículo, sugerencias de marcas de monitores para mi setup, comparativa de productos de alimentación según la revista del consumidor de PROFECO o curiosidades generales.
 
 ## Criterios
 
