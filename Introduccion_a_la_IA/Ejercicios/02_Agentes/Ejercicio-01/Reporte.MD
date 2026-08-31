@@ -27,3 +27,5 @@ Se diseñó una cueva de cuadrícula 4x4 modificando las posiciones del Wumpus y
 1 | A   .   W   P     A = Agente inicio (1,1) mirando al Este
   -----------------
     1   2   3   4   X
+
+![Mapa de la cueva](./Images/01-Wumpus_World.PNG)
