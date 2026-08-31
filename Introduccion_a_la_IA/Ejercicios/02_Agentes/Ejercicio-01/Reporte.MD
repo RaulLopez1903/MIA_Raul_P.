@@ -15,7 +15,7 @@ Se diseñó una cueva de cuadrícula 4x4 modificando las posiciones del Wumpus y
 * **Pozos (P):** Ubicados en `[4, 1]` , `[3, 2]` y `[4, 3]` (reubicados de las posiciones clásicas `[3, 1]`, `[3, 3]`, `[4, 4]`).
 * **Oro (G):** Ubicado en `[4, 4]` (reubicado de la posición clásica `[2, 3]`).
 
-![Mapa de la cueva](./Images/01-Wumpus_World.PNG.png)
+![Mapa de la cueva](./Images/01-Wumpus_World.png)
 
 ### Diagrama ASCII de la Cueva
 
