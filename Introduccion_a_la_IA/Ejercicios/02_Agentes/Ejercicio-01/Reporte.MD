@@ -51,7 +51,9 @@ Ejecutando `python 05_utility_based_agent.py --config config/mi_cueva_4x4.yaml`:
 
 Ejecutando `python 06_learning_agent.py --episodes 1500 --config config/mi_cueva_4x4.yaml`:
 
-![Leraning Agent](./Images/06-Learning_agent.PNG)
+![Learning Agent](./Images/06-Learning_agent.PNG)
 
 ### Resultados 
+
+El resultado de los agentes ante la configuración de la cueva planteada fue el mismo, ninguno logró salir de la cueva con el oro. De hecho, solo el agente con aprendizaje logró salir de la cueva después de una única acción `climb`, el agente basado en utilidad logró derrotar al Wumpus pero en su siguiente paso se encontró con un Pit, por lo que su resultado fue `DIED`; los demás agentes únicamente recorrieron el mapa hasta que agotaron el límite de 200 movimientos.
 
