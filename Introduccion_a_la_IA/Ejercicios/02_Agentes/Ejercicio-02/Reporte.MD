@@ -35,49 +35,49 @@ Describe PEAS para cada una de estas aplicaciones:
 
 2. **Robot aspirador doméstico** (p. ej. Roomba u otro robot que limpia pisos de un departamento).
 
-- **Performance:** limpiar el máximo espacio con el menor consumo de energía posible.
-- **Environment:** interior de una vivienda; presencia de personas y muebles, cambia con el tiempo.
-- **Actuators:** succionar, cambiar de dirección, moverse, hacer sonidos de proximidad, notificar al usuario.
-- **Sensors:** sensor de calor, cámara, sensor de proximidad.
+- **Performance:** limpieza completa, menor tiempo, menor consumo de energia.
+- **Environment:** interior de una vivienda; presencia de personas, mascotas y muebles, cambia con el tiempo.
+- **Actuators:** motor de succion, ruedas giratorias, bocina de sonido de proximidad, cepillos giratorios.
+- **Sensors:** sensor de calor, cámara, sensor de proximidad, botones de comandos.
 
 3. **Sistema de recomendación de streaming** (p. ej. Netflix o Spotify que sugiere películas o canciones).
 
-- **Performance:** Recomendar opciones de reproducción que generen interés en el usuario.
-- **Environment:** 
+- **Performance:** Recomendaciones aceptadas.
+- **Environment:**  Opciones disponibles en la plataforma, usuarios.
 - **Actuators:** Autocompletar en el buscador, preview de la recomendación, reproducción automática, añadir o eliminar posibles sugerencias.
-- **Sensors:** Historial de reproducción del usuario, opciones disponibles en la plataforma, búsquedas recientes, sistema de `similitud` entre títulos, comportamiento del usuario (skips, sugerencias rechazadas o aceptadas).
+- **Sensors:** Historial de reproducción del usuario, búsquedas recientes, sistema de `similitud` entre títulos, comportamiento del usuario (skips, sugerencias rechazadas o aceptadas).
 
 4. **Vehículo autónomo en ciudad** (conducción sin conductor en calles urbanas con tráfico y peatones).
 
-- **Performance:**  Transportar a los usuarios de manera cómoda, rápida, segura y legal.
+- **Performance:**  Comodidad, velocidad, cumplimiento de leyes de transito, seguridad.
 - **Environment:**  Calles y avenidas de la ciudad con tráfico, peatones y señales de tránsito.
-- **Actuators:**  Acelerar, frenar, cambiar de dirección, sonidos de alerta.
-- **Sensors:**  Detalles de la ruta, sensores de calor, sensores de proximidad, cámaras, sensores eléctricos internos.
+- **Actuators:**  Acelerador, freno, llantas, volante, bocinas.
+- **Sensors:**  Detalles de la ruta, sensores de calor, sensores de proximidad, cámaras, sensores eléctricos internos, GPS.
 
 5. **Agente de trading algorítmico en bolsa** (compra y venta automática de acciones en mercados financieros).
 
-- **Performance:** Realizar compra-venta de acciones minimizando pérdidas y maximizando ganancias.
-- **Environment:** 
-- **Actuators:** 
-- **Sensors:** Historial de comportamiento de las acciones, perfil de riesgo del usuario.
+- **Performance:**  Minimizar pérdidas y maximizar ganancias.
+- **Environment:**  Mercado de valores en linea, con acciones de precios cambiantes e incertidumbre del futuro, wallet del usuario.
+- **Actuators:**  Ordenar compras o ventas, retiro de efectivo, notificaciones al usuario, generar estado de cuenta, mostrar comportamiento del portafolio, sugerir compras o ventas.
+- **Sensors:**  Historial de comportamiento de las acciones, perfil de riesgo del usuario, noticias del mercado o empresas.
 
 6. **Sistema de diagnóstico médico asistido por IA** (apoya a un médico a interpretar síntomas e imágenes clínicas).
 
-- **Performance:** 
-- **Environment:** 
-- **Actuators:**
-- **Sensors:** 
+- **Performance:**  Realizar diagnosticos correctos, rapidez, bienestar del paciente, minimizar costos al paciente.
+- **Environment:**  Paciente, historial medico del paciente, base de datos medica (enfermedad-sintomas).
+- **Actuators:**  Generar y mostrar diagnostico, generar y mostrar receta medica, sugerir análisis médicos.
+- **Sensors:**  Teclado, cámara, sensor de calor.
 
 7. **Dron de inspección de infraestructura** (revisa grietas, corrosión o fugas en puentes, tuberías o líneas eléctricas).
 
-- **Performance:** 
-- **Environment:** 
-- **Actuators:** 
-- **Sensors:** 
+- **Performance:**  Velocidad, certeza, maximizar alcance de inspección.
+- **Environment:**  Alturas exteriores con estructuras fijas, clima variable, personas, autos, animales y situaciones extraordinarias.
+- **Actuators:**  Aspas.
+- **Sensors:**  Cámara, sensor de calor, escaner.
 
 8. **Agente jugador de ajedrez** (programa que compite contra un humano u otro agente en partidas completas).
 
-- **Performance:** 
+- **Performance:**  
 - **Environment:** 
 - **Actuators:** 
 - **Sensors:** 
