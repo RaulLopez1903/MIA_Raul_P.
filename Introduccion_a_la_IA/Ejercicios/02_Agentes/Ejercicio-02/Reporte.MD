@@ -23,7 +23,7 @@ Para cada una de las **8 aplicaciones** listadas abajo, redacta una descripción
 *(p. ej. Siri, Alexa o Google Assistant en un altavoz inteligente)*
 
 - **Performance:** Comprender y ejecutar las tareas solicitadas de manera precisa y con el menor tiempo de respuesta posible.
-- **Environment:** Casa u oficina con ruido, personas, internet (parcialmente observable).
+- **Environment:** Interior de una casa con ruido, personas, internet (parcialmente observable).
 - **Actuators:** Bocina, envio de instrucciones a otros aparatos.
 - **Sensors:** Micrófono, botones.
 ---
@@ -32,8 +32,8 @@ Para cada una de las **8 aplicaciones** listadas abajo, redacta una descripción
 *(p. ej. Roomba u otro robot que limpia pisos de un departamento)*
 
 - **Performance:** Mayor alcance de limpieza con menor tiempo y consumo de energía.
-- **Environment:** Interior de una vivienda con presencia de personas, mascotas y muebles (parcialmente observable).
-- **Actuators:** Motor de succión, ruedas giratorias, bocina de sonido de proximidad, cepillos giratorios.
+- **Environment:** Interior de una casa con personas, mascotas y muebles (parcialmente observable).
+- **Actuators:** Motor de succión, ruedas, bocina de sonido de proximidad, cepillos.
 - **Sensors:** Sensor de calor, cámara, sensor de proximidad, botones de comandos.
 
 ---
