@@ -22,18 +22,17 @@ Para cada una de las **8 aplicaciones** listadas abajo, redacta una descripción
 ### 1. Asistente virtual de voz
 *(p. ej. Siri, Alexa o Google Assistant en un altavoz inteligente)*
 
-- **Performance:** 
-- **Environment:** 
-- **Actuators:** 
-- **Sensors:** Micrófono, 
-
+- **Performance:** Comprender y ejecutar las tareas solicitadas de manera precisa y con el menor tiempo de respuesta posible.
+- **Environment:** Casa u oficina con ruido, personas, internet (parcialmente observable).
+- **Actuators:** Bocina, envio de instrucciones a otros aparatos.
+- **Sensors:** Micrófono, botones.
 ---
 
 ### 2. Robot aspirador doméstico
 *(p. ej. Roomba u otro robot que limpia pisos de un departamento)*
 
 - **Performance:** Mayor alcance de limpieza con menor tiempo y consumo de energía.
-- **Environment:** Interior de una vivienda con presencia de personas, mascotas y muebles (estocástico).
+- **Environment:** Interior de una vivienda con presencia de personas, mascotas y muebles (parcialmente observable).
 - **Actuators:** Motor de succión, ruedas giratorias, bocina de sonido de proximidad, cepillos giratorios.
 - **Sensors:** Sensor de calor, cámara, sensor de proximidad, botones de comandos.
 
@@ -73,7 +72,7 @@ Para cada una de las **8 aplicaciones** listadas abajo, redacta una descripción
 *(apoya a un médico a interpretar síntomas e imágenes clínicas)*
 
 - **Performance:** Realizar diagnósticos correctos, rapidez, bienestar del paciente, minimizar costos al paciente.
-- **Environment:** Paciente, historial médico del paciente, base de datos médica (enfermedad-síntomas).
+- **Environment:** Paciente, historial médico del paciente, base de datos médica (enfermedad-síntomas) (parcialmente observable).
 - **Actuators:** Generar y mostrar diagnóstico, generar y mostrar receta médica, sugerir análisis médicos.
 - **Sensors:** Teclado, cámara, sensor de calor.
 
@@ -93,7 +92,7 @@ Para cada una de las **8 aplicaciones** listadas abajo, redacta una descripción
 *(programa que compite contra un humano u otro agente en partidas completas)*
 
 - **Performance:** Partidas ganadas, maximizar movimientos brillantes, minimizar movimientos de error, minimizar tiempo de pensamiento.
-- **Environment:** Tablero con piezas de ajedrez en constante movimiento y reloj con tiempo de juego restante definido, rival.
+- **Environment:** Tablero con piezas de ajedrez en constante movimiento y reloj con tiempo de juego restante definido, rival (totalmente observable).
 - **Actuators:** Mover pieza, analizar posición, rendirse.
 - **Sensors:** Sensor de movimientos del rival y lector de reloj con tiempo restante de juego.
 
