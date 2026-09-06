@@ -36,7 +36,7 @@ python 01_wumpus_world.py --config config/mi_cueva_4x4.yaml
 ```
 
 El mapa generado se visualiza a continuación:
-
+![Mapa de la cueva](./Images/01-Wumpus_World.PNG)
 ---
 
 ## 2. Ejecución de los Agentes
@@ -49,34 +49,35 @@ python 02_simple_reflex_agent.py --config config/mi_cueva_4x4.yaml
 
 ```
 
+![Simple Reflex Agent](./Images/02-Simple_reflex_agent.PNG)
 
 2. **Agente Basado en Modelo:**
 ```bash
 python 03_model_based_agent.py --config config/mi_cueva_4x4.yaml
 
 ```
-
+![Model Based Agent](./Images/03-Model_based_agent.PNG)
 
 3. **Agente Basado en Metas:**
 ```bash
 python 04_goal_based_agent.py --config config/mi_cueva_4x4.yaml
 
 ```
-
+![Goal Based Agent](./Images/04-Goal_based_agent.PNG)
 
 4. **Agente Basado en Utilidad:**
 ```bash
 python 05_utility_based_agent.py --config config/mi_cueva_4x4.yaml
 
 ```
-
+![Utility Based Agent](./Images/05-Utility_based_agent.PNG)
 
 5. **Agente con Aprendizaje:**
 ```bash
 python 06_learning_agent.py --episodes 1500 --config config/mi_cueva_4x4.yaml
 
 ```
-
+![Learning Agent](./Images/06-Learning_agent.PNG)
 
 
 ---
@@ -109,7 +110,3 @@ En la cueva `mi_cueva_4x4.yaml`, el agente se detiene al llegar a la casilla `[1
 
 * **Basado en Metas:** Aunque cuenta con la capacidad operativa para disparar la flecha, al quedar atrapado en una zona donde desconoce si el camino subsecuente es seguro, prioriza girar sobre el avance, gastando todos sus movimientos en el bucle sin ejecutar el disparo.
 * **Basado en Utilidad:** Evalúa una función de utilidad que lo lleva a retornar a la posición del Wumpus y disparar. No obstante, al no calcular la probabilidad de riesgo de la casilla posterior, avanza hacia un pozo no detectado y muere.
-
-```
-
-```
