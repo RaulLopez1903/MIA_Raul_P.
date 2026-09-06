@@ -1,4 +1,3 @@
-```markdown
 # Reporte de Ejercicio 1 — Mundo del Wumpus
 
 **Curso:** Maestría en Inteligencia Artificial  
