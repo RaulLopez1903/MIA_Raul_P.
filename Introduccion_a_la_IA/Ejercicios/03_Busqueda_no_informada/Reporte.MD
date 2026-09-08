@@ -1,112 +1,99 @@
-# Reporte de Ejercicio 1 — Mundo del Wumpus
+# Reporte de Búsqueda No Informada: Mapa de Rumania
 
-**Curso:** Maestría en Inteligencia Artificial  
-**Alumno:** Raúl Alejandro Pérez López  
-**Asignatura:** Introducción a la IA  
+**Asignatura:** Introducción a la inteligencia artifical
+**Tema:** Busqueda no informada
+**Ejercicio:** Ejercicio 1 — Comparación de Algoritmos BFS, UCS, DFS, DLS e IDS  
+**Origen:** Timisoara  
+**Destino:** Bucharest  
 
 ---
 
-## 1. Configuración de la Cueva (`mi_cueva_4x4.yaml`)
+## 1. Instancia Elegida y Subgrafo Relevante
 
-Se diseñó un entorno de cuadrícula de 4x4 modificando las posiciones del Wumpus, los pozos (*pits*) y el oro con respecto a la configuración clásica (`classic_4x4.yaml`), garantizando la validez de las reglas del entorno:
+Para este análisis se seleccionó la ruta con origen en **Timisoara** y destino en **Bucharest**. 
 
-* **Agente (A):** Ubicación inicial en `[1, 1]`, orientación `east` (Este) y 1 flecha disponible.
-* **Wumpus (W):** Reubicado en la casilla `[3, 1]` (posición clásica: `[1, 3]`).
-* **Pozos (P):** Reubicados en las casillas `[4, 1]`, `[3, 2]` y `[4, 3]` (posiciones clásicas: `[3, 1]`, `[3, 3]`, `[4, 4]`).
-* **Oro (G):** Reubicado en la casilla `[4, 4]` (posición clásica: `[2, 3]`).
+### Subgrafo Relevante (Distancias en km)
 
-### Diagrama ASCII de la Cueva
-
-```text
-  Y
-4 | .   .   .   G     G = Oro [4, 4]
-3 | .   .   P   .     P = Pozos [4, 1], [3, 2], [4, 3]
-2 | .   P   .   .     W = Wumpus [3, 1]
-1 | A   .   W   P     A = Agente inicio [1, 1] (mirando al Este)
-  -----------------
-    1   2   3   4   X
+```
+                [Arad] ─── 140 km ─── [Sibiu] ─── 99 km ─── [Fagaras] ─── 211 km ───┐
+                  │                      │                                          │
+                118 km                 80 km                                        │
+                  │                      │                                          │
+              [Timisoara] ── 111 km     ─┴─ [Lugoj]    [Rimnicu Vilcea]             │
+                  │                      │                                          │
+                70 km                  97 km                                        │
+                  │                      │                                          │
+              [Mehadia]                  └── [Pitesti] ─── 101 km ─── [Bucharest] ◄ |
+                  │                             │                          ▲
+                75 km                        138 km                        │
+                  │                             │                          │
+              [Dobreta] ─── 120 km ──────── [Craiova] ─────────────────────┘
 
 ```
 
-Tras definir la configuración en el archivo YAML, se verificó el entorno ejecutando:
-
-```bash
-python 01_wumpus_world.py --config config/mi_cueva_4x4.yaml
-
-```
-
-El mapa generado se visualiza a continuación:
-![Mapa de la cueva](./Images/01-Wumpus_World.PNG)
 ---
 
-## 2. Ejecución de los Agentes
+## 2. Evidencia de Ejecución de Algoritmos
 
 Se ejecutaron los scripts correspondientes a las distintas arquitecturas de agentes para evaluar su desempeño en el entorno diseñado:
 
 1. **Agente de Reflejo Simple:**
 ```bash
-python 02_simple_reflex_agent.py --config config/mi_cueva_4x4.yaml
-
+python 02_breadth_first_search.py --from-city Timisoara --to Bucharest
 ```
+![Breadth First Search](./Images/02-breadth_first_search.PNG)
 
-![Simple Reflex Agent](./Images/02-Simple_reflex_agent.PNG)
-
-2. **Agente Basado en Modelo:**
 ```bash
-python 03_model_based_agent.py --config config/mi_cueva_4x4.yaml
-
+python 03_uniform_cost_search.py  --from-city Timisoara --to Bucharest
 ```
-![Model Based Agent](./Images/03-Model_based_agent.PNG)
+![Uniform Cost Search](./Images/03_uniform_cost_search.PNG)
 
-3. **Agente Basado en Metas:**
 ```bash
-python 04_goal_based_agent.py --config config/mi_cueva_4x4.yaml
-
+python 04_depth_first_search.py   --from-city Timisoara --to Bucharest
 ```
-![Goal Based Agent](./Images/04-Goal_based_agent.PNG)
+![Depth First Search](./Images/04_depth_first_search.PNG)
 
-4. **Agente Basado en Utilidad:**
 ```bash
-python 05_utility_based_agent.py --config config/mi_cueva_4x4.yaml
-
+python 05_depth_limited_search.py --from-city Timisoara --to Bucharest --limit 2
 ```
-![Utility Based Agent](./Images/05-Utility_based_agent.PNG)
+![Depth Limited Searh Limit 2](./Images/05_depth_limited_search_limit2.PNG)
 
-5. **Agente con Aprendizaje:**
 ```bash
-python 06_learning_agent.py --episodes 1500 --config config/mi_cueva_4x4.yaml
-
+python 05_depth_limited_search.py --from-city Timisoara --to Bucharest --limit 4
 ```
-![Learning Agent](./Images/06-Learning_agent.PNG)
+![Depth Limited Searh Limit 4](./Images/05_depth_limited_search_limit4.PNG)
 
+```bash
+python 06_iterative_deepening_search.py --from-city Timisoara --to Bucharest
+```
+![Iterative Deepening Search](./Images/06_iterative_deepening_search.PNG)
+
+## 3. Tabla Comparativa de Resultados
+
+| Algoritmo | Status | Camino (Path) | Profundidad (Hops) | Costo (km) | Nodos Expandidos | Nodos Generados |
+| :--- | :--- | :--- | :---: | :---: | :---: | :---: |
+| **BFS** | `success` | Timisoara → Arad → Sibiu → Fagaras → Bucharest | 4 | 568 km | 7 | 17 |
+| **UCS** | `success` | Timisoara → Lugoj → Mehadia → Dobreta → Craiova → Pitesti → Bucharest | 6 | 536 km | 13 | 31 |
+| **DFS** | `success` | Timisoara → Arad → Sibiu → Rimnicu Vilcea → Pitesti → Craiova → Dobreta → Mehadia → Lugoj | -- | -- | -- | -- |
+| **DLS (límite = 2)** | `cutoff` | N/A | -- | N/A | 3 | 5 |
+| **DLS (límite = 4)** | `success` | Timisoara → Arad → Sibiu → Fagaras → Bucharest | 4 | 568 km | 7 | 13 |
+| **IDS** | `success` | Timisoara → Arad → Sibiu → Fagaras → Bucharest | 4 | 568 km | 15 | 29 |
 
 ---
 
-## 3. Análisis de Resultados
+## 4. Análisis de Resultados
 
-### 3.1. Generalidades de Desempeño
+### 1. ¿BFS encontró el camino con menos carreteras? ¿UCS el de menos km?
+* **BFS (Breadth-First Search):** Encontró una ruta de **4 carreteras (hops)** (`Timisoara → Arad → Sibiu → Fagaras → Bucharest`) con un costo de **568 km**. Al explorar por niveles en amplitud, garantiza hallar la solución con el menor número de saltos.
+* **UCS (Uniform-Cost Search):** Encontró una ruta más larga en número de carreteras (**6 hops**), pero óptima en distancia total: **536 km** (`Timisoara → Lugoj → Mehadia → Dobreta → Craiova → Pitesti → Bucharest`). UCS expande siempre el nodo con el menor costo acumulado $g(n)$, logrando un ahorro de **32 km** en comparación con BFS.
 
-Bajo la configuración planteada, ningún agente logró cumplir el objetivo de extraer el oro y salir exitosamente de la cueva:
+### 2. ¿Por qué DFS puede devolver un camino más largo aunque el grafo sea el mismo?
+* **DFS (Depth-First Search)** explora de manera profunda por la primera rama elegida según el orden alfabético de los vecinos. En este mapa, DFS profundiza por `Arad → Sibiu → Rimnicu Vilcea → Pitesti → Craiova...`, atrapándose en trayectos largos antes de retroceder, sin evaluar ni la profundidad ni el costo en kilómetros.
 
-* **Agente con Aprendizaje:** Salió de la cueva de forma inmediata ejecutando la acción `climb` en el primer paso.
-* **Agente Basado en Utilidad:** Logró derrotar al Wumpus disparando la flecha; sin embargo, al avanzar hacia la siguiente casilla cayó en un pozo (*Pit*), concluyendo en estado `DIED`.
-* **Agentes de Reflejo Simple, Basado en Modelo y Basado en Metas:** Recorrieron el mapa en bucles de movimientos hasta agotar el límite establecido de 200 pasos.
+### 3. Comportamiento de DLS e IDS y relación con BFS
+* **DLS con `--limit 2`:** Devuelve `cutoff` debido a que la solución más cercana en número de saltos se encuentra a profundidad 4. Con solo 2 saltos únicamente logra alcanzar nodos como `Arad`, `Lugoj` o `Mehadia`.
+* **DLS con `--limit 4`:** Alcanza la profundidad requerida y devuelve la misma solución de 4 saltos que BFS (`568 km`).
+* **IDS (Iterative Deepening Search):** Ejecuta búsquedas DLS de forma iterativa incrementando el límite ($l = 0, 1, 2, 3, 4$). Al alcanzar el límite 4 encuentra la solución óptima en carreteras igual que BFS, combinando la eficiencia de memoria de DFS con la optimalidad en saltos de BFS.
 
-### 3.2. Agente de Reflejo Simple (Análisis de Falla o Suerte)
+---
 
-El agente de reflejo simple entra en un bucle infinito al ingresar a una casilla con percepción de hedor (`stench`). Debido a que su regla de condición-acción establece girar a la derecha (`TURN_RIGHT`) cuando percibe `stench` o brisa (`breeze`), el agente queda atrapado ejecutando giros sucesivos en la misma casilla.
-
-Este agente solo podría *tener suerte* y resolver el problema si la disposición del mapa le permite encontrar un camino directo hacia el oro sin pasar por casillas adyacentes a pozos o al Wumpus, evitando así activar las percepciones que disparan la regla de giro.
-
-### 3.3. Agente Basado en Modelo y Variación con Pozos
-
-El agente basado en modelo mantiene un registro de las casillas clasificadas como "seguras" (definidas como aquellas con al menos dos casillas adyacentes visitadas sin percepciones de riesgo). Ante señales de `stench` o `breeze`, el agente redirige su trayectoria solo hacia casillas que pueda confirmar como seguras.
-
-En la cueva `mi_cueva_4x4.yaml`, el agente se detiene al llegar a la casilla `[1, 3]`: al no tener la certeza de que la casilla `[1, 4]` sea segura, evita avanzar y se limita a girar a la izquierda hasta consumir sus 200 movimientos.
-
-* **Efecto de acercar o alejar un pozo:** Si se posiciona un pozo en una casilla más cercana a la salida (por ejemplo, en `[1, 2]`), la percepción de brisa generada al inicio privará al agente de confirmar casillas vecinas como seguras. En consecuencia, el agente restringirá totalmente sus desplazamientos frontales y entrará en bucle de giros sin realizar ningún avance efectivo.
-
-### 3.4. Agente Basado en Metas y Agente Basado en Utilidad
-
-* **Basado en Metas:** Aunque cuenta con la capacidad operativa para disparar la flecha, al quedar atrapado en una zona donde desconoce si el camino subsecuente es seguro, prioriza girar sobre el avance, gastando todos sus movimientos en el bucle sin ejecutar el disparo.
-* **Basado en Utilidad:** Evalúa una función de utilidad que lo lleva a retornar a la posición del Wumpus y disparar. No obstante, al no calcular la probabilidad de riesgo de la casilla posterior, avanza hacia un pozo no detectado y muere.
