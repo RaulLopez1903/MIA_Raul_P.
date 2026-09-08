@@ -41,7 +41,7 @@ Se ejecutaron los scripts correspondientes a las distintas arquitecturas de agen
 ```bash
 python 02_breadth_first_search.py --from-city Timisoara --to Bucharest
 ```
-![Breadth First Search](./03_Images/02-breadth_first_search.PNG)
+![Breadth First Search](./03_Images/02_breadth_first_search.PNG)
 
 ```bash
 python 03_uniform_cost_search.py  --from-city Timisoara --to Bucharest
