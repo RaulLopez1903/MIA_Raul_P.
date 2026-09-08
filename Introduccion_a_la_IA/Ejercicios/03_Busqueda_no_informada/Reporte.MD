@@ -56,12 +56,12 @@ python 04_depth_first_search.py   --from-city Timisoara --to Bucharest
 ```bash
 python 05_depth_limited_search.py --from-city Timisoara --to Bucharest --limit 2
 ```
-![Depth Limited Searh Limit 2](./03_Images/05_depth_limited_search_limit2.PNG)
+![Depth Limited Searh Limit 2](./03_Images/05_depth_limited_search_limit_2.PNG)
 
 ```bash
 python 05_depth_limited_search.py --from-city Timisoara --to Bucharest --limit 4
 ```
-![Depth Limited Searh Limit 4](./03_Images/05_depth_limited_search_limit4.PNG)
+![Depth Limited Searh Limit 4](./03_Images/05_depth_limited_search_limit_4.PNG)
 
 ```bash
 python 06_iterative_deepening_search.py --from-city Timisoara --to Bucharest
