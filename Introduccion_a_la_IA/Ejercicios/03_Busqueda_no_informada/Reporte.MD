@@ -41,32 +41,32 @@ Se ejecutaron los scripts correspondientes a las distintas arquitecturas de agen
 ```bash
 python 02_breadth_first_search.py --from-city Timisoara --to Bucharest
 ```
-![Breadth First Search](./Images/02-breadth_first_search.PNG)
+![Breadth First Search](./03_Images/02-breadth_first_search.PNG)
 
 ```bash
 python 03_uniform_cost_search.py  --from-city Timisoara --to Bucharest
 ```
-![Uniform Cost Search](./Images/03_uniform_cost_search.PNG)
+![Uniform Cost Search](./03_Images/03_uniform_cost_search.PNG)
 
 ```bash
 python 04_depth_first_search.py   --from-city Timisoara --to Bucharest
 ```
-![Depth First Search](./Images/04_depth_first_search.PNG)
+![Depth First Search](./03_Images/04_depth_first_search.PNG)
 
 ```bash
 python 05_depth_limited_search.py --from-city Timisoara --to Bucharest --limit 2
 ```
-![Depth Limited Searh Limit 2](./Images/05_depth_limited_search_limit2.PNG)
+![Depth Limited Searh Limit 2](./03_Images/05_depth_limited_search_limit2.PNG)
 
 ```bash
 python 05_depth_limited_search.py --from-city Timisoara --to Bucharest --limit 4
 ```
-![Depth Limited Searh Limit 4](./Images/05_depth_limited_search_limit4.PNG)
+![Depth Limited Searh Limit 4](./03_Images/05_depth_limited_search_limit4.PNG)
 
 ```bash
 python 06_iterative_deepening_search.py --from-city Timisoara --to Bucharest
 ```
-![Iterative Deepening Search](./Images/06_iterative_deepening_search.PNG)
+![Iterative Deepening Search](./03_Images/06_iterative_deepening_search.PNG)
 
 ## 3. Tabla Comparativa de Resultados
 
