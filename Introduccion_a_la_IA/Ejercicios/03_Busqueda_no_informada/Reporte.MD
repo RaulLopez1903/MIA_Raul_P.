@@ -1,7 +1,7 @@
 # Reporte de Búsqueda No Informada: Mapa de Rumania
 
-**Asignatura:** Introducción a la inteligencia artifical
-**Tema:** Busqueda no informada
+**Asignatura:** Introducción a la inteligencia artifical  
+**Tema:** Busqueda no informada  
 **Ejercicio:** Ejercicio 1 — Comparación de Algoritmos BFS, UCS, DFS, DLS e IDS  
 **Origen:** Timisoara  
 **Destino:** Bucharest  
