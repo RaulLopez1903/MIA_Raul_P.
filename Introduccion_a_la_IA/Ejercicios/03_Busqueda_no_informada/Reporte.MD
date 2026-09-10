@@ -14,22 +14,7 @@ Para este análisis se seleccionó la ruta con origen en **Timisoara** y destino
 
 ### Subgrafo Relevante (Distancias en km)
 
-```
-                [Arad] ─── 140 km ─── [Sibiu] ─── 99 km ─── [Fagaras] ─── 211 km ───┐
-                  │                      │                                          │
-                118 km                 80 km                                        │
-                  │                      │                                          │
-              [Timisoara] ── 111 km     ─┴─ [Lugoj]    [Rimnicu Vilcea]             │
-                  │                      │                                          │
-                70 km                  97 km                                        │
-                  │                      │                                          │
-              [Mehadia]                  └── [Pitesti] ─── 101 km ─── [Bucharest] ◄ |
-                  │                             │                          ▲
-                75 km                        138 km                        │
-                  │                             │                          │
-              [Dobreta] ─── 120 km ──────── [Craiova] ─────────────────────┘
-
-```
+![Romania Map](./03_Images/01_romania_map.PNG)
 
 ---
 
@@ -70,25 +55,25 @@ python 06_iterative_deepening_search.py --from-city Timisoara --to Bucharest
 
 ## 3. Tabla Comparativa de Resultados
 
-| Algoritmo | Status | Camino (Path) | Profundidad (Hops) | Costo (km) | Nodos Expandidos | Nodos Generados |
+| Algoritmo | Status | Camino (Path) | Profundidad (Depth) | Costo (km) | Nodos Expandidos | Nodos Generados |
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: |
 | **BFS** | `success` | Timisoara → Arad → Sibiu → Fagaras → Bucharest | 4 | 568 km | 7 | 17 |
-| **UCS** | `success` | Timisoara → Lugoj → Mehadia → Dobreta → Craiova → Pitesti → Bucharest | 6 | 536 km | 13 | 31 |
-| **DFS** | `success` | Timisoara → Arad → Sibiu → Rimnicu Vilcea → Pitesti → Craiova → Dobreta → Mehadia → Lugoj | -- | -- | -- | -- |
-| **DLS (límite = 2)** | `cutoff` | N/A | -- | N/A | 3 | 5 |
-| **DLS (límite = 4)** | `success` | Timisoara → Arad → Sibiu → Fagaras → Bucharest | 4 | 568 km | 7 | 13 |
-| **IDS** | `success` | Timisoara → Arad → Sibiu → Fagaras → Bucharest | 4 | 568 km | 15 | 29 |
+| **UCS** | `success` | Timisoara → Arad → Sibiu → Rimnicu Vilcea → Pitesti → Bucharest | 5 | 536 km | 12 | 31 |
+| **DFS** | `success` | Timisoara → Arad → Sibiu → Fagaras → Bucharest | 4 | 568 | 4 | 12 |
+| **DLS (límite = 2)** | `cutoff` | -- | -- | -- | 3 | 8 |
+| **DLS (límite = 4)** | `success` | Timisoara → Arad → Sibiu → Fagaras → Bucharest | 4 | 568 km | 4 | 6 |
+| **IDS** | `success` | Timisoara → Arad → Sibiu → Fagaras → Bucharest | 4 | 568 km | 14 | 34 |
 
 ---
 
 ## 4. Análisis de Resultados
 
 ### 1. ¿BFS encontró el camino con menos carreteras? ¿UCS el de menos km?
-* **BFS (Breadth-First Search):** Encontró una ruta de **4 carreteras (hops)** (`Timisoara → Arad → Sibiu → Fagaras → Bucharest`) con un costo de **568 km**. Al explorar por niveles en amplitud, garantiza hallar la solución con el menor número de saltos.
-* **UCS (Uniform-Cost Search):** Encontró una ruta más larga en número de carreteras (**6 hops**), pero óptima en distancia total: **536 km** (`Timisoara → Lugoj → Mehadia → Dobreta → Craiova → Pitesti → Bucharest`). UCS expande siempre el nodo con el menor costo acumulado $g(n)$, logrando un ahorro de **32 km** en comparación con BFS.
+* **BFS (Breadth-First Search):** Encontró una ruta de **4 carreteras** (`Timisoara → Arad → Sibiu → Fagaras → Bucharest`) con un costo de **568 km**. Al explorar por niveles en amplitud, garantiza hallar la solución con el menor número de saltos.
+* **UCS (Uniform-Cost Search):** Encontró una ruta más larga en número de carreteras (**6**), pero óptima en distancia total: **536 km** (`Timisoara → Arad → Sibiu → Rimnicu Vilcea → Pitesti → Bucharest`). UCS expande siempre el nodo con el menor costo acumulado $g(n)$, logrando un ahorro de **32 km** en comparación con BFS.
 
 ### 2. ¿Por qué DFS puede devolver un camino más largo aunque el grafo sea el mismo?
-* **DFS (Depth-First Search)** explora de manera profunda por la primera rama elegida según el orden alfabético de los vecinos. En este mapa, DFS profundiza por `Arad → Sibiu → Rimnicu Vilcea → Pitesti → Craiova...`, atrapándose en trayectos largos antes de retroceder, sin evaluar ni la profundidad ni el costo en kilómetros.
+* **DFS (Depth-First Search)** explora de manera profunda por la primera rama elegida según el orden de los vecinos, atrapándose en trayectos largos antes de retroceder, sin evaluar ni la profundidad ni el costo en kilómetros.
 
 ### 3. Comportamiento de DLS e IDS y relación con BFS
 * **DLS con `--limit 2`:** Devuelve `cutoff` debido a que la solución más cercana en número de saltos se encuentra a profundidad 4. Con solo 2 saltos únicamente logra alcanzar nodos como `Arad`, `Lugoj` o `Mehadia`.
