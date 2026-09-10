@@ -54,7 +54,7 @@ python 03_greedy_best_first_search.py --from-city Timisoara --to Bucharest
 ```bash
 python 04_a_star_search.py --from-city Timisoara --to Bucharest
 ```
-![A Star Search](./03_Images/./04_Images/04_a_star_search.PNG)
+![A Star Search](./04_Images/04_a_star_search.PNG)
 ```bash
 [Timisoara]
     | (140)
