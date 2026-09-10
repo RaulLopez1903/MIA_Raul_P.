@@ -14,7 +14,7 @@ Para este análisis se seleccionó la ruta con origen en **Timisoara** y destino
 
 ### Subgrafo Relevante (Distancias en km)
 
-![Romania Map](./03_Images/01_romania_map.PNG)
+![Romania Map](./04_Images/01_romania_map.PNG)
 
 ---
 
