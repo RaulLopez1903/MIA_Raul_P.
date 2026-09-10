@@ -72,8 +72,7 @@ python 04_a_star_search.py --from-city Timisoara --to Bucharest
 
 | Algoritmo | Status | Camino (Path) | Profundidad (Depth) | Costo (km) | Nodos Expandidos | Nodos Generados | Heuristic |
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Greedy Search** | `success` | Timisoara → Lugoj → Mehadia → Dobreta → Craiova → Pitesti → Bucharest | 6 | 615 km | 6 | 1
-5| AIMA Table |
+| **Greedy Search** | `success` | Timisoara → Lugoj → Mehadia → Dobreta → Craiova → Pitesti → Bucharest | 6 | 615 km | 6 | 15| AIMA Table |
 | **A* Search** | `success` | Timisoara → Arad → Sibiu → Rimnicu Vilcea → Pitesti → Bucharest | 5 | 536 km | 10 | 27 | AIMA Table |
 
 ---
