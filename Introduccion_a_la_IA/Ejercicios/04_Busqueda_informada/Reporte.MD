@@ -74,8 +74,7 @@ El siguiente diagrama integra las ciudades exploradas por ambos algoritmos, indi
 
 ### 3.3. Monotonicidad de la Función $f(n)$ en A*
 
-* En el camino óptimo encontrado por A*, los valores de la función de evaluación $f(n)$ son **monótonamente no decrecientes** ($f(n_1) \le f(n_2) \le \dots$).
-* Esto sucede porque la heurística de distancia en línea recta es **consistente (o monótona)**, cumpliendo con la desigualdad triangular:
+En el camino óptimo encontrado por A, los valores de la función de evaluación $f(n)$ son **monótonamente no decrecientes**. Esto sucede porque la heurística de distancia en línea recta es **consistente (o monótona)**, cumpliendo con la desigualdad triangular:
 
 $$h(n) \le c(n, a, n') + h(n')$$
 
