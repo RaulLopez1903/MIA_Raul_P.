@@ -69,8 +69,7 @@ El siguiente diagrama integra las ciudades exploradas por ambos algoritmos, indi
 
 ### 3.2. Suboptimalidad de Greedy Search con Heurísticas Admisibles
 
-* Greedy Search ignora por completo el costo acumulado de la trayectoria recorrida ($g(n)$). Su única meta es minimizar la estimación restante $h(n)$.
-* Aunque la heurística $h(n)$ sea **admisible** (nunca sobreestima la distancia real al objetivo), Greedy toma decisiones totalmente "miopes" basándose solo en el atractivo del nodo inmediato. No identifica si para avanzar unos pocos kilómetros en línea recta está recorriendo tramos de carretera extremadamente largos en el mundo real, cayendo fácilmente en soluciones locales subóptimas.
+Greedy Search ignora por completo el costo acumulado de la trayectoria recorrida ($g(n)$). Su única meta es minimizar la estimación restante $h(n)$. Aunque la heurística $h(n)$ sea **admisible** (nunca sobreestima la distancia real al objetivo), Greedy toma decisiones totalmente "miopes" basándose solo en el atractivo del nodo inmediato. No identifica si para avanzar unos pocos kilómetros en línea recta está recorriendo tramos de carretera extremadamente largos en el mundo real, cayendo fácilmente en soluciones locales subóptimas.
 
 ### 3.3. Monotonicidad de la Función $f(n)$ en A*
 
