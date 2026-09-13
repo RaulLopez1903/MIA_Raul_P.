@@ -74,11 +74,7 @@ El siguiente diagrama integra las ciudades exploradas por ambos algoritmos, indi
 
 ### 3.3. Monotonicidad de la Función $f(n)$ en A*
 
-En el camino óptimo encontrado por A, los valores de la función de evaluación $f(n)$ son **monótonamente no decrecientes**. Esto sucede porque la heurística de distancia en línea recta es **consistente (o monótona)**, cumpliendo con la desigualdad triangular:
-
-$$h(n) \le c(n, a, n') + h(n')$$
-
-Dado que la estimación nunca sobrepasa el costo real de viajar a un nodo vecino más su propia heurística, la suma total $f(n) = g(n) + h(n)$ mantiene un crecimiento constante o se preserva a lo largo del camino óptimo a medida que se revela la verdadera geografía del mapa.
+En el camino óptimo encontrado por A, los valores de la función de evaluación $f(n)$ son **monótonamente no decrecientes**. Esto sucede porque la heurística de distancia en línea recta es **consistente (o monótona)**, cumpliendo con la desigualdad triangular. Dado que la estimación nunca sobrepasa el costo real de viajar a un nodo vecino más su propia heurística, la suma total $f(n) = g(n) + h(n)$ mantiene un crecimiento constante o se preserva a lo largo del camino óptimo a medida que se revela la verdadera geografía del mapa.
 
 ---
 
