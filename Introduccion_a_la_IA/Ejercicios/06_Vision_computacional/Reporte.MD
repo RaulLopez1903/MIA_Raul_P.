@@ -32,7 +32,7 @@ Se ejecutó la inferencia mediante interfaz de línea de comandos (CLI):
 
 ### 1.2. Inferencia Python post Fine-Tuning (`bus.jpg`)
 
-Se ejecutó un entrenamiento rápido (*fine-tuning*) de 3 épocas sobre la muestra `coco128.yaml` y posteriormente se realizó la predicción mediante la API de Python:
+Se ejecutó un entrenamiento rápido (*fine-tuning*) de 3 épocas sobre la muestra `coco128.yaml` y posteriormente se realizó la predicción mediante la celda de Python:
 
 ```python
 from ultralytics import YOLO
@@ -54,7 +54,11 @@ model('bus.jpg', save=True)
 
 ## 2. Inferencia sobre Imagen Personalizada
 
-Para evaluar la capacidad de generalización del modelo frente a un entorno no predeterminado, se reemplazaron los datos de entrada por una imagen personalizada de prueba donde se evalúa la inferencia tanto en la interfaz **CLI** como en el API de **Python**.
+Para evaluar la capacidad de generalización del modelo frente a un entorno no predeterminado, se reemplazaron los datos de entrada por una imagen de prueba donde se evalúa la inferencia tanto en la interfaz **CLI** como en la celda de **Python**.
+
+![Paseador de perros](./06_Images/paseador_de_perros.png)
+
+La imagen trata de un paseador de perros con **seis perros** atados a tres correas y una persona al fondo, por lo que esperaríamos un resultado de dos ``person``, seis ``dog`` y tres ``belt``.
 
 ### 2.1. Inferencia CLI sobre Imagen Personalizada
 
@@ -101,17 +105,11 @@ model('/content/paseador_de_perros.png', save=True)
 ### 1. ¿Qué clases detectó YOLO en las fotos de Ultralytics y cuáles en la tuya?
 
 * **Fotos de Ultralytics:** Detectó las clases `person`, `tie`, `bus` y `stop sign`.
-* **Foto Personalizada:** Detectó exclusivamente las clases `person` y `dog`. Todas corresponden a categorías estándar presentes en el conjunto de datos **COCO** de 80 clases.
+* **Foto Personalizada:** Detectó las clases `person` y `dog`. Todas corresponden a categorías estándar presentes en el conjunto de datos **COCO** de 80 clases.
 
 ### 2. ¿Algún objeto evidente de tu foto NO salió etiquetado? ¿Por qué podría pasar?
 
-* **Análisis de Omisión:** En la ejecución con la API de Python, el modelo omitió 1 perro en comparación con la ejecución por CLI (10 vs 11 detecciones).
-* **Causas Técnicas:**
-1. **Umbral de Confianza (*Confidence Threshold*):** Si la certeza calculada por la red para una caja delimitadora está cerca del límite por defecto (`conf=0.25`), pequeñas variaciones en el estado del modelo post-entrenamiento pueden descartar la detección.
-2. **Oclusión y Tamaño del Objeto:** Objetos pequeños, solapados o parcialmente cubiertos presentan menor activación en los mapas de características (*feature maps*) de la red `yolov8n` (arquitectura Nano), reduciendo la puntuación $IoU$ (*Intersection over Union*).
-3. **Categorías fuera de COCO:** Cualquier objeto presente en la escena que no forme parte del conjunto de 80 clases entrenadas por defecto será ignorado por la red.
-
-
+En la ejecución con la celda de Python, el modelo omitió 1 perro en comparación con la ejecución por CLI (10 vs 11 detecciones), también podemos notar tres correas omitidas tanto en CLI como la celda de Python. Esto podría deberse al umbral de confianza default (`conf=0.25`), objetos pequeños, solapados o parcialmente cubiertos o que el objeto presente no forme parte del conjunto de 80 clases entrenadas por defecto y sea ignorado por la red. Curiosamente el haber omitido un perro es relativamente mejor, ya que en la imagen habían seis perros únicamente, que la red haya etiquedado a más puede deberse al solapamiento de los perros.
 
 ### 3. ¿La predicción de la celda CLI y la de `model(...)` coinciden sobre tu misma imagen?
 
