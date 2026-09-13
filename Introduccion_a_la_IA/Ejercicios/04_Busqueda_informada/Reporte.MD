@@ -91,21 +91,23 @@ A continuación se presentan las capturas de pantalla de la ejecución de las he
 
 ```bash
 python 02_heuristics.py --from-city Timisoara --to Bucharest
-
 ```
+
+![Heuristics](./04_Images/02_heuristics.PNG)
 
 ### 4.2. Búsqueda Greedy Best-First Search
 
 ```bash
 python 03_greedy_best_first_search.py --from-city Timisoara --to Bucharest
-
 ```
+
+![Greedy Search](./04_Images/03_greedy_best_first_search.PNG)
 
 ### 4.3. Búsqueda A* (A-Star Search)
 
 ```bash
 python 04_a_star_search.py --from-city Timisoara --to Bucharest
-
 ```
 
-``
+![A Star Search](./04_Images/04_a_star_search.PNG)
+
