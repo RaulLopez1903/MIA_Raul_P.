@@ -51,7 +51,7 @@ plt.show()
 #### 3. Interpretación de la Red Base
 
 Podemos notar discrepancia entre la pérdida inicial de NumPy ($0.77$) y Keras ($0.25$) radica principalmente en el esquema de inicialización de pesos. Mientras NumPy utiliza una distribución aleatoria no optimizada, Keras probablemente aplique por defecto inicializadores avanzados que posicionen a la red en un punto de partida más cercano al mínimo local.
-Además, después de las primeras 100 epocas Keras logra reducir un $13\%$ adicional de pérdida general respecto a NumPy, probablemente debido a la optimización interna al usar tensores vectorizados.
+Además, después de las primeras 100 epocas Keras logra reducir un 13% adicional de pérdida general respecto a NumPy, probablemente debido a la optimización interna al usar tensores vectorizados.
 
 ---
 
