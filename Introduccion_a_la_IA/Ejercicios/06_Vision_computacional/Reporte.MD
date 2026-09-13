@@ -121,6 +121,5 @@ A continuación se adjuntan las ligas de los notebook utilizados que acreditan e
 
 ### 5.1. Inferencia sobre Muestras Base
 
-* **Github:** 
-![Notebook Modificado de Keras](./13 Yolo ultralytics.ipynb)
+* **Github:** [Notebook Modificado de Keras](./13 YOLO ultralytics.ipynb)
 * **Colab:** [Ejecutar Experimento en Google Colab](https://colab.research.google.com/github/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/06_Vision_computacional/13%20YOLO%20ultralytics.ipynb)
