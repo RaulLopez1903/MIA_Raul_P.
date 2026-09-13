@@ -93,7 +93,7 @@ A continuación se presentan las capturas de pantalla de la ejecución de las he
 python 02_heuristics.py --from-city Timisoara --to Bucharest
 ```
 
-![Heuristics](./04_Images/02_heuristics.PNG)
+![Heuristics](./04_Images/02_heuristics.png)
 
 ### 4.2. Búsqueda Greedy Best-First Search
 
