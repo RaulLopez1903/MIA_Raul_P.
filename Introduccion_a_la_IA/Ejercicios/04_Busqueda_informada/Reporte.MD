@@ -64,8 +64,8 @@ El siguiente diagrama integra las ciudades exploradas por ambos algoritmos, indi
 
 ### 3.1. Evaluación del Camino Hallado: A* vs. Greedy Search
 
-* **Greedy Search (Miopía Heurística):** No encontró el camino de menor kilometraje y sufrió un desvío significativo. Al estar en `Timisoara`, evaluó las opciones de `Lugoj` ($h = 244$) y `Arad` ($h = 366$). Como Greedy solo evalúa la heurística ($f(n) = h(n)$), eligió `Lugoj` por parecer estar más cerca de `Bucharest` en línea recta. Esto lo encadenó a rodear toda la región sur pasando por `Mehadia`, `Drobeta` y `Craiova`, resultando en una ruta subóptima de **615 km**.
-* **A* Search (Optimalidad de Costo):** Halló la ruta óptima de **536 km**. A* utiliza la función de evaluación $f(n) = g(n) + h(n)$. Aunque `Lugoj` tenía un valor $h$ atractivo, conforme avanzó la exploración, el costo real acumulado ($g$) penalizó esa rama. Esto permitió a A* corregir el rumbo a través de `Arad`, `Sibiu`, `Rimnicu Vilcea` y `Pitesti`, garantizando el camino más corto en distancia total.
+* **Greedy Search:** No encontró el camino de menor kilometraje y sufrió un desvío significativo. Al estar en `Timisoara`, evaluó las opciones de `Lugoj` ($h = 244$) y `Arad` ($h = 366$). Como Greedy solo evalúa la heurística ($f(n) = h(n)$), eligió `Lugoj` por parecer estar más cerca de `Bucharest` en línea recta. Esto lo encadenó a rodear toda la región sur pasando por `Mehadia`, `Drobeta` y `Craiova`, resultando en una ruta subóptima de **615 km**.
+* **A* Search:** Halló la ruta óptima de **536 km**. A* utiliza la función de evaluación $f(n) = g(n) + h(n)$. Aunque `Lugoj` tenía un valor $h$ atractivo, conforme avanzó la exploración, el costo real acumulado ($g$) penalizó esa rama. Esto permitió a A* corregir el rumbo a través de `Arad`, `Sibiu`, `Rimnicu Vilcea` y `Pitesti`, garantizando el camino más corto en distancia total.
 
 ### 3.2. Suboptimalidad de Greedy Search con Heurísticas Admisibles
 
