@@ -88,40 +88,46 @@ A continuación se adjuntan las capturas de terminal que respaldan las ejecucion
 
 ```bash
 python 02_breadth_first_search.py --from-city Timisoara --to Bucharest
-
 ```
+
+![Breadth First Search](./03_Images/02_breadth_first_search.PNG)
 
 ### 4.2. Búsqueda con costo uniforme (UCS)
 
 ```bash
 python 03_uniform_cost_search.py --from-city Timisoara --to Bucharest
-
 ```
+
+![Uniform Cost Search](./03_Images/03_uniform_cost_search.PNG)
 
 ### 4.3. Búsqueda a lo profundo (DFS)
 
 ```bash
 python 04_depth_first_search.py --from-city Timisoara --to Bucharest
-
 ```
+
+![Depth First Search](./03_Images/04_depth_first_search.PNG)
 
 ### 4.4. Búsqueda con profundidad limitada (DLS, Límite = 2)
 
 ```bash
 python 05_depth_limited_search.py --from-city Timisoara --to Bucharest --limit 2
-
 ```
+
+![Depth Limited Searh Limit 2](./03_Images/05_depth_limited_search_limit_2.PNG)
 
 ### 4.5. Búsqueda con profundidad limitada (DLS, Límite = 4)
 
 ```bash
 python 05_depth_limited_search.py --from-city Timisoara --to Bucharest --limit 4
-
 ```
+
+![Depth Limited Searh Limit 4](./03_Images/05_depth_limited_search_limit_4.PNG)
 
 ### 4.6. Búsqueda por profundización iterativa (IDS)
 
 ```bash
 python 06_iterative_deepening_search.py --from-city Timisoara --to Bucharest
-
 ```
+
+![Iterative Deepening Search](./03_Images/06_iterative_deepening_search.PNG)
