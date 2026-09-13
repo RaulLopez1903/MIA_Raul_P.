@@ -50,8 +50,8 @@ plt.show()
 
 #### 3. Interpretación de la Red Base
 
-* **Diferencia de valores iniciales:** La discrepancia entre la pérdida inicial de NumPy ($0.77$) y Keras ($0.25$) radica principalmente en el esquema de inicialización de pesos. Mientras NumPy utiliza una distribución aleatoria no optimizada, Keras aplica por defecto inicializadores avanzados (como *Glorot Uniform* / *Xavier*), lo cual posiciona la red en un punto de partida mucho más cercano al mínimo local.
-* **Dinámica de aprendizaje:** Keras logra reducir un $13\%$ adicional de pérdida general respecto a NumPy debido a la optimización interna en la precisión decimal de los tensores vectorizados durante el ajuste por Descenso de Gradiente Estocástico ($SGD$).
+Podemos notar discrepancia entre la pérdida inicial de NumPy ($0.77$) y Keras ($0.25$) radica principalmente en el esquema de inicialización de pesos. Mientras NumPy utiliza una distribución aleatoria no optimizada, Keras probablemente aplique por defecto inicializadores avanzados que posicionen a la red en un punto de partida más cercano al mínimo local.
+Además, después de las primeras 100 epocas Keras logra reducir un $13\%$ adicional de pérdida general respecto a NumPy, probablemente debido a la optimización interna al usar tensores vectorizados.
 
 ---
 
@@ -92,12 +92,8 @@ model = keras.Sequential([
 
 ### 2.3. Interpretación de la Red Profunda
 
-* **Desvanecimiento del Gradiente (*Vanishing Gradient*):** Al encadenar 4 capas con activación sigmoide ($\sigma(x)$), la derivada utilizada en el backpropagation ($\sigma'(x) = \sigma(x)(1 - \sigma(x))$) toma valores máximos de $0.25$. Al aplicar la regla de la cadena para actualizar los pesos de las primeras capas:
-
-$$\delta^{(l)} = \Big(\prod_{k=l}^{L-1} W^{(k+1)T} \delta^{(k+1)}\Big) \odot \sigma'(z^{(l)})$$
-
-El gradiente se multiplica por valores inferiores a $0.25$ en cada capa retrocedida, provocando que la actualización de pesos en las capas iniciales sea prácticamente nula ($\Delta W \approx 0$).
-* **Complejidad del Dataset vs. Arquitectura:** El dataset Iris es un problema con baja dimensión (150 muestras, casi linealmente separable). Introducir más capas no aporta capacidad de representación útil y, en presencia de funciones sigmoides + $MSE$, dificulta drásticamente la convergencia.
+Al encadenar 4 capas con activación sigmoide, la derivada utilizada en el backpropagation hace que el gradiente se desvanezca, provocando que la actualización de pesos en las capas iniciales sea prácticamente nula.
+Además, el dataset Iris es un problema con baja dimensión (150 muestras, casi linealmente separable). Introducir más capas no aporta capacidad de representación útil y, en presencia de funciones sigmoides + $MSE$, dificulta drásticamente la convergencia.
 
 ---
 
@@ -121,11 +117,24 @@ El gradiente se multiplica por valores inferiores a $0.25$ en cada capa retroced
 
 ### 2. ¿Las curvas de NumPy y Keras se parecen con la misma topología? ¿Qué diferencias lo explican?
 
-No se parecen. Las diferencias principales surgen por:
-
-1. **Inicialización de pesos:** Keras utiliza inicialización *Glorot/Xavier*, partiendo de pérdidas bajas ($0.25$). NumPy utiliza valores aleatorios no escalados ($0.77$).
-2. **Optimizador y procesamiento:** Keras gestiona operaciones matriciales optimizadas sobre tensores de bajo nivel en TensorFlow, mientras que la implementación manual en NumPy utiliza operaciones en bucle simple sujetas a diferencias en la acumulación de gradientes.
+No se parecen. Las diferencias principales surgen por la inicializacion de pesos, Keras parte de pérdidas bajas ($0.25$), mientras que NumPy utiliza valores iniciales aleatorios lo que provoca un error inicial de ($0.77$), y; Keras probablemente gestiona operaciones matriciales optimizadas, mientras que la implementación manual en NumPy utiliza operaciones en bucle simple sujetas a diferencias en la acumulación de gradientes.
 
 ### 3. Con sigmoides apiladas y MSE, ¿tiene sentido que una red más profunda no aprenda mejor en Iris?
 
-Sí, tiene total sentido teórico. Apilar múltiples funciones sigmoides causa el **desvanecimiento del gradiente**, ya que las derivadas se vuelven exponencialmente pequeñas conforme se retropropaga hacia las primeras capas. Además, el problema de Iris es simple y no requiere abstraer características complejas; sobrecargar la red con capas ocultas innecesarias dificulta la optimización cuando se combina con la función de pérdida $MSE$.
+Sí, apilar múltiples funciones sigmoides causa el **desvanecimiento del gradiente**, ya que las derivadas se vuelven exponencialmente pequeñas conforme se retropropaga hacia las primeras capas. Además, el problema de Iris es simple y no requiere abstraer características complejas; sobrecargar la red con capas ocultas innecesarias dificulta la optimización cuando se combina con la función de pérdida $MSE$.
+
+---
+
+## 5. Evidencias de Ejecución en Google Colab
+
+A continuación se adjuntan las ligas de los notebook utilizados que acreditan el entrenamiento y las inferencias ejecutadas:
+
+### 5.1 Multilayer perceptron
+* **Github:** [Github 13 YOLO ultralytics.ipynb](https://github.com/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/Perceptr%C3%B3n%20multicapa/04%20Multilayer%20perceptron.ipynb)
+* **Colab:** [Colab 13 YOLO ultralytics.ipynb](https://colab.research.google.com/github/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/Perceptr%C3%B3n%20multicapa/04%20Multilayer%20perceptron.ipynb)
+
+### 5.2 Keras - Multilayer perceptron
+* **Github:** [Github 13 YOLO ultralytics.ipynb](
+https://github.com/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/Perceptr%C3%B3n%20multicapa/05%20Keras%20-%20multilayer%20perceptron%20-%20iris.ipynb)
+* **Colab:** [Colab 13 YOLO ultralytics.ipynb](https://colab.research.google.com/github/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/Perceptr%C3%B3n%20multicapa/05%20Keras%20-%20multilayer%20perceptron%20-%20iris.ipynb)
+
