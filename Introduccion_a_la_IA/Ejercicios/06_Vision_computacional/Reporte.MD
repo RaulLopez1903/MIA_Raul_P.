@@ -35,6 +35,10 @@ Se ejecutó la inferencia mediante interfaz de línea de comandos (CLI):
 Se ejecutó un entrenamiento rápido (*fine-tuning*) de 3 épocas sobre la muestra `coco128.yaml` y posteriormente se realizó la predicción mediante la API de Python:
 
 ```python
+from ultralytics import YOLO
+
+model = YOLO('yolov8n.pt')  # load a pretrained YOLOv8n detection model
+model.train(data='coco128.yaml', epochs=3)  # train the model
 model('bus.jpg', save=True)
 
 ```
