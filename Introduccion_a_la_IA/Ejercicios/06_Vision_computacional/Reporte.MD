@@ -55,7 +55,7 @@ Para evaluar la capacidad de generalización del modelo frente a un entorno no p
 ### 2.1. Inferencia CLI sobre Imagen Personalizada
 
 ```bash
-!yolo predict model=yolov8n.pt source='mi_foto.jpg'
+!yolo predict model=yolov8n.pt source='/content/paseador_de_perros.png'
 
 ```
 
@@ -69,7 +69,7 @@ Para evaluar la capacidad de generalización del modelo frente a un entorno no p
 ### 2.2. Inferencia API Python sobre Imagen Personalizada
 
 ```python
-model('mi_foto.jpg', save=True)
+model('/content/paseador_de_perros.png', save=True)
 
 ```
 
@@ -117,8 +117,9 @@ Coinciden en las **clases principales** (personas y perros en la escena) y en la
 
 ## 5. Evidencias de Ejecución en Google Colab
 
-A continuación se adjuntan las capturas del entorno de desarrollo que acreditan el entrenamiento y las inferencias ejecutadas con aceleración por GPU (T4):
+A continuación se adjuntan las ligas de los notebook utilizados que acreditan el entrenamiento y las inferencias ejecutadas:
 
 ### 5.1. Inferencia sobre Muestras Base
 
-### 5.2. Inferencia sobre Imagen Personalizada
+* **Github:** [Notebook Modificado de Keras](./13 Yolo ultralytics.ipynb)
+* **Colab:** [Ejecutar Experimento en Google Colab](https://colab.research.google.com/github/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/06_Vision_computacional/13%20YOLO%20ultralytics.ipynb)
