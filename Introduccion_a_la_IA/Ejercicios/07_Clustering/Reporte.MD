@@ -2,7 +2,7 @@
 
 **Asignatura:** Introducción a la inteligencia artificial  
 **Alumno:** Raul Alejandro Perez Lopez  
-**Tema:** Clustering
+**Tema:** Clustering  
 **Ejercicio:** Separar los blobs y volver a elegir \(k\)  
 
 ---
@@ -46,19 +46,19 @@ Los datos simulados con estas especificaciones se muestran en el siguiente gráf
 
 ![Original Blobs Plot](./07_Images/02_blobs_plot.png)
 
-En la distribución original se observan cinco centros, pero los tres grupos ubicados en la zona izquierda presentan una separación reducida entre sí. Esto provoca que sus observaciones se encuentren relativamente próximas y exista cierto grado de solapamiento.
+En la distribución original se observan cinco centros, pero los dos grupos ubicados en la zona inferior izquierda y los dos grupos en la zona superior derecha presentan una separación reducida entre sí. Esto provoca que sus observaciones se encuentren relativamente próximas y exista cierto grado de solapamiento.
 
-2.2 Diagrama de Voronoi con (k=5)
+2.1 Diagrama de Voronoi con (k=5)
 
 
 ![Original Voronoi Plot](./07_Images/05_voronoi_plot.png)
 
-El diagrama permite observar las regiones asignadas por K-means a cada centroide. Aunque se utilizan cinco clusters, la cercanía entre algunos grupos hace que las fronteras entre determinadas regiones se encuentren muy próximas.
+El diagrama permite observar las regiones asignadas por K-means a cada centroide. Aunque se utilizan cinco clusters, la cercanía entre algunos grupos hace que las fronteras entre determinadas regiones no se reconozcan, mientras que en otras regiones se asignen fronteras por defecto.
 
 Esto permite visualizar que establecer (k=5) no garantiza que los cinco clusters correspondan a grupos claramente separados en los datos.
 
 
-2.3 Método del codo
+2.2 Método del codo
 
 El método del codo se utiliza para analizar la relación entre el número de clusters (k) y la inercia del modelo.
 
@@ -69,17 +69,12 @@ La inercia representa la suma de las distancias cuadráticas de las observacione
 A partir de la gráfica se identifica el codo aproximadamente en:
 
 \[
-k = [VALOR]
+k = 4
 \]
-
-[EXPLICAR AQUÍ POR QUÉ SE IDENTIFICA ESE PUNTO COMO EL CODO.]
 
 En este caso, el codo puede encontrarse en un valor diferente de cinco debido a que algunos de los blobs se encuentran suficientemente próximos como para que K-means pueda representar parte de su estructura mediante un mismo cluster sin generar un incremento considerable de la inercia.
 
-
----
-
-3.4 Coeficiente de silueta
+2.3 Coeficiente de silueta
 
 El coeficiente de silueta permite evaluar qué tan adecuadamente se encuentra cada observación dentro de su cluster considerando tanto la distancia respecto a su propio grupo como la distancia respecto a los demás grupos.
 
@@ -90,21 +85,16 @@ Valores cercanos a (1) indican una mayor separación entre clusters, mientras qu
 El valor máximo del coeficiente de silueta se obtiene para:
 
 \[
-k = [VALOR]
+k = 4
 \]
 
 con un coeficiente de:
 
 \[
-S = [VALOR]
+S = 0.68
 \]
 
-Interpretación
-
-El resultado indica que, de acuerdo con el coeficiente de silueta, la configuración con (k=[VALOR]) presenta la mejor separación relativa entre los clusters evaluados.
-
-[EXPLICAR AQUÍ SI EL RESULTADO COINCIDE O NO CON EL MÉTODO DEL CODO.]
-
+El resultado indica que, de acuerdo con el coeficiente de silueta, la configuración con (k=4) presenta la mejor separación relativa entre los clusters evaluados. Lo que coincide con el método del codo.
 
 ---
 
@@ -130,123 +120,53 @@ blob_std = np.array([0.2, 0.2, 0.1, 0.1, 0.1])
 
 ![Modified Blobs Plot](./07_Images/06_blobs_plot_modified.png)
 
-Después de realizar la modificación, se observa que:
-
-[DESCRIBIR AQUÍ EL CAMBIO OBSERVADO EN LA DISTRIBUCIÓN.]
-
-En comparación con la configuración original:
-
-[EXPLICAR QUÉ GRUPOS PRESENTAN UNA MAYOR SEPARACIÓN Y SI EXISTE TODAVÍA ALGÚN SOLAPAMIENTO.]
-
+Después de realizar la modificación, se observan grupos de datos claramente acumulados en nubes separadas, esto debido a que, a comparación de la configuración base, definimos esta nueva configuración exactamente para observar que sucede cuando los blobs son de este estilo.
 
 3.3 Diagrama de Voronoi con (k=5)
 
 ![Modified Voronoi Plot](./07_Images/09_voronoi_plot_modified.png)
 
-
 El diagrama muestra la distribución de las regiones correspondientes a los cinco centroides después de modificar los datos.
-
-[DESCRIBIR CÓMO CAMBIARON LAS REGIONES RESPECTO AL VORONOI ORIGINAL.]
-
-[INDICAR SI LOS CINCO CLUSTERS PRESENTAN AHORA UNA SEPARACIÓN MÁS CLARA.]
-
+En este caso podemos observar una separación clara en los grupos de datos y sin solapamientos.
 
 ---
 
 5.3 Método del codo después de la modificación
 
-
 ![Modified Inertia Plot](./07_Images/07_inertia_vs_k_plot_modified.png)
-
-
-(k)	Inercia
-
-3	[VALOR]
-5	[VALOR]
-8	[VALOR]
-
 
 El codo se identifica aproximadamente en:
 
 \[
-k = [VALOR]
+k = 5
 \]
 
-Interpretación
-
-Después de modificar la distribución de los datos, el comportamiento de la inercia presenta:
-
-[DESCRIBIR EL CAMBIO RESPECTO A LA CURVA ORIGINAL.]
-
-El resultado indica que:
-
-[EXPLICAR SI EL CODO SE ACERCÓ A (k=5), SE MANTUVO EN (k=4), O PRESENTÓ OTRO COMPORTAMIENTO.]
-
+Después de modificar la distribución de los datos, el comportamiento de la inercia presenta un codo muy claro con un aplanado después de k=5, mientras que la configuración base generó un codo en k=4 y además la inercia seguía con pequeñas reducciones después de dicho codo.
 
 ---
 
 5.4 Coeficiente de silueta después de la modificación
 
-![Modified Shilhouette Plot](./07_Images/04_silhouette_score_vs_k_modified.png)
+![Modified Shilhouette Plot](./07_Images/08_silhouette_score_vs_k_modified.png)
 
 El valor máximo del coeficiente de silueta se obtiene para:
 
 \[
-k = [VALOR]
+k = 5
 \]
 
 con un valor de:
 
 \[
-S = [VALOR]
+S = 0.9
 \]
 
-Interpretación
 
-Al comparar este resultado con la configuración original:
-
-[EXPLICAR CÓMO CAMBIÓ EL VALOR DE LA SILUETA.]
-
-[INDICAR SI EL MÁXIMO SE DESPLAZÓ HACIA (k=5).]
-
+Al comparar este resultado con la configuración original
 
 ---
 
-## 4. Comparación de resultados
-
-Para facilitar la comparación entre ambas configuraciones, se resumen los principales resultados obtenidos.
-
-Métrica	Datos originales	Datos modificados
-
-(k) identificado mediante codo	[VALOR]	[VALOR]
-(k) con mayor silueta	[VALOR]	[VALOR]
-Silueta máxima	[VALOR]	[VALOR]
-Inercia con (k=3)	[VALOR]	[VALOR]
-Inercia con (k=5)	[VALOR]	[VALOR]
-Inercia con (k=8)	[VALOR]	[VALOR]
-
-
-Interpretación conjunta
-
-[REALIZAR AQUÍ LA COMPARACIÓN GENERAL ENTRE LOS RESULTADOS.]
-
-En particular, analizar:
-
-Si el método del codo cambió de (k=4) hacia (k=5).
-
-Si el máximo de la silueta cambió.
-
-Si ambas métricas coinciden en el mismo valor de (k).
-
-Si dicho valor corresponde a los cinco grupos utilizados para generar los datos.
-
-Cómo influyó la separación de los centros y/o la modificación de blob_std.
-
-
-
----
-
-7. Conclusiones de resultados
+## 4. Conclusiones de resultados
 
 A partir de los experimentos realizados, se puede concluir que:
 
@@ -262,10 +182,9 @@ A partir de los experimentos realizados, se puede concluir que:
 
 En términos generales, el experimento permitió observar que la selección de (k) mediante K-means depende de la estructura y distribución de los datos, y no únicamente del número de grupos con el que fueron generados originalmente.
 
-
 ---
 
-8. Enlaces y evidencia de ejecución
+5. Enlaces y evidencia de ejecución
 
 GitHub
 
@@ -278,5 +197,3 @@ Google Colab
 Evidencia de ejecución
 
 ![Original Shilhouette Plot](./07_Images/10_entorno_de_ejecucion.png)
-
-
