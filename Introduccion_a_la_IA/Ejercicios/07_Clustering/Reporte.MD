@@ -154,29 +154,29 @@ k = 5
 con un valor de:
 
 \[
-S = 0.9
+S = 0.8
 \]
 
 
-Al comparar este resultado con la configuración original
+Al comparar este resultado con la configuración original nos damos cuenta de que como los grupos de datos están muy bien separados el coeficiente de silueta tiene un nuevo máximo de 0.8, es decir, si reconoce la mejora en la segmentación de datos.
 
 ---
 
 ## 4. Conclusiones de resultados
 
-A partir de los experimentos realizados, se puede concluir que:
+A partir de los experimentos realizados, se puede concluir que la distribución de los datos tiene una influencia directa sobre el comportamiento de K-means y sobre la selección del número de clusters \(k\).
 
-[CONCLUSIÓN 1: EXPLICAR EL RESULTADO OBTENIDO CON LOS DATOS ORIGINALES.]
+En la configuración original, aunque los datos fueron generados utilizando cinco centros, algunos de estos se encontraban demasiado próximos entre sí, provocando cierto grado de solapamiento entre las nubes. Como consecuencia, tanto el método del codo como el coeficiente de silueta identificaron \(k=4\) como la configuración con un comportamiento más adecuado. En particular, el coeficiente de silueta alcanzó un valor máximo de \(0.68\) para \(k=4\).
 
-[CONCLUSIÓN 2: EXPLICAR POR QUÉ EL NÚMERO DE CENTROS UTILIZADOS PARA GENERAR LOS DATOS NO NECESARIAMENTE COINCIDE CON EL (k) SUGERIDO POR LAS MÉTRICAS.]
+Esto permite observar que el número de centros utilizado para generar los datos no necesariamente coincide con el número de clusters que K-means identifica como más adecuado. El algoritmo no tiene información sobre la cantidad de centros originales utilizados por `make_blobs`, sino que trabaja con la distribución y las distancias entre los datos. Por lo tanto, cuando dos o más grupos se encuentran demasiado próximos o presentan cierto solapamiento, pueden ser representados de manera más adecuada mediante un mismo cluster.
 
-[CONCLUSIÓN 3: EXPLICAR QUÉ EFECTO TUVO LA SEPARACIÓN DE LOS CINCO BLOBS.]
+Al modificar la posición de los centros y reducir algunas de las desviaciones estándar mediante `blob_std`, se consiguió una separación mucho más clara entre los cinco grupos. Esta modificación permitió que las nubes fueran visualmente distinguibles y que prácticamente no existiera solapamiento entre ellas.
 
-[CONCLUSIÓN 4: INDICAR QUÉ OCURRIÓ CON EL CODO Y LA SILUETA DESPUÉS DE LA MODIFICACIÓN.]
+Como consecuencia de esta nueva distribución, el comportamiento de ambas métricas cambió. El método del codo pasó de identificar aproximadamente \(k=4\) en la configuración original a identificar un codo claramente definido en \(k=5\). De manera similar, el coeficiente de silueta alcanzó su valor máximo en \(k=5\), aumentando de \(0.68\) en la configuración original a \(0.8\) después de la modificación.
 
-[CONCLUSIÓN 5: EXPLICAR QUÉ SE OBSERVÓ SOBRE LA RELACIÓN ENTRE LA DISTANCIA ENTRE CENTROS, blob_std Y LA SEPARACIÓN DE LOS CLUSTERS.]
+La comparación de ambos experimentos muestra que existe una relación importante entre la distancia de los centros, el valor de `blob_std` y la capacidad de K-means para distinguir los diferentes grupos. Al aumentar la separación relativa entre las nubes y reducir su dispersión, disminuye el solapamiento de los datos y se vuelve más clara la estructura de cinco clusters.
 
-En términos generales, el experimento permitió observar que la selección de (k) mediante K-means depende de la estructura y distribución de los datos, y no únicamente del número de grupos con el que fueron generados originalmente.
+En términos generales, el experimento permitió comprobar que la selección de \(k\) mediante K-means depende de la estructura y distribución de los datos, y no únicamente del número de grupos con el que fueron generados originalmente. En este caso, al mejorar la separación de los cinco blobs, tanto el método del codo como el coeficiente de silueta coincidieron en \(k=5\), haciendo que el resultado del clustering fuera consistente con la estructura utilizada para generar los datos.
 
 ---
 
