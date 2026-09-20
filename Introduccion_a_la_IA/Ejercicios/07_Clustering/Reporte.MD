@@ -188,12 +188,12 @@ En términos generales, el experimento permitió observar que la selección de (
 
 GitHub
 
-[PEGAR AQUÍ EL ENLACE AL REPOSITORIO O AL ARCHIVO .ipynb]
+[https://github.com/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/07_Clustering/01%20K-medias.ipynb]
 
 Google Colab
 
-[PEGAR AQUÍ EL ENLACE DE COLAB]
+[https://colab.research.google.com/github/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/07_Clustering/01%20K-medias.ipynb]
 
 Evidencia de ejecución
 
-![Original Shilhouette Plot](./07_Images/10_entorno_de_ejecucion.png)
+![Entorno de ejecucion](./07_Images/10_entorno_de_ejecucion.png)
