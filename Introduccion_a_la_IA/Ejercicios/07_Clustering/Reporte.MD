@@ -184,11 +184,11 @@ En términos generales, el experimento permitió observar que la selección de (
 
 GitHub
 
-![Github 01 K-medias][https://github.com/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/07_Clustering/01%20K-medias.ipynb]
+[Github 01 K-medias](https://github.com/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/07_Clustering/01%20K-medias.ipynb)
 
 Google Colab
 
-[Colab 01 K-medias][https://colab.research.google.com/github/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/07_Clustering/01%20K-medias.ipynb]
+[Colab 01 K-medias](https://colab.research.google.com/github/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/07_Clustering/01%20K-medias.ipynb)
 
 Evidencia de ejecución
 
