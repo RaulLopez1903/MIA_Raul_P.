@@ -129,7 +129,7 @@ Después de realizar la modificación, se observan grupos de datos claramente ac
 El diagrama muestra la distribución de las regiones correspondientes a los cinco centroides después de modificar los datos.
 En este caso podemos observar una separación clara en los grupos de datos y sin solapamientos.
 
-### 3.3 Método del codo después de la modificación
+### 3.4 Método del codo después de la modificación
 
 ![Modified Inertia Plot](./07_Images/07_inertia_vs_k_plot_modified.png)
 
@@ -141,7 +141,7 @@ k = 5
 
 Después de modificar la distribución de los datos, el comportamiento de la inercia presenta un codo muy claro con un aplanado después de k=5, mientras que la configuración base generó un codo en k=4 y además la inercia seguía con pequeñas reducciones después de dicho codo.
 
-### 3.4 Coeficiente de silueta después de la modificación
+### 3.5 Coeficiente de silueta después de la modificación
 
 ![Modified Shilhouette Plot](./07_Images/08_silhouette_score_vs_k_modified.png)
 
@@ -184,11 +184,11 @@ En términos generales, el experimento permitió observar que la selección de (
 
 GitHub
 
-[https://github.com/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/07_Clustering/01%20K-medias.ipynb]
+![Github 01 K-medias][https://github.com/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/07_Clustering/01%20K-medias.ipynb]
 
 Google Colab
 
-[https://colab.research.google.com/github/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/07_Clustering/01%20K-medias.ipynb]
+[Colab 01 K-medias][https://colab.research.google.com/github/RaulLopez1903/MIA_Raul_P./blob/main/Introduccion_a_la_IA/Ejercicios/07_Clustering/01%20K-medias.ipynb]
 
 Evidencia de ejecución
 
