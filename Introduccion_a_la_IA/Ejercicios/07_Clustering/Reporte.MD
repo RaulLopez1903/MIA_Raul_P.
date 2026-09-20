@@ -48,7 +48,7 @@ Los datos simulados con estas especificaciones se muestran en el siguiente gráf
 
 En la distribución original se observan cinco centros, pero los dos grupos ubicados en la zona inferior izquierda y los dos grupos en la zona superior derecha presentan una separación reducida entre sí. Esto provoca que sus observaciones se encuentren relativamente próximas y exista cierto grado de solapamiento.
 
-2.1 Diagrama de Voronoi con (k=5)
+### 2.1 Diagrama de Voronoi con (k=5)
 
 
 ![Original Voronoi Plot](./07_Images/05_voronoi_plot.png)
@@ -58,7 +58,7 @@ El diagrama permite observar las regiones asignadas por K-means a cada centroide
 Esto permite visualizar que establecer (k=5) no garantiza que los cinco clusters correspondan a grupos claramente separados en los datos.
 
 
-2.2 Método del codo
+### 2.2 Método del codo
 
 El método del codo se utiliza para analizar la relación entre el número de clusters (k) y la inercia del modelo.
 
@@ -74,7 +74,7 @@ k = 4
 
 En este caso, el codo puede encontrarse en un valor diferente de cinco debido a que algunos de los blobs se encuentran suficientemente próximos como para que K-means pueda representar parte de su estructura mediante un mismo cluster sin generar un incremento considerable de la inercia.
 
-2.3 Coeficiente de silueta
+### 2.3 Coeficiente de silueta
 
 El coeficiente de silueta permite evaluar qué tan adecuadamente se encuentra cada observación dentro de su cluster considerando tanto la distancia respecto a su propio grupo como la distancia respecto a los demás grupos.
 
@@ -104,7 +104,7 @@ Después de analizar la configuración original, se modificaron los parámetros 
 
 El objetivo de esta modificación fue lograr que los cinco blobs presentaran una separación visual más clara, sin modificar el número de muestras ni los parámetros principales del algoritmo.
 
-3.1 Nueva Configuración 
+### 3.1 Nueva Configuración 
 
 ```python
 blob_centers = np.array(
@@ -116,22 +116,20 @@ blob_centers = np.array(
 blob_std = np.array([0.2, 0.2, 0.1, 0.1, 0.1])
 ```
 
-3.2. Distribución de los blobs separados
+### 3.2. Distribución de los blobs separados
 
 ![Modified Blobs Plot](./07_Images/06_blobs_plot_modified.png)
 
 Después de realizar la modificación, se observan grupos de datos claramente acumulados en nubes separadas, esto debido a que, a comparación de la configuración base, definimos esta nueva configuración exactamente para observar que sucede cuando los blobs son de este estilo.
 
-3.3 Diagrama de Voronoi con (k=5)
+### 3.3 Diagrama de Voronoi con (k=5)
 
 ![Modified Voronoi Plot](./07_Images/09_voronoi_plot_modified.png)
 
 El diagrama muestra la distribución de las regiones correspondientes a los cinco centroides después de modificar los datos.
 En este caso podemos observar una separación clara en los grupos de datos y sin solapamientos.
 
----
-
-5.3 Método del codo después de la modificación
+### 3.3 Método del codo después de la modificación
 
 ![Modified Inertia Plot](./07_Images/07_inertia_vs_k_plot_modified.png)
 
@@ -143,9 +141,7 @@ k = 5
 
 Después de modificar la distribución de los datos, el comportamiento de la inercia presenta un codo muy claro con un aplanado después de k=5, mientras que la configuración base generó un codo en k=4 y además la inercia seguía con pequeñas reducciones después de dicho codo.
 
----
-
-5.4 Coeficiente de silueta después de la modificación
+### 3.4 Coeficiente de silueta después de la modificación
 
 ![Modified Shilhouette Plot](./07_Images/08_silhouette_score_vs_k_modified.png)
 
@@ -184,7 +180,7 @@ En términos generales, el experimento permitió observar que la selección de (
 
 ---
 
-5. Enlaces y evidencia de ejecución
+## 5. Enlaces y evidencia de ejecución
 
 GitHub
 
@@ -196,4 +192,4 @@ Google Colab
 
 Evidencia de ejecución
 
-![Entorno de ejecucion](./07_Images/10_entorno_de_ejecucion.png)
+![Entorno de ejecucion](./07_Images/10_entorno_de_ejecucion.PNG)
