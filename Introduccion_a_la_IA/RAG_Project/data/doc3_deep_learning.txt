@@ -1,0 +1,15 @@
+REDES NEURONALES Y DEEP LEARNING
+
+El Aprendizaje Profundo o Deep Learning es un subcampo del Aprendizaje Automático basado en el diseño y entrenamiento de Redes Neuronales Artificiales (ANN) con múltiples capas ocultas interconectadas.
+
+Inspiradas vagamente en la estructura biológica del cerebro humano, las redes neuronales procesan información a través de unidades llamadas neuronas artificiales o perceptrones. Cada conexión transmite señales ponderadas por pesos numéricos que ajustan la importancia de cada característica.
+
+Componentes clave de una red neuronal:
+- Capa de Entrada: Recibe los datos iniciales procesados.
+- Capas Ocultas: Extraen características progresivamente más complejas y abstractas a medida que se profundiza en la red.
+- Capa de Salida: Genera la predicción final (p. ej., una categoría de imagen o un valor numérico).
+- Funciones de Activación: Introducen no linealidad al sistema (ejemplos: ReLU, Sigmoide, Tanh), permitiendo a la red aprender relaciones complejas.
+
+El entrenamiento de estas redes se realiza mediante el algoritmo de retropropagación (backpropagation) en combinación con el descenso de gradiente. Este algoritmo calcula el error de la predicción respecto al valor real y ajusta iterativamente los pesos de toda la red en dirección opuesta al gradiente del error.
+
+Existen arquitecturas especializadas según la naturaleza del problema. Las Redes Neuronales Convolucionales (CNN) son líderes en el procesamiento de imágenes y visión por computadora, mientras que las Redes Neuronales Recurrentes (RNN) y arquitecturas basadas en Atención se diseñaron para secuencias como el lenguaje natural y series temporales.

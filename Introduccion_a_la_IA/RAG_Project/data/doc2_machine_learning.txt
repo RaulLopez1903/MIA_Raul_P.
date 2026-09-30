@@ -1,0 +1,13 @@
+FUNDAMENTOS DEL APRENDIZAJES AUTOMÁTICO (MACHINE LEARNING)
+
+El Aprendizaje Automático o Machine Learning (ML) es una rama fundamental de la Inteligencia Artificial que permite a los sistemas informáticos aprender y mejorar su rendimiento en tareas específicas directamente a partir de datos, sin ser programados explícitamente regla por regla.
+
+Existen tres paradigmas principales en el Aprendizaje Automático:
+
+1. Aprendizaje Supervisado: El algoritmo se entrena utilizando un conjunto de datos etiquetados. Cada ejemplo de entrada cuenta con una respuesta o etiqueta correcta esperada. Ejemplos clásicos incluyen la clasificación de correos (spam / no spam) y la predicción de precios inmobiliarios mediante regresión lineal.
+
+2. Aprendizaje No Supervisado: El modelo analiza datos que no contienen etiquetas ni respuestas previas. Su objetivo es descubrir patrones ocultos, agrupaciones naturales o estructuras subyacentes. El agrupamiento (clustering) mediante K-Means y la reducción de dimensionalidad con PCA son algoritmos representativos.
+
+3. Aprendizaje por Refuerzo: Un agente aprende a tomar decisiones interactuando de forma iterativa con un entorno dinámico. El agente recibe recompensas positivas por acciones deseadas y penalizaciones por errores, optimizando una política de comportamiento a largo plazo. Es ampliamente utilizado en robótica y en juegos como el ajedrez o Go.
+
+Para evaluar el rendimiento de estos modelos es crítico dividir los datos en conjuntos de entrenamiento, validación y prueba. Esto previene el sobreajuste (overfitting), un fenómeno en el cual el modelo memoriza el ruido de los datos de entrenamiento pero fracasa al generalizar con información nueva.

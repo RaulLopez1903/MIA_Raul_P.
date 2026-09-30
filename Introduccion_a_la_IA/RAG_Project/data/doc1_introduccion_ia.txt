@@ -1,0 +1,11 @@
+HISTORIA E INTRODUCCIÓN A LA INTELIGENCIA ARTIFICIAL
+
+La Inteligencia Artificial (IA) es el campo de la ciencia de la computación dedicado al desarrollo de sistemas capaces de realizar tareas que simulan la inteligencia humana. Estas tareas incluyen el razonamiento, la resolución de problemas, la comprensión del lenguaje natural y el aprendizaje a partir de la experiencia.
+
+El concepto moderno de IA comenzó a formalizarse en la Conferencia de Dartmouth en 1956, organizada por figuras clave como John McCarthy, Marvin Minsky, Nathaniel Rochester y Claude Shannon. Durante este evento se acuñó formalmente el término "Inteligencia Artificial" y se proyectó la visión de que las máquinas podrían simular cualquier aspecto del aprendizaje humano.
+
+Tradicionalmente, la IA se divide en dos categorías principales:
+1. IA Débil o Estrecha (Narrow AI): Diseñada para realizar tareas específicas sin poseer conciencia ni comprensión general. Ejemplos de esto son los clasificadores de correo no deseado, los sistemas de recomendación y los motores de búsqueda.
+2. IA Fuerte o General (AGI): Un concepto hipotético de máquina con capacidad intelectual idéntica o superior a la humana en todos los ámbitos cognitivos.
+
+A lo largo de las décadas, la IA ha pasado por varios ciclos de entusiasmo seguidos por períodos de escasez de financiamiento conocidos como "inviernos de la IA". Sin embargo, el aumento masivo en la capacidad de cómputo, la disponibilidad de grandes volúmenes de datos (Big Data) y el avance en algoritmos de aprendizaje automático han revitalizado el campo de forma acelerada en el siglo XXI.

@@ -1,63 +1,120 @@
 import streamlit as st
 import httpx
 
-API_URL = "http://localhost:8000"
+API_BASE_URL = "http://localhost:8000"
 
-st.set_page_config(page_title="Sistema RAG", page_icon="💬")
-st.title("Sistema RAG (FastAPI + ChromaDB + Gemini)")
+st.set_page_config(
+    page_title="RAG System — Google AI & ChromaDB",
+    page_icon="📚",
+    layout="wide"
+)
 
-# Sidebar para Ingestar
+st.title("📚 Sistema RAG: Generación Aumentada por Recuperación")
+st.caption("Cliente Streamlit interactuando con la API de FastAPI (ChromaDB + Google AI)")
+
+# Verificar conectividad con la API
+@st.cache_data(ttl=5)
+def check_api_health():
+    try:
+        response = httpx.get(f"{API_BASE_URL}/health", timeout=3.0)
+        return response.status_code == 200, response.json()
+    except Exception:
+        return False, {}
+
+api_online, health_data = check_api_health()
+
+if not api_online:
+    st.error("⚠️ La API de FastAPI no está disponible en http://localhost:8000. Asegúrate de iniciar `uvicorn app.main:app --reload`.")
+    st.stop()
+elif not health_data.get("google_api_key_configured"):
+    st.warning("⚠️ La API está activa pero la clave de Google AI (`GEMINI_API_KEY`) no está configurada en el archivo `.env`.")
+
+# Sidebar: Configuración e Ingesta
 with st.sidebar:
-    st.header("Cargar Documentos")
-    uploaded_file = st.file_uploader("Sube un archivo (.txt o .md)", type=["txt", "md"])
-    if uploaded_file and st.button("Ingestar Documento"):
-        with st.spinner("Indexando en ChromaDB..."):
-            files = {"file": (uploaded_file.name, uploaded_file.getvalue(), "text/plain")}
+    st.header("⚙️ Estado del Sistema")
+    st.success(f"API Online | Chunks indexados: **{health_data.get('total_chunks_indexed', 0)}**")
+    
+    st.divider()
+    st.header("📥 Ingesta de Documentos")
+    uploaded_files = st.file_uploader(
+        "Sube archivos (.txt, .md, .pdf)", 
+        type=["txt", "md", "pdf"], 
+        accept_multiple_files=True
+    )
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        chunk_size = st.number_input("Chunk size", min_value=50, max_value=1000, value=300, step=50)
+    with col2:
+        chunk_overlap = st.number_input("Overlap", min_value=0, max_value=200, value=50, step=10)
+
+    if st.button("Procesar e Indexar", type="primary", use_container_width=True):
+        if not uploaded_files:
+            st.warning("Selecciona al menos un archivo primero.")
+        else:
+            with st.spinner("Procesando documentos, generando embeddings e indexando..."):
+                files_payload = [
+                    ("files", (f.name, f.getvalue(), f.type or "application/octet-stream"))
+                    for f in uploaded_files
+                ]
+                data_payload = {
+                    "chunk_size": str(chunk_size),
+                    "chunk_overlap": str(chunk_overlap)
+                }
+                
+                try:
+                    res = httpx.post(f"{API_BASE_URL}/ingest", files=files_payload, data=data_payload, timeout=60.0)
+                    if res.status_code == 200:
+                        result = res.json()
+                        st.success(f"¡Éxito! {result.get('chunks_indexed')} chunks creados desde {result.get('documents_processed')} documento(s).")
+                        st.rerun()
+                    else:
+                        st.error(f"Error en ingesta: {res.text}")
+                except Exception as e:
+                    st.error(f"Error al conectar con la API: {str(e)}")
+
+# Sección Principal: Chat / Consulta
+st.subheader("❓ Realizar Consulta")
+
+top_k = st.slider("Número de fragmentos a recuperar (top-k)", min_value=1, max_value=10, value=3)
+question = st.text_input("Escribe tu pregunta sobre los documentos indexados:", placeholder="Ej. ¿De qué trata el documento X?")
+
+if st.button("Buscar Respuesta", type="primary"):
+    if not question.strip():
+        st.warning("Escribe una pregunta antes de enviar.")
+    else:
+        with st.spinner("Buscando en ChromaDB y generando respuesta con Gemini..."):
             try:
-                res = httpx.post(f"{API_URL}/ingest", files=files, timeout=60.0)
-                if res.status_code == 200:
-                    st.success(f"Éxito: {res.json()['chunks_indexed']} chunks indexados.")
-                else:
-                    st.error("Error al procesar el archivo.")
-            except Exception as e:
-                st.error(f"No se pudo conectar con la API: {e}")
-
-# Historial de Chat
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
-prompt = st.chat_input("Escribe tu pregunta sobre el corpus...")
-if prompt:
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
-
-    with st.chat_message("assistant"):
-        with st.spinner("Buscando evidencia y generando respuesta..."):
-            try:
-                response = httpx.post(
-                    f"{API_URL}/query", 
-                    json={"question": prompt, "top_k": 3},
+                res = httpx.post(
+                    f"{API_BASE_URL}/query",
+                    json={"question": question, "top_k": top_k},
                     timeout=30.0
                 )
-                if response.status_code == 200:
-                    data = response.json()
-                    answer = data["answer"]
-                    st.markdown(answer)
-                    
-                    # Desplegar los fragmentos y scores si no se abstuvo
-                    if not data["abstained"] and data.get("citations"):
-                        with st.expander("Ver evidencia recuperada (Top-K)"):
-                            for idx, cite in enumerate(data["citations"], 1):
-                                st.write(f"**[{idx}] {cite['source']}** (Distancia: {cite['score']:.4f})")
-                                st.caption(cite["text"])
-                    
-                    st.session_state.messages.append({"role": "assistant", "content": answer})
+                
+                if res.status_code == 200:
+                    data = res.json()
+                    answer = data.get("answer", "")
+                    citations = data.get("citations", [])
+                    abstained = data.get("abstained", False)
+
+                    st.markdown("### 💬 Respuesta")
+                    if abstained:
+                        st.warning(answer)
+                    else:
+                        st.info(answer)
+
+                    # Mostrar Evidencia / Citas
+                    st.markdown("### 🔍 Evidencia Recuperada")
+                    if not citations:
+                        st.write("No se recuperaron fragmentos.")
+                    else:
+                        for idx, cit in enumerate(citations, start=1):
+                            with st.expander(f"Chunk [{idx}] — Fuente: {cit.get('source')} | Score: {cit.get('score')}"):
+                                st.write(cit.get("text"))
+                                st.caption(f"ID: {cit.get('id')}")
+
                 else:
-                    st.error("Error en la respuesta de la API.")
+                    st.error(f"Error de la API: {res.text}")
+
             except Exception as e:
-                st.error(f"Error de conexión con FastAPI: {e}")
+                st.error(f"Error al conectar con la API: {str(e)}")
