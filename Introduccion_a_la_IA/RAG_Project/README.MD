@@ -1,6 +1,6 @@
 # Sistema RAG con Streamlit + FastAPI + ChromaDB + Google AI
 
-Este proyecto implementa una solución completa de Generación Aumentada por Recuperación (RAG) utilizando FastAPI como capa de API REST, ChromaDB como base de datos vectorial persistente, Google AI para embeddings (`text-embedding-004`) y generación anclada (`gemini-2.5-flash`), y Streamlit como interfaz gráfica.
+Este proyecto implementa una solución completa de Generación Aumentada por Recuperación (RAG) utilizando FastAPI como capa de API REST, ChromaDB como base de datos vectorial persistente, Google AI para embeddings (`gemini-embedding-001`) y generación anclada (`gemini-3.6-flash`), y Streamlit como interfaz gráfica.
 
 ## Requisitos previos
 
