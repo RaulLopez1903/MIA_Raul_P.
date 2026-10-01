@@ -1,0 +1,14 @@
+SEGURIDAD, ALINEACIÓN Y DESAFÍOS ÉTICOS EN LA IA AVANZADA
+
+A medida que los modelos de Inteligencia Artificial ganan en capacidad y autonomía, los campos de la Seguridad de la IA (AI Safety) y la Alineación (AI Alignment) se han convertido en prioridades estratégicas absolutas para la comunidad científica y los desarrolladores de tecnología.
+
+El problema de la alineación consiste en garantizar que los sistemas de IA compartan, respeten y ejecuten fielmente las intenciones, valores y objetivos humanos, evitando comportamientos no deseados, perjudiciales o peligrosos. Uno de los métodos más utilizados para lograr esto es el Aprendizaje por Refuerzo con Retroalimentación Humana (RLHF - Reinforcement Learning from Human Feedback). En el RLHF, evaluadores humanos califican las diferentes respuestas generadas por un modelo, entrenando un "modelo de recompensa" que posteriormente ajusta el comportamiento del LLM mediante algoritmos de optimización de políticas para hacerlo más útil, honesto e inofensivo (Helpful, Honest, Harmless).
+
+Sin embargo, los modelos de lenguaje y los agentes autónomos enfrentan vulnerabilidades de seguridad críticas. Entre las más destacadas se encuentran:
+
+1. Prompt Injection (Inyección de Prompts): Ocurre cuando un atacante inserta instrucciones maliciosas dentro de los datos que el modelo procesa. En su variante indirecta, un agente que lee un correo electrónico o una página web externa puede ejecutar comandos ocultos escritos por un tercero (por ejemplo, "borra los archivos del usuario" o "envía información confidencial a este servidor").
+2. Alucinaciones y Confabulación: La tendencia de los modelos a inventar datos, citas bibliográficas o hechos históricos con apariencia de certeza absoluta, lo que representa un riesgo alto en aplicaciones médicas, legales o financieras.
+3. Fuga de Datos (Data Leakage): El riesgo de que un modelo revele información confidencial o datos de carácter personal que formaban parte de su conjunto de entrenamiento o del contexto corporativo.
+4. Jailbreaking: El uso de técnicas de ingeniería de prompts complejas o lenguaje codificado para eludir los filtros de seguridad del modelo y forzarlo a generar contenido peligroso, como instrucciones para fabricar armas o ejecutar ciberataques.
+
+Para mitigar estos riesgos, las organizaciones implementan arquitecturas de defensa en profundidad que incluyen guardarraíles (Guardrails) de entrada y salida, entornos aislados (sandboxing) para la ejecución de código por parte de agentes, y auditorías continuas mediante Red Teaming (equipos de ciberseguridad que intentan vulnerar los sistemas de IA para identificar fallos antes de su despliegue).

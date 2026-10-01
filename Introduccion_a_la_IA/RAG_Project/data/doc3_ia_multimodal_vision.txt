@@ -1,0 +1,13 @@
+MODELOS MULTIMODALES Y PROCESAMIENTO DE INFORMACIÓN HETEROGÉNEA
+
+La Inteligencia Artificial ha trascendido la frontera del texto plano para adentrarse en la era de la Multimodalidad. La IA Multimodal se refiere a sistemas capaces de procesar, comprender y relacionar simultáneamente información procedente de diversas modalidades de datos, incluyendo texto, imágenes, audio, video y señales sensoriales complejas.
+
+Históricamente, los modelos de visión por computadora y los modelos de procesamiento de lenguaje natural (PLN) se desarrollaban de forma aislada. Sin embargo, arquitecturas pioneras como CLIP (Contrastive Language-Image Pre-training) demostraron que es posible proyectar imágenes y textos en un mismo espacio vectorial de embeddings compartidos. Esto permitió que un modelo relacionara el concepto semántico escrito "un perro jugando en el parque" con la representación matemática de los píxeles de dicha imagen.
+
+En la actualidad, los Large Multimodal Models (LMMs) integran la visión directamente dentro de la arquitectura del modelo de lenguaje. Mediante codificadores visuales especiales (Vision Encoders) y conectores de proyección, las imágenes se convierten en tokens visuales que el modelo lee de la misma manera que lee palabras. Esto habilita capacidades avanzadas como:
+
+1. Razonamiento Visual Complejo: El modelo no solo identifica objetos en una fotografía, sino que puede interpretar diagramas de flujo, leer tablas manuscritas, analizar radiografías médicas o resolver problemas de geometría ilustrados.
+2. Comprensión de Interfaz Gráfica (GUI Agents): Agentes dotados de visión pueden "ver" la pantalla de una computadora o teléfono móvil, identificar botones, cajas de texto y menús, y realizar clics y desplazamientos para operar aplicaciones humanas de manera autónoma.
+3. Análisis de Video en Tiempo Real: Capacidad para procesar secuencias de cuadros por segundo, comprendiendo acciones temporales, identificando eventos clave y respondiendo preguntas sobre la dinámica de un video largo.
+
+El procesamiento de audio nativo es otro avance crítico. En lugar de convertir primero la voz a texto mediante un sistema Speech-to-Text independiente, los modelos multimodales nativos procesan las ondas sonoras directamente. Esto les permite captar no solo las palabras habladas, sino también la entonación, la emoción, el ritmo, el sarcasmo y los ruidos de fondo, respondiendo con voz humana generada en tiempo real con latencias imperceptibles.

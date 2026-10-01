@@ -12,16 +12,16 @@ Este proyecto implementa una solución completa de Generación Aumentada por Rec
 1. Crear y activar el entorno virtual:
 
 ```bash
-   python -m venv .venv
+   python3 -m venv venv
    # En Windows:
-   .venv\Scripts\activate
+   .\venv\Scripts\Activate.ps1
    # En Linux/macOS:
-   source .venv/bin/activate
+   source venv/bin/activate
 ```
 
 2. Instalar dependencias:
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 
 ```
 
@@ -29,7 +29,7 @@ pip install -r requirements.txt
 3. Configurar variables de entorno:
 Copiar `.env.example` como `.env` y definir la clave de API:
 ```env
-GEMINI_API_KEY=tu_api_key_aqui
+GEMINI_API_KEY=api_key
 ```
 
 

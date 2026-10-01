@@ -1,0 +1,15 @@
+EVOLUCIÓN Y ARQUITECTURA DE LOS AGENTES AUTÓNOMOS BASADOS EN IA
+
+La evolución de la Inteligencia Artificial ha experimentado un cambio de paradigma fundamental en los últimos años, transitando de modelos pasivos de clasificación y generación de texto hacia el desarrollo de Agentes Autónomos. Un agente autónomo de IA es un sistema informático capaz de percibir su entorno, tomar decisiones de forma independiente, planificar secuencias de acciones complejas y ejecutar herramientas externas para alcanzar un objetivo específico sin intervención humana continua.
+
+A diferencia de los asistentes de chat tradicionales que simplemente responden a una entrada (prompt) del usuario de manera reactiva, los agentes autónomos operan mediante ciclos continuos de percepción, razonamiento, acción y aprendizaje. La arquitectura básica de un agente autónomo moderno se compone de cuatro pilares fundamentales:
+
+1. El Cerebro o Núcleo de Razonamiento: Generalmente respaldado por un Modelo de Lenguaje Masivo (LLM) de gran escala. Este componente procesa la información de entrada, comprende la intención del usuario y determina qué pasos deben seguirse para cumplir la tarea asignada.
+
+2. Memoria (A Corto y Largo Plazo): La memoria a corto plazo gestiona el contexto de la conversación o ejecución actual (Buffer de contexto), mientras que la memoria a largo plazo utiliza bases de datos vectoriales para almacenar experiencias pasadas, preferencias del usuario y conocimiento del dominio que se recupera mediante técnicas de búsqueda semántica.
+
+3. Módulo de Planificación: Permite al agente descomponer un objetivo complejo en sub-tareas más pequeñas y manejables. Utiliza estrategias como la descomposición de tareas (Task Decomposition), el auto-reflejo (Self-Reflection) y el análisis de errores para corregir el rumbo si una acción falla.
+
+4. Uso de Herramientas (Tool Use / Function Calling): Es la capacidad crucial que conecta al LLM con el mundo real o digital. El agente puede invocar APIs web, ejecutar código en lenguajes como Python, consultar bases de datos relacionales, navegar por Internet o interactuar con software empresarial.
+
+El surgimiento de arquitecturas multi-agente ha elevado aún más el estado del arte. En estos entornos, varios agentes especializados colaboran entre sí adoptando roles específicos (por ejemplo, un agente programador, un agente revisor de código y un agente gestor de proyectos). Mediante la comunicación inter-agente y la negociación de tareas, los sistemas multi-agente pueden resolver problemas de ingeniería de software, investigación científica y análisis financiero de extrema complejidad con mínima supervisión.
