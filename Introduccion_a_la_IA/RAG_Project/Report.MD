@@ -11,17 +11,17 @@ El objetivo de este proyecto era armar un sistema RAG (Retrieval-Augmented Gener
 1. **Arquitectura inicial y separación de capas:**
    Decidimos no mezclar la interfaz con la lógica de negocio. Dejamos a **FastAPI** (puerto 8000) como la API central que habla con los modelos y la base de datos, mientras que **Streamlit** (puerto 8501) quedó únicamente como un cliente HTTP que consume los endpoints `/ingest` y `/query`.
 
-![Local View](.\evidence\01_local_view_streamlit_app.PNG)
+![Local View](./evidence/01_local_view_streamlit_app.PNG)
 
 2. **Selección del corpus:**
    Elegimos un tema técnico relevante para probar el sistema: **Inteligencia Artificial Avanzada**. Preparamos 5 archivos `.txt` (`doc1` a `doc5`) que suman algo más de 3,100 palabras. Cubren temas como agentes autónomos, técnicas de razonamiento (*ReAct*, *CoT*), modelos multimodales, seguridad y cómputo.
 
-![Local View](.\evidence\02_documents_selection.PNG)
+![Local View](./evidence/02_documents_selection.PNG)
 
 3. **Primer obstáculo: Límites de cuota (Rate Limits):**
    Al probar las primeras ingestas masivas, la API gratuita de Google AI nos rebotó con un error `429 RESOURCE_EXHAUSTED`. Como los documentos sumaban bastantes palabras, enviar todo de golpe saturaba las peticiones por minuto. Lo resolvimos bajando el tamaño del corpus de 50,000 a las 3,100 palabras en los archivos finales. Con eso los embeddings (`gemini-embedding-001`) procesaron todos los chunks sin fallar.
 
-![Local View](.\evidence\03_embedding.PNG)
+![Local View](./evidence/03_embedding.PNG)
 
 4. **Persistencia del índice:**
    Guardamos los vectores y sus metadatos (`source`, `chunk_index`) en disco dentro de la carpeta `chroma/`. Esto nos aseguró que al reiniciar el servidor de FastAPI no hiciera falta volver a procesar ni gastar cuota de API reindexando los documentos.
@@ -38,22 +38,22 @@ Le preguntamos al sistema: `¿Qué es la arquitectura ReAct y cómo funciona su 
 
 El sistema recuperó los fragmentos relevantes y redactó una respuesta clara citando los puntos clave (`[1]`, `[2]`).
 
-![Local View](.\evidence\04_first_question_reponse.PNG)
+![Local View](./evidence/04_first_question_reponse.PNG)
 
 Al desplegar la **Evidencia Recuperada**, confirmamos que la fuente principal fue `doc2_tecnicas_razonamiento_llm.txt` con un score de similitud cosenoidal de `0.6573`.
 
-![Local View](.\evidence\05_first_question_evidence.PNG)
+![Local View](./evidence/05_first_question_evidence.PNG)
 
 ---
 
 ### Verificación del backend desde Swagger (FastAPI)
 Para comprobar que la API funciona de forma independiente a la UI, enviamos la misma consulta usando la documentación interactiva en `http://localhost:8000/docs`.
 
-![Local View](.\evidence\06_fastapi_docs_first_question.PNG)
+![Local View](./evidence/06_fastapi_docs_first_question.PNG)
 
 El servidor respondió con código `200 OK`, devolviendo el JSON estructurado con el texto, las citas detalladas y el atributo `"abstained": false`.
 
-![Local View](.\evidence\07_fastapi_doct_fisrt_question_response.PNG)
+![Local View](./evidence/07_fastapi_doct_fisrt_question_response.PNG)
 
 ---
 
@@ -61,7 +61,7 @@ El servidor respondió con código `200 OK`, devolviendo el JSON estructurado co
 Para validar que el sistema no inventa información cuando no la tiene, enviamos una pregunta ajena al corpus:  
 `¿Cuál es la receta exacta para preparar una paella valenciana?`
 
-![Local View](.\evidence\08_second_question_response.PNG)
+![Local View](./evidence/08_second_question_response.PNG)
 
 El sistema reconoció que los fragmentos no cubrían el tema y devolvió exactamente el mensaje esperado:  
 > *"No tengo evidencia suficiente en los documentos para responder a tu pregunta."*
