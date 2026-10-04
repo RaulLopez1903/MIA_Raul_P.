@@ -31,5 +31,6 @@ def search_courses(query: str, path: Path = DEFAULT_CATALOG) -> list[Course]:
     for course in courses:
         if term in course.title.casefold():
             matches.append(course)
+    logger.info("Search completed: %d readed courses", len(courses))
     logger.info("Search completed: %d matches", len(matches))
     return matches
