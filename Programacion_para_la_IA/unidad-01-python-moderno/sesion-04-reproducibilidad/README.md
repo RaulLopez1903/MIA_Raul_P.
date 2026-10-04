@@ -1,51 +1,39 @@
-# Sesión 4: Organización y reproducibilidad de proyectos con uv
+# Sesión 4: Organización y reproducibilidad con uv y un servidor MCP local
 
-Construiremos una aplicación de consola para validar lecturas y generar un
-reporte. El trabajo se realiza en archivos Python y en la terminal.
+Construiremos un catálogo de cursos que primero consultaremos como una función
+Python y después como una herramienta MCP. El ejemplo permite trabajar con
+módulos, dependencias, logging y reproducción del entorno.
 
-La [presentación](https://drive.google.com/file/d/1L7z6CxmTSq6CT-fPHlxq593WCAa2HRcI/view?usp=drivesdk) explica los conceptos
-e intercala demostraciones en la terminal y el editor.
+## Entrega de prácticas
 
-La [guía de la sesión](./GUIA.md) recorre la creación desde una carpeta nueva.
-El [proyecto completo](./proyecto/README.md) permite consultar la implementación
-y reproducir el resultado.
+La fecha límite para entregar las prácticas de la Unidad 1 es el **7 de octubre de 2026**.
+Envía los entregables mediante el [formulario de entrega](https://docs.google.com/forms/d/e/1FAIpQLSdTJ2vU04VfIpw1Tst_T_0g0tlbE-n6ZI81nrG0RQJMReAtaQ/viewform?usp=publish-editor).
 
-## Contenido
+## Recorrido
 
-1. Proyecto, intérprete, entorno y dependencias.
-2. Creación con `uv` y configuración en `pyproject.toml`.
-3. `main.py`, módulos, paquetes e imports.
-4. Argumentos de terminal y códigos de salida.
-5. Logging: niveles, loggers, handlers y formato.
-6. Reproducción con `uv.lock` y control de versiones.
-7. [Ejercicios y reproducción desde una copia limpia](./PRACTICA.md).
-8. [Calidad de código: pytest, Ruff y Makefile](./CALIDAD.md).
+1. Crear un proyecto con uv y ejecutar `main.py`.
+2. Consultar un archivo JSON desde un módulo reutilizable.
+3. Incorporar argumentos y logging.
+4. Exponer la consulta mediante un servidor MCP local.
+5. Conectar un cliente y reproducir el proyecto desde una copia limpia.
 
-El último bloque utiliza la misma aplicación y puede continuarse en otra sesión.
-
-## Resultados de aprendizaje
-
-- Crear y ejecutar una aplicación con dependencias declaradas.
-- Separar la entrada del programa, las reglas de datos y el procesamiento.
-- Registrar eventos y errores sin mezclarlos con el resultado del programa.
-- Reconstruir el entorno y comprobar el comportamiento con herramientas de calidad.
-
-Se retoman funciones, excepciones, imports, modelos Pydantic y lectura de archivos
-con `with`. Se necesita una terminal, un editor de texto o código y `uv` instalado;
-la guía incluye los pasos de preparación.
+La [guía](./GUIA.md) construye el ejemplo por etapas. El
+[proyecto de referencia](./project/README.md) contiene la implementación completa.
+La sesión reúne **9 ejercicios**: cinco de la aplicación y cuatro de calidad
+con pytest, Ruff, mypy y Makefile. [PRACTICA.md](./PRACTICA.md) reúne los
+entregables y enlaza el bloque de [CALIDAD.md](./CALIDAD.md).
 
 ## Ejecutar la referencia
 
-Desde la raíz del repositorio:
-
 ```bash
-cd unidad-01-python-moderno/sesion-04-reproducibilidad/proyecto
+cd unidad-01-python-moderno/sesion-04-reproducibilidad/project
 uv sync --locked
-uv run --locked python main.py data/readings.jsonl
-uv run --locked ruff check .
-uv run --locked ruff format --check .
-uv run --locked python -m pytest
+uv run --locked python main.py python
+uv run --locked python client.py python
 ```
 
-Resultado: tres lecturas válidas, una rechazada y temperatura media de `22.0`.
-La advertencia se muestra en stderr; el reporte JSON, en stdout.
+La primera consulta devuelve dos cursos directamente. La segunda inicia un
+servidor local, descubre `find_courses`, la invoca mediante MCP y cierra la
+conexión. Una búsqueda sin coincidencias devuelve una lista vacía.
+
+[Documentación para profundizar](./FUENTES.md)

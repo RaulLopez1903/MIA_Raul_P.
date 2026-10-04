@@ -1,220 +1,118 @@
-# De una carpeta a una aplicación reproducible
+# De una función Python a un servidor MCP local
 
-La aplicación de esta sesión recibe un archivo con lecturas de temperatura,
-valida sus registros y produce un reporte. Los registros inválidos se cuentan y
-se omiten; si no hay ninguno válido, el programa termina con un error.
+El proyecto consulta un catálogo de cursos. Construiremos primero una aplicación
+que funciona desde la terminal y luego reutilizaremos su búsqueda mediante MCP.
 
-## 1. Preparar la terminal
+## 1. Crear el proyecto
 
-Una terminal ejecuta comandos en un **directorio de trabajo**. Abre una carpeta
-de prácticas en tu editor y su terminal integrada. `cd nombre` entra en una
-carpeta; `cd ..` vuelve a la anterior. En macOS/Linux, `pwd` muestra dónde estás
-y `ls` lista los archivos; en PowerShell puedes usar `Get-Location` y `Get-ChildItem`.
-
-Instala `uv` siguiendo las [instrucciones de Astral](https://docs.astral.sh/uv/getting-started/installation/).
-El instalador independiente es una opción para macOS/Linux:
+Instala uv desde las [instrucciones oficiales](https://docs.astral.sh/uv/getting-started/installation/).
+Abre una terminal en tu carpeta de prácticas. `cd nombre` entra en una carpeta
+y `cd ..` vuelve a la anterior. Crea el ejemplo fuera del proyecto de referencia:
 
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
-En Windows, desde PowerShell:
-
-```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
-
-Abre una nueva terminal si el comando todavía no aparece y comprueba:
-
-```bash
-uv --version
-uv python install 3.13
-```
-
-`uv` gestiona intérpretes, entornos y dependencias. Python es quien ejecuta el
-programa. Un entorno virtual permite que distintos proyectos utilicen distintas
-versiones de sus bibliotecas.
-
-## 2. Crear el proyecto
-
-En una carpeta de prácticas, fuera de la carpeta `proyecto` de esta referencia:
-
-```bash
-uv init --no-package --python 3.13 --vcs none readings-report
-cd readings-report
+uv init --no-package --python 3.13 --vcs none course-catalog
+cd course-catalog
 uv run python main.py
 ```
 
-`--no-package` crea una aplicación ejecutada como script. Desde uv 0.12, el
-comportamiento por defecto de `uv init` es crear una aplicación empaquetada con
-`src/`; por eso aquí explicitamos la opción. `--vcs none` pospone la creación del
-repositorio Git hasta conocer qué archivos debemos guardar.
-[Creación de proyectos](https://docs.astral.sh/uv/concepts/projects/init/).
+`--no-package` crea una aplicación que ejecutaremos como scripts. `--vcs none`
+pospone la creación del repositorio Git. Python ejecuta el código y uv prepara
+el entorno y sus dependencias. No necesitas activar `.venv` manualmente.
 
-Identifica `main.py`, `pyproject.toml`, `.python-version` y `README.md`.
-Después de ejecutar el programa también encontrarás `.venv/` y `uv.lock`.
-
-| Elemento | Función |
+| Archivo o carpeta | Función |
 |---|---|
-| `main.py` | Entrada de nuestra aplicación. |
-| `pyproject.toml` | Metadatos, requisitos y configuración de herramientas. |
-| `.python-version` | Selección local del intérprete para uv. |
-| `uv.lock` | Resolución de dependencias, con versiones y artefactos. |
-| `.venv/` | Entorno local que se puede reconstruir. |
-| `README.md` | Instrucciones para usar y comprobar el proyecto. |
+| `main.py` | Punto de entrada de la aplicación de consola. |
+| `pyproject.toml` | Nombre, compatibilidad y dependencias declaradas. |
+| `.python-version` | Intérprete elegido para trabajar. |
+| `uv.lock` | Versiones resueltas de dependencias directas y transitivas. |
+| `.venv/` | Entorno local que uv puede reconstruir. |
 
-`uv run` prepara el entorno del proyecto antes de ejecutar el comando. No es
-necesario activar `.venv` manualmente en este recorrido.
-[Trabajo con proyectos](https://docs.astral.sh/uv/guides/projects/).
+`uv run` crea el entorno y el lockfile cuando hace falta. Comprueba el intérprete:
 
-**Comprobación:** ejecuta `uv run python -c "import sys; print(sys.executable)"`.
-La ruta debe corresponder al entorno del proyecto.
+```bash
+uv run python -c "import sys; print(sys.executable)"
+```
 
-## 3. Entender main.py
+## 2. Una función antes del protocolo
 
-Sustituye el contenido inicial por:
+Reemplaza `main.py` por este ejemplo completo:
 
 ```python
-def main() -> int:
-    print("Reading report")
-    return 0
+def search_courses(query: str) -> list[str]:
+    titles = ["Python foundations", "Python for data analysis", "Machine learning introduction"]
+    matches = []
+    for title in titles:
+        if query.strip().casefold() in title.casefold():
+            matches.append(title)
+    return matches
+
+
+def main() -> None:
+    print(search_courses("python"))
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()
 ```
 
-Ejecuta `uv run python main.py` y después `uv run python -c "import main"`.
-La primera instrucción imprime el mensaje; la segunda no.
+`strip()` elimina espacios de los extremos y `casefold()` permite comparar sin
+distinguir mayúsculas. Aquí la búsqueda es por una secuencia de caracteres en el
+título. Todavía no validamos consultas vacías; lo añadiremos al extraer el módulo.
 
-`main.py` es una convención de nombre. Python no busca ni llama automáticamente
-una función llamada `main`. La condición comprueba si el archivo se está ejecutando
-como entrada del programa; al importarlo, su nombre de módulo es `main`.
-`SystemExit` convierte el retorno en un código de salida: `0` representa éxito.
-[Entorno de ejecución principal](https://docs.python.org/3/library/__main__.html).
+```bash
+uv run python main.py
+uv run python -c "import main"
+```
 
-Un programa nuevo arranca en un proceso nuevo: no conserva variables de una
-notebook ni resultados de una ejecución anterior. Las entradas deben llegar
-por argumentos, archivos u otra interfaz definida.
+El primer comando imprime dos títulos. El segundo importa el módulo sin ejecutar
+la consulta. Python no llama automáticamente a una función llamada `main`:
+la condición `if __name__ == "__main__"` decide cuándo hacerlo.
 
-## 4. Declarar dependencias
+## 3. Archivo de datos y módulo reutilizable
 
 ```bash
 uv add "pydantic>=2,<3"
-```
-
-Pydantic será una dependencia de ejecución. `logging`, `argparse` y `pathlib` pertenecen a la biblioteca estándar:
-no se agregan como dependencias externas.
-
-Abre `pyproject.toml`. Conserva las dependencias que escribió uv y cambia
-`requires-python` a `">=3.12"`, la compatibilidad mínima de esta aplicación.
-`.python-version` puede seguir seleccionando `3.13`. Son decisiones distintas:
-compatibilidad declarada y versión elegida para trabajar.
-
-```bash
-uv lock
-uv sync
 uv tree
 ```
 
-`uv tree` permite identificar dependencias directas y transitivas: algunas
-bibliotecas son necesarias porque otra biblioteca depende de ellas.
-[Dependencias y grupos](https://docs.astral.sh/uv/concepts/projects/dependencies/).
+`uv add` actualiza las dependencias y su resolución. `uv tree` muestra también
+las bibliotecas que estas necesitan. `json`, `pathlib` y `logging` pertenecen a
+Python y no requieren `uv add`.
 
-**Comprobación:** localiza Pydantic en `[project].dependencies`. Compara esa declaración con las versiones resueltas
-en `uv.lock`; no edites el lockfile a mano.
+Crea `data/courses.json` copiando el [catálogo](./project/data/courses.json).
+Crea la carpeta `catalog`, un `catalog/__init__.py` vacío y copia
+[catalog/search.py](./project/catalog/search.py). Recorre el módulo:
 
-## 5. Separar responsabilidades
+- `Course` retoma Pydantic y exige un número positivo de horas.
+- `search_courses` rechaza consultas vacías, carga el JSON y compara títulos.
+- Si no encuentra cursos, devuelve `[]`. Un archivo ausente o inválido provoca
+  una excepción: no equivale a una búsqueda sin coincidencias.
 
-La estructura final de esta aplicación será:
-
-```text
-readings-report/
-├── main.py
-├── readings/
-│   ├── __init__.py
-│   ├── models.py
-│   ├── processing.py
-│   └── logging_config.py
-├── data/
-│   ├── readings.jsonl
-│   └── invalid.jsonl
-├── .gitignore
-├── .python-version
-├── pyproject.toml
-├── uv.lock
-└── README.md
-```
-
-Un archivo `.py` es un módulo. La carpeta `readings`, con `__init__.py`, es un
-paquete importable que agrupa módulos. Esto no significa que hayamos construido
-una distribución instalable ni publicado una biblioteca.
-
-| Archivo | Responsabilidad |
-|---|---|
-| `models.py` | Definir qué datos acepta una lectura y cómo se representa el reporte. |
-| `processing.py` | Leer, validar, acumular y devolver un resultado. |
-| `logging_config.py` | Elegir destinos, niveles y formato de los logs. |
-| `main.py` | Interpretar argumentos, configurar la ejecución y presentar el resultado. |
-
-Crea las carpetas y un `readings/__init__.py` vacío. Usa nombres que describan el
-problema; evita llamar a un archivo `logging.py`, `json.py` o `pydantic.py`, porque
-podría ocultar el módulo que intentas importar.
-
-### Modelos y datos
-
-Crea `readings/models.py` con el contenido de [models.py](./proyecto/readings/models.py).
-`Reading` exige una estación no vacía y una temperatura finita. `Report` representa
-la salida. Se retoma Pydantic de la sesión 2 sin añadir otra biblioteca de datos.
-[Restricciones de campos](https://docs.pydantic.dev/latest/concepts/fields/).
-
-Crea `data/readings.jsonl` copiando la [muestra](./proyecto/data/readings.jsonl).
-Cada línea es un objeto JSON independiente; el archivo completo no es una lista JSON.
-La tercera línea tiene una temperatura inválida. Crea también
-[data/invalid.jsonl](./proyecto/data/invalid.jsonl), donde todas las lecturas fallan.
-
-### Procesamiento
-
-Crea `readings/processing.py` a partir de [processing.py](./proyecto/readings/processing.py).
-Lee primero la función ignorando temporalmente las llamadas `logger.*`:
-abre el archivo con `with`, valida cada línea, acumula una media y devuelve `Report`.
-La media se actualiza sin guardar todas las lecturas.
-
-Los errores de validación permiten continuar con otra fila. Los errores que
-impiden leer el archivo se propagan al llamador. No se devuelve un reporte de
-éxito si ninguna fila fue válida. Las líneas vacías también se rechazan.
+Un archivo `.py` es un módulo. `catalog` agrupa módulos en un paquete importable.
+La ruta `Path(__file__).resolve().parents[1]` localiza la carpeta del proyecto a
+partir del archivo del módulo. Así el catálogo no depende de dónde arranque un
+cliente externo.
 
 Sustituye temporalmente `main.py` por:
 
 ```python
-from pathlib import Path
-
-from readings.processing import summarize_file
+from catalog.search import search_courses
 
 
-def main() -> int:
-    report = summarize_file(Path("data/readings.jsonl"))
-    print(report.model_dump_json(indent=2))
-    return 0
+def main() -> None:
+    for course in search_courses("python"):
+        print(course.model_dump_json())
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()
 ```
 
-Ejecuta `uv run python main.py`. Verás un reporte con `count=3`, `rejected=1` y
-`average_temperature=22.0`. También puede aparecer la advertencia del registro
-rechazado: logging tiene un mecanismo de respaldo para avisos aunque todavía no
-hayamos configurado los destinos.
+Ejecuta y comprueba los códigos `PY01` y `PY02`. La función se puede usar sin MCP.
 
-## 6. Incorporar logging
+## 4. Logging y argumentos
 
-El resultado del programa y los eventos de su ejecución tienen propósitos
-diferentes. El reporte se imprime para consumirlo; los logs ayudan a entender
-qué ocurrió mientras se produjo.
-
-En la parte superior de `main.py`, agrega `import logging`. Como primera
-instrucción dentro de `main()`, antes de procesar el archivo, agrega:
+Agrega `import logging` y esta configuración al principio de `main()`:
 
 ```python
 logging.basicConfig(
@@ -223,147 +121,166 @@ logging.basicConfig(
 )
 ```
 
-En `processing.py`, `logging.getLogger(__name__)` crea o recupera el logger del
-módulo. La configuración se hace en la entrada de la aplicación, una sola vez;
-los módulos se limitan a emitir eventos.
-[Guía de logging](https://docs.python.org/3/howto/logging.html).
+El módulo usa `logging.getLogger(__name__)` y emite eventos. La entrada del
+programa configura sus destinos. Cambia INFO por DEBUG y compara los mensajes.
 
-| Nivel | Uso en esta aplicación |
+| Nivel | Ejemplo |
 |---|---|
-| `DEBUG` | Confirmar el procesamiento de una línea. |
-| `INFO` | Informar inicio y final del reporte. |
-| `WARNING` | Señalar una fila rechazada mientras el proceso continúa. |
-| `ERROR` | Registrar que el reporte no pudo generarse. |
-| `CRITICAL` | Reservado para fallos que impidan continuar una aplicación; aquí no hace falta. |
+| DEBUG | Ruta del catálogo que se lee. |
+| INFO | Cantidad de coincidencias de una consulta. |
+| WARNING | Situación recuperable que merece atención; aquí no necesitamos emitir una. |
+| ERROR | Consulta que no pudo completarse. |
 
-Ejecuta con `INFO` y luego cambia a `DEBUG`. Observa qué mensajes aparecen.
-`logger.info("Reading input file: %s", path)` deja el formato del mensaje a logging.
-No se imprime el registro completo cuando falla: el número de línea basta para
-localizarlo en esta práctica.
-
-### Destinos y formato
-
-Un **logger** emite eventos. Un **handler** los dirige a un destino. Un
-**formatter** controla su presentación. Los niveles filtran los eventos.
-
-Crea `readings/logging_config.py` desde
-[logging_config.py](./proyecto/readings/logging_config.py). La configuración de
-referencia pone el logger raíz en `DEBUG` y define el umbral de cada handler:
-la consola utiliza el nivel solicitado y el archivo opcional recibe desde `DEBUG`.
-El logger de `readings.processing` hereda el nivel y propaga sus registros al raíz.
-
-Solo el logger raíz tiene handlers; añadir el mismo destino también a un logger
-hijo puede duplicar mensajes por propagación. `basicConfig()` no reconfigura
-normalmente un raíz que ya tenga handlers: por eso este código se configura una
-vez al iniciar un proceso nuevo. No lo uses como si fuera una celda reiniciable.
-[Referencia de logging](https://docs.python.org/3/library/logging.html).
-
-**Extensión opcional:** el archivo usa `RotatingFileHandler` con `maxBytes=100_000`
-y `backupCount=2`. Al rotar conserva hasta dos copias numeradas además del archivo
-activo. Es una rotación por tamaño, no por fecha; no representa un límite exacto
-al byte para cada registro. Para comenzar basta el handler de consola.
-[Handlers de archivo](https://docs.python.org/3/library/logging.handlers.html#rotatingfilehandler).
-
-## 7. Recibir argumentos y comunicar errores
-
-Reemplaza `main.py` por la [versión completa](./proyecto/main.py). Recorre su flujo:
-`argparse` recibe la ruta, se configura logging, se ejecuta `summarize_file` y se
-presenta el reporte. `Path` conserva una ruta como objeto. Las rutas relativas
-parten de la carpeta donde se ejecuta el comando.
+Copia [logging_config.py](./project/catalog/logging_config.py) y reemplaza
+`main.py` por la [versión de referencia](./project/main.py). `argparse` recibe
+la consulta y opciones; `main` devuelve 0 al completar la búsqueda y 1 ante un
+error. `raise SystemExit(main())` comunica ese resultado a la terminal.
 
 ```bash
-uv run python main.py --help
-uv run python main.py data/readings.jsonl
-uv run python main.py data/readings.jsonl --log-level DEBUG
-uv run python main.py data/invalid.jsonl
-uv run python main.py data/missing.jsonl
+uv run python main.py python
+uv run python main.py python --log-level DEBUG
+uv run python main.py python --log-level ERROR --log-file logs/app.log
+uv run python main.py python --catalog data/missing.json
 ```
 
-Dentro de un `except`, `logger.exception()` emite un evento `ERROR` con traceback.
-El programa devuelve `1` y no imprime un reporte cuando falla. Los argumentos
-incorrectos producen el código `2` de `argparse`. Una fila inválida que se omite
-no cambia a error una ejecución que sí produjo el reporte.
+Un **handler** dirige mensajes a un destino; un **formatter** define cómo se ven.
+El logger raíz acepta DEBUG. El handler de consola aplica el nivel solicitado,
+y el archivo opcional recibe desde DEBUG. Por eso la tercera ejecución guarda
+mensajes en el archivo aunque la consola no los muestre.
 
-Para consultar el código inmediatamente después de ejecutar: `echo $?` en
+```bash
+uv run python main.py python > result.json
+```
+
+El JSON sale por stdout. `StreamHandler` escribe en stderr, por lo que los logs
+no contaminan el archivo. Dentro de `except`, `logger.exception` registra ERROR
+con traceback. Consulta el código de salida inmediatamente con `echo $?` en
 macOS/Linux o `$LASTEXITCODE` en PowerShell.
 
+## 5. Exponer la función como herramienta MCP
+
+MCP es un protocolo para que una aplicación descubra e invoque herramientas.
+El **servidor** publica funciones; el **cliente** consulta cuáles están disponibles
+y solicita su ejecución. Una aplicación de IA puede incorporar ese cliente.
+Nuestro servidor realiza la búsqueda, sin generar una respuesta de lenguaje natural.
+
 ```bash
-uv run python main.py data/readings.jsonl > report.json
-uv run python main.py data/readings.jsonl --log-level ERROR --log-file logs/app.log
+uv add "mcp>=2,<3"
 ```
 
-`StreamHandler` escribe en stderr por defecto. Por ello la primera redirección
-guarda el JSON de stdout y los logs siguen visibles. En la segunda ejecución,
-la consola queda sin mensajes, pero el archivo conserva detalles y advertencias.
-En Windows usa PowerShell 7 o un editor que detecte la codificación al abrir el
-JSON redirigido; las versiones antiguas de PowerShell pueden redirigir como UTF-16.
+Usaremos el SDK oficial versión 2. Algunos ejemplos antiguos importan FastMCP;
+aquí seguimos su API actual, `MCPServer`. Copia [server.py](./project/server.py).
+La parte central es:
 
-## 8. Compartir un entorno reproducible
+```python
+mcp = MCPServer("Course catalog")
 
-Para continuar un proyecto existente, usa su lockfile:
+
+@mcp.tool()
+def find_courses(query: str) -> list[Course]:
+    """Find courses by words in their title, ignoring letter case."""
+    return search_courses(query)
+```
+
+Este fragmento muestra el registro; el archivo completo incluye los imports y
+el manejo de errores. El decorador registra la función como herramienta. El SDK
+usa anotaciones y docstring para describir su entrada, salida y propósito.
+La función de búsqueda sigue dentro de `catalog/search.py`.
+
+La versión completa captura errores de lectura y validación, registra su detalle
+y comunica `ToolError` al cliente. El servidor puede atender otra consulta después.
+
+```bash
+uv run python server.py
+```
+
+El transporte **stdio** intercambia mensajes por stdin y stdout del proceso.
+El servidor espera una petición MCP: no abre un puerto ni una página. No escribas
+una búsqueda como texto libre en esa terminal. Detén esta prueba con Ctrl+C.
+Durante el servicio, stdout pertenece al protocolo. Usa logging a stderr en
+lugar de `print` para diagnosticar el servidor.
+
+El SDK puede configurar el logger raíz al crear `MCPServer`. Nuestra configuración
+reemplaza los handlers antes de arrancar, para evitar destinos duplicados y aplicar
+el formato elegido. Importar `server` registra la herramienta, pero no inicia
+el transporte, gracias a la condición final del archivo.
+
+## 6. Hacer una llamada local
+
+Copia [client.py](./project/client.py) y ejecuta:
+
+```bash
+uv run --locked python client.py python
+uv run --locked python client.py astronomy
+uv run --locked python client.py " "
+```
+
+El cliente inicia `server.py` con el mismo intérprete, descubre `find_courses` y
+la llama. `async with` gestiona la conexión y `await` espera las respuestas,
+retomando la sesión anterior. Al terminar cierra la conexión y el proceso servidor.
+No necesitas arrancar `server.py` en otra terminal.
+
+La primera llamada devuelve los cursos PY01 y PY02. La segunda termina con éxito
+y una lista vacía. La tercera devuelve un resultado de herramienta con
+`is_error: true` y el cliente termina con código 1. El JSON MCP incluye un sobre
+con contenido y metadatos; no es idéntico al JSON de la aplicación de consola.
+
+Los `print` de este archivo muestran resultados en la terminal del **cliente**.
+No escriben en el stdout reservado del proceso **servidor**.
+
+## 7. Inspeccionar la herramienta
+
+[MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) permite
+explorar la herramienta visualmente. Requiere Node.js y `npx`; es una alternativa
+al cliente Python incluido. Desde el proyecto:
+
+```bash
+npx @modelcontextprotocol/inspector uv run --locked python server.py
+```
+
+Abre la URL local que muestra Inspector. Selecciona el transporte stdio y conecta
+con el comando indicado. En Tools, lista las herramientas, selecciona
+`find_courses` y envía `query` con el valor `python`. Compara con `astronomy` y
+una cadena de espacios. Inspector inicia el servidor, igual que el cliente de
+la etapa anterior. Al terminar, desconecta y detén Inspector con Ctrl+C.
+
+Para un host compatible con stdio, el comando equivalente es:
+
+```bash
+uv --directory /ruta/absoluta/course-catalog run --locked python server.py
+```
+
+Usa tu ruta real. Cada host tiene su propio formato de configuración. Consulta
+[conexión a un host](https://py.sdk.modelcontextprotocol.io/get-started/real-host/).
+
+## 8. Reproducir el proyecto
 
 ```bash
 uv sync --locked
-uv run --locked python main.py data/readings.jsonl
+uv run --locked python client.py python
 ```
 
-`--locked` verifica que las declaraciones y el lockfile sean compatibles y falla
-si necesita cambiar la resolución. `--frozen` omite esa comprobación de vigencia;
-no es un sustituto de `--locked` al revisar una entrega. Un `uv sync` normal puede
-actualizar el lockfile. [Bloqueo y sincronización](https://docs.astral.sh/uv/concepts/projects/sync/).
+`--locked` falla si `pyproject.toml` requiere cambiar el lockfile. `--frozen` omite
+esa comprobación de vigencia. Un `uv sync` normal puede actualizar la resolución.
 
-El lockfile fija dependencias, pero no captura los archivos de entrada, la
-configuración del sistema ni todos los factores de una ejecución. Comparte los
-datos de muestra, los comandos y la versión elegida de Python. `.python-version`
-con `3.13` fija la rama; especifica también el parche si el trabajo requiere una
-versión exacta del intérprete.
+Versiona código, datos de muestra, README, `.python-version`, `pyproject.toml`
+y `uv.lock`. Copia [.gitignore](./project/.gitignore) y excluye `.venv`, cachés,
+logs y resultados. El lockfile fija dependencias, pero no guarda los datos ni
+reproduce por sí solo todo el sistema operativo.
 
-Copia el [.gitignore](./proyecto/.gitignore). Versiona código, pruebas, datos
-pequeños de práctica, README, `.python-version`, `pyproject.toml` y `uv.lock`.
-`.venv`, cachés y logs se reconstruyen o se generan al ejecutar.
-
-En tu carpeta nueva, con [Git instalado](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git):
+En la carpeta independiente de tu práctica, inicializa Git, revisa los archivos
+antes de guardarlos y crea un commit. Si trabajas dentro del repositorio del curso,
+usa ese repositorio en lugar de crear otro anidado. Desde la carpeta superior de
+un proyecto independiente ya guardado:
 
 ```bash
-git init
-git status --short
-git add .
-git diff --cached --stat
-git commit -m "Add reproducible readings application"
-```
-
-Antes del commit verifica que no aparezcan `.venv` ni logs. Si trabajas dentro de
-un repositorio ya existente, usa ese repositorio en vez de inicializar uno anidado.
-Git guarda revisiones; uv administra el entorno. Son tareas distintas.
-
-## 9. Reproducir desde otra carpeta
-
-Después del commit, crea una copia limpia desde la carpeta que contiene tu
-repositorio independiente:
-
-```bash
-git clone ./readings-report readings-report-check
-cd readings-report-check
+git clone ./course-catalog course-catalog-check
+cd course-catalog-check
 uv sync --locked
-uv run --locked python main.py data/readings.jsonl
+uv run --locked python client.py python
 ```
 
-El clon solo incluye archivos guardados en Git. La nueva `.venv` se construye
-con el lockfile. Si trabajas con el repositorio del curso completo, clona ese
-repositorio y entra después en la subcarpeta del proyecto.
-
-## 10. Cuándo cambiar la estructura
-
-Esta aplicación se ejecuta con `uv run python main.py` desde su carpeta. Si se
-necesita instalar un comando independiente del directorio de trabajo o distribuir
-la lógica, conviene una aplicación empaquetada con `src/`, un backend de construcción
-y un punto de entrada en `[project.scripts]`. Se puede explorar en otra carpeta
-con `uv init --package example-app`.
-
-`src/` por sí solo no hace que Python encuentre los módulos: el paquete debe
-instalarse en el entorno. Esa evolución cambia la instalación y los imports;
-no es necesario imponerla a toda aplicación pequeña.
-
-Continúa con los [ejercicios de organización y logging](./PRACTICA.md).
-El último tema es [Calidad de código: pytest, Ruff y Makefile](./CALIDAD.md),
-que trabaja sobre esta misma aplicación.
+El clon reconstruye `.venv` a partir del lockfile. Debe devolver los mismos dos
+cursos. Continúa con [PRACTICA.md](./PRACTICA.md). El bloque final de
+[calidad](./CALIDAD.md) usa el mismo proyecto. Las [fuentes oficiales](./FUENTES.md)
+permiten profundizar en MCP y en la gestión de proyectos.
