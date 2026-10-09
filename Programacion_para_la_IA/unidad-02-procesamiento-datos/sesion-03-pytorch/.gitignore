@@ -1,0 +1,4 @@
+data/
+outputs/
+*.executed.ipynb
+.slides-build/

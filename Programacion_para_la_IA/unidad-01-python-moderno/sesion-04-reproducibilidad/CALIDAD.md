@@ -18,8 +18,8 @@ arranca un proceso real, descubre la herramienta y verifica que el servidor
 sigue respondiendo después de una consulta inválida.
 
 ```bash
-uv run --locked ruff check .
-uv run --locked ruff format --check .
+uv run --locked ruff check
+uv run --locked ruff format --check
 uv run --locked mypy --strict main.py server.py client.py catalog
 uv run --locked python -m pytest
 ```
