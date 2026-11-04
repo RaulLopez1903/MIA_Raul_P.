@@ -47,10 +47,16 @@ uv run --locked ruff check .
 ```
 
 La aplicación escribe `passengers_prepared.csv`, `survival_by_group.csv`,
-`features.npy` y `labels.npy` en `outputs/`. Los CSV mantienen nombres de columnas
-y grupos; los archivos NumPy contienen una matriz numérica `(891, 4)` y un vector
-de etiquetas `(891,)`. Son materiales para estudiar representación de datos, no
-un conjunto de entrenamiento preparado para evaluar modelos.
+`missing_age_by_class.csv`, `features.npy` y `labels.npy` en `outputs/`. Los CSV
+mantienen nombres de columnas y grupos; los archivos NumPy contienen una matriz
+numérica `(891, 4)` y un vector de etiquetas `(891,)`. Son materiales para estudiar
+representación de datos, no un conjunto de entrenamiento preparado para evaluar
+modelos.
+
+El total de 177 edades ausentes indica cuántos pasajeros no tienen ese dato, pero
+`missing_age_by_class.csv` muestra qué proporción representa dentro de cada clase.
+Esta comparación describe una asociación entre clase y ausencia de edad; no
+demuestra que la clase la cause.
 
 La tabla de [fuentes](./FUENTES.md) reúne la documentación oficial usada en esta
 sesión.

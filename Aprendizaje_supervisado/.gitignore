@@ -1,0 +1,19 @@
+# Solucionarios: solo se publican las soluciones de las actividades de las Unidades 1-3.
+# La solución del examen (y cualquier otra) nunca se publica.
+*solucion*
+*_solution*
+solucionarios/
+!unidad1/solucion_*.ipynb
+!unidad2/solucion_*.ipynb
+!unidad3/solucion_*.ipynb
+
+# Archivos de trabajo
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+.ipynb_checkpoints/
+.DS_Store

@@ -10,7 +10,8 @@ de cada clase respecto de todas las etiquetas recibidas. Conserva `class_id`,
 `class_name`, `count` y las clases con conteo cero. Actualiza el tipo de retorno
 para admitir valores `float`.
 
-Añade una prueba con etiquetas `[0, 0, 2, 2, 2]` y clases
+Comprueba en la notebook, con aserciones y sin añadir pruebas pytest, las
+etiquetas `[0, 0, 2, 2, 2]` y las clases
 `["class_a", "class_b", "class_c"]`: conteos `[2, 0, 3]`, proporciones
 `[0.4, 0.0, 0.6]` y suma aproximadamente uno.
 
@@ -22,7 +23,7 @@ conteos y cambiar `limit` puede alterarlos.
 ## Entregables
 
 - Una copia de la notebook con los ejercicios 1–4 resueltos y sus explicaciones.
-- El proyecto con la función modificada y su prueba.
+- El proyecto con la función modificada y la comprobación del caso en la notebook.
 - `class_counts.csv` y la explicación del denominador y los conteos, que puede ir
   en la notebook.
 

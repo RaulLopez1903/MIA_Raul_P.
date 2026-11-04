@@ -1,0 +1,20 @@
+[project]
+name = "document-agent-lab"
+version = "0.1.0"
+description = "Optional LangChain agent with document tools and middleware"
+requires-python = ">=3.12"
+dependencies = [
+    "langchain>=1.4,<2",
+    "langchain-google-genai>=4.4.0",
+    "pydantic>=2,<3",
+    "python-dotenv>=1,<2",
+]
+
+[project.optional-dependencies]
+mcp = ["langchain[mcp]>=1.4,<2"]
+openai = ["langchain-openai>=1,<2"]
+anthropic = ["langchain-anthropic>=1,<2"]
+gemini = ["langchain-google-genai>=4,<5"]
+
+[dependency-groups]
+dev = ["ipykernel>=6,<8", "nbconvert>=7,<8", "pip>=25,<27"]

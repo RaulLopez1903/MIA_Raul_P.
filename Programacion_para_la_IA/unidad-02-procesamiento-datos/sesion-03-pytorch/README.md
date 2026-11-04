@@ -111,7 +111,7 @@ Con los argumentos predeterminados, `outputs/` contiene:
 |---|---|
 | `images.npy` | 64 imágenes, forma `(64, 3, 32, 32)`, `float32`, escala `[0, 1]` |
 | `labels.npy` | 64 identificadores de clase en el mismo orden, `int64` |
-| `class_counts.csv` | Conteo de las diez clases dentro de esas 64 imágenes |
+| `class_counts.csv` | Conteo y proporción de las diez clases dentro de esas 64 imágenes |
 | `report.json` | Conjunto, selección, formas, tipos y nombres de clase |
 
 La selección conserva el orden del dataset y no pretende representar la
