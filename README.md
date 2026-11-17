@@ -1,144 +1,163 @@
 # MIA_Raul_P
 
-Repositorio personal de la asignatura de Introducción a la Inteligencia Artificial de la Maestría en Inteligencia Artificial UADY (2026-2027). Aquí se documentan ejercicios, reportes, notas y experimentos realizados a lo largo del curso, con enfoque en agentes inteligentes, búsqueda, visión computacional, clustering y redes neuronales.
+Repositorio personal de trabajos, prácticas y proyectos de la Maestría en Inteligencia Artificial de la Universidad Autónoma de Yucatán (UADY).
 
-## Descripción general
+El repositorio reúne materiales de varias asignaturas. Contiene notebooks, presentaciones, reportes, ejercicios de programación, conjuntos de datos, aplicaciones de ejemplo y resultados de prácticas.
 
-Este repositorio recopila el trabajo académico desarrollado en la carpeta `Introduccion_a_la_IA`, organizada por temas y actividades. El contenido incluye:
+## Contenido del repositorio
 
-- ejercicios prácticos con scripts y ejemplos de programación,
-- reportes escritos con análisis técnico y resultados,
-- imágenes de evidencia de ejecución,
-- notebooks de Python para modelos de aprendizaje automático,
-- notas de lectura y conceptos fundamentales de IA.
+| Carpeta | Asignatura | Contenido principal |
+|---|---|---|
+| [Introduccion_a_la_IA](./Introduccion_a_la_IA/) | Introducción a la Inteligencia Artificial | Agentes, búsqueda, visión computacional, clustering, redes neuronales y un proyecto RAG |
+| [Programacion_para_la_IA](./Programacion_para_la_IA/) | Programación para la Inteligencia Artificial | Python moderno, NumPy, pandas, PyTorch, visualización, SQL/NoSQL, LangGraph, LangChain y proyecto final MCP |
+| [Aprendizaje_supervisado](./Aprendizaje_supervisado/) | Aprendizaje supervisado | Materiales por unidades y módulos, notebooks de examen y prácticas, evaluaciones y sitio de publicación |
 
-## Estructura del repositorio
+## Introducción a la Inteligencia Artificial
 
-```text
-MIA_Raul_P/
-├── README.md
-└── Introduccion_a_la_IA/
-    ├── Ejercicios/
-    │   ├── 01_Conceptos_básicos_de_Inteligencia_Artificial/
-    │   │   └── Ejercicio-01.MD
-    │   ├── 02_Agentes/
-    │   │   ├── Ejercicio-01/
-    │   │   │   ├── Images/
-    │   │   │   ├── Reporte.MD
-    │   │   │   ├── mi_cueva_4x4.yaml
-    │   │   │   └── mi_cueva_dificil_4x4.yaml
-    │   │   └── Ejercicio-02/
-    │   │       └── Reporte.MD
-    │   ├── 03_Busqueda_no_informada/
-    │   │   ├── 03_Images/
-    │   │   └── Reporte.MD
-    │   ├── 04_Busqueda_informada/
-    │   │   ├── 04_Images/
-    │   │   └── Reporte.MD
-    │   ├── 06_Vision_computacional/
-    │   │   ├── 06_Images/
-    │   │   ├── 13 YOLO ultralytics.ipynb
-    │   │   └── Reporte.MD
-    │   ├── 07_Clustering/
-    │   │   ├── 07_Images/
-    │   │   ├── 01 K-medias.ipynb
-    │   │   └── Reporte.MD
-    │   └── Perceptrón multicapa/
-    │       ├── 05_Images/
-    │       ├── 04 Multilayer perceptron.ipynb
-    │       ├── 05 Keras - multilayer perceptron - iris.ipynb
-    │       └── Reporte.MD
-    └── Notas/
-        └── 01_Conceptos_básicos_de_Inteligencia_Artificial.MD
+La carpeta [Introduccion_a_la_IA](./Introduccion_a_la_IA/) contiene notas y ejercicios organizados por tema:
+
+- conceptos básicos de inteligencia artificial;
+- agentes inteligentes y análisis PEAS;
+- búsqueda no informada e informada;
+- visión computacional con YOLO;
+- agrupamiento con K-medias;
+- perceptrón multicapa y redes neuronales;
+- proyecto RAG con recuperación de documentos, embeddings y ChromaDB.
+
+Los ejercicios incluyen reportes en Markdown, notebooks de Jupyter, imágenes de evidencia, presentaciones PDF y archivos de configuración YAML.
+
+### Proyecto RAG
+
+[RAG_Project](./Introduccion_a_la_IA/RAG_Project/) es una implementación experimental de recuperación aumentada por generación. Utiliza documentos locales, FastAPI, Streamlit, ChromaDB y modelos de Google Gemini.
+
+El proyecto incluye:
+
+- archivos de fuente en `data/`;
+- configuración de entorno mediante `.env.example`;
+- base vectorial persistente en `chroma/`;
+- dependencias en `requirements.txt`.
+
+## Programación para la Inteligencia Artificial
+
+La carpeta [Programacion_para_la_IA](./Programacion_para_la_IA/) organiza el trabajo por unidades y sesiones:
+
+### Unidad 1: Python moderno
+
+- curso acelerado de Python y Zen de Python;
+- tipado, Pydantic y modelos de datos;
+- iteradores, recursos y concurrencia;
+- organización de proyectos y reproducibilidad.
+
+Cada sesión cuenta con una guía propia y prácticas ejecutables. Los proyectos usan Python moderno y, en varios casos, [`uv`](https://docs.astral.sh/uv/) para gestionar dependencias y entornos.
+
+### Unidad 2: Procesamiento y análisis de datos
+
+- NumPy y vectorización;
+- pandas y análisis del conjunto de datos Titanic;
+- PyTorch y entrenamiento básico;
+- visualización de datos;
+- pruebas automatizadas y notebooks.
+
+Los proyectos incluyen aplicaciones pequeñas, módulos de procesamiento, conjuntos de datos y resultados generados.
+
+### Unidad 3: Integración y calidad
+
+- Python como cliente de SQLite y Neo4j;
+- workflows de datos con LangGraph;
+- agentes y herramientas MCP con LangChain;
+- consultas parametrizadas, validación y organización de resultados.
+
+La sesión de LangChain se marca como opcional y puede requerir credenciales propias para ejecutar el modelo.
+
+### Proyecto final
+
+[proyecto-final](./Programacion_para_la_IA/proyecto-final/) implementa un servidor MCP por HTTP para buscar y analizar productos de **Amazon Reviews 2023 · Electronics**.
+
+El servidor expone herramientas para:
+
+- búsqueda semántica de productos;
+- análisis de calificaciones;
+- comparación de productos;
+- manejo de consultas inválidas y productos desconocidos.
+
+El proyecto utiliza embeddings con PyTorch o NumPy, FastAPI y MCP. Los datos seleccionados se limitan a 600 productos y 6992 reseñas, por lo que los resultados no representan la totalidad del catálogo o de las opiniones de Amazon.
+
+## Aprendizaje supervisado
+
+La carpeta [Aprendizaje_supervisado](./Aprendizaje_supervisado/) contiene materiales del curso de aprendizaje supervisado:
+
+- planeación didáctica;
+- presentaciones de introducción y unidades;
+- notebooks de actividades y soluciones;
+- prácticas y exámenes de módulos;
+- conjuntos de datos de estabilidad de redes eléctricas;
+- un examen final publicado como sitio HTML;
+- una página de presentación del curso.
+
+Las unidades 1 a 3 incluyen actividades de EDA, preprocesamiento y selección de variables. Las unidades posteriores contienen presentaciones y notebooks sobre SVM, redes neuronales, evaluación de hiperparámetros, ensambles y boosting.
+
+El README específico de esta línea académica se encuentra en [Aprendizaje_supervisado/README.md](./Aprendizaje_supervisado/README.md).
+
+## Tecnologías utilizadas
+
+Según el proyecto o la práctica, el repositorio utiliza:
+
+- Python y Jupyter Notebook;
+- NumPy y pandas;
+- PyTorch;
+- scikit-learn;
+- TensorFlow / Keras;
+- FastAPI y Streamlit;
+- Pydantic;
+- LangGraph y LangChain;
+- MCP;
+- SQLite y Neo4j;
+- ChromaDB;
+- modelos de embeddings y Google Gemini;
+- YOLO / Ultralytics;
+- OpenCV;
+- UV para entornos y dependencias;
+- Git y GitHub Pages.
+
+## Ejecución general
+
+No existe una aplicación única para todo el repositorio. Los proyectos suelen tener su propio entorno, notebook o guía de ejecución.
+
+### Notebooks
+
+Muchas prácticas pueden abrirse directamente con Jupyter, VS Code o Google Colab:
+
+```bash
+python -m pip install jupyter
+jupyter notebook
 ```
 
-## Temas abordados
+### Proyectos administrados con `uv`
 
-### 1. Conceptos básicos de IA
+Dentro de la carpeta del proyecto:
 
-Se incluyen definiciones y fundamentos introductorios sobre Inteligencia Artificial, así como una primera nota de lectura relacionada con el ensayo de Alan Turing: "Computing Machinery and Intelligence".
+```bash
+uv sync --locked
+uv run --locked python main.py
+```
 
-### 2. Agentes inteligentes
+Los proyectos individuales pueden usar otros nombres de archivo. Consulta su README, notebook o archivo `pyproject.toml`.
 
-Se exploran distintos tipos de agentes:
+### Proyecto RAG
 
-- agente reactivo simple,
-- agente basado en modelo,
-- agente basado en metas,
-- agente basado en utilidad,
-- agente con aprendizaje,
-- análisis PEAS para diferentes aplicaciones.
+Desde `Introduccion_a_la_IA/RAG_Project`:
 
-El ejercicio más destacado es la implementación y evaluación del entorno del Wumpus World, con configuraciones YAML y reportes visuales comparando el comportamiento de cada agente.
+```bash
+python -m pip install -r requirements.txt
+```
 
-### 3. Búsqueda no informada
+Debe configurarse un archivo `.env` a partir de `.env.example` antes de ejecutar las funciones que requieran una API de Google Gemini.
 
-Se comparan algoritmos clásicos como:
+## Convenciones y contenido generado
 
-- BFS (Breadth-First Search)
-- UCS (Uniform-Cost Search)
-- DFS (Depth-First Search)
-- DLS (Depth-Limited Search)
-- IDS (Iterative Deepening Search)
+Algunos directorios contienen artefactos de ejecución, entornos virtuales, cachés, salidas de pruebas o bases de datos locales. Se recomienda revisar los archivos `.gitignore` de cada proyecto antes de compartir o publicar cambios.
 
-El caso de estudio es la ruta entre Timisoara y Bucharest en el mapa de Rumania, con métricas de profundidad, costo, nodos expandidos y generados.
-
-### 4. Búsqueda informada
-
-Se evaluan técnicas con heurísticas, principalmente:
-
-- Greedy Best-First Search
-- A* Search
-
-Se analizan diferencias entre una estrategia miopista y otra que incorpora costo acumulado más la estimación heurística.
-
-### 5. Visión computacional
-
-Se trabaja con detección de objetos usando YOLOv8 y su inferencia sobre imágenes base y personalizadas. El repositorio incluye:
-
-- notebooks de Google Colab,
-- imágenes de salida,
-- análisis del comportamiento del modelo,
-- discusión sobre precisión, objetos omitidos y ajuste de parámetros.
-
-### 6. Clustering
-
-Se realiza un ejercicio de K-medias con visualización de centroides, inercia, silhouette score y separación de clústeres. El contenido incluye notebook y gráficas del proceso.
-
-### 7. Redes neuronales y perceptrón multicapa
-
-Se estudia el entrenamiento de perceptrones multicapa para clasificar el dataset Iris, comparando implementaciones manuales y con Keras/TensorFlow. Se analizan aspectos como:
-
-- profundidad de la red,
-- inicialización de pesos,
-- desvanecimiento del gradiente,
-- efecto de añadir capas ocultas.
-
-## Archivos relevantes
-
-- `Introduccion_a_la_IA/Notas/01_Conceptos_básicos_de_Inteligencia_Artificial.MD` — notas y materiales introductorios.
-- `Introduccion_a_la_IA/Ejercicios/02_Agentes/Ejercicio-01/Reporte.MD` — análisis del mundo del Wumpus.
-- `Introduccion_a_la_IA/Ejercicios/03_Busqueda_no_informada/Reporte.MD` — comparación de algoritmos de búsqueda no informada.
-- `Introduccion_a_la_IA/Ejercicios/04_Busqueda_informada/Reporte.MD` — comparación de búsqueda informada.
-- `Introduccion_a_la_IA/Ejercicios/06_Vision_computacional/Reporte.MD` — detección de objetos con YOLO.
-- `Introduccion_a_la_IA/Ejercicios/07_Clustering/Reporte.MD` — análisis de clustering con K-medias.
-- `Introduccion_a_la_IA/Ejercicios/Perceptrón multicapa/Reporte.MD` — estudio del MLP y sus derivados.
-
-## Herramientas y entorno
-
-Los ejercicios utilizan principalmente:
-
-- Python
-- Jupyter Notebook
-- Google Colab
-- NumPy
-- TensorFlow / Keras
-- OpenCV / ultralytics (en visión computacional)
-- YAML para configuraciones de entornos
-
-## Propósito del repositorio
-
-Este repositorio sirve como portafolio académico y registro de aprendizaje del curso de Introducción a la Inteligencia Artificial, mostrando tanto la teoría como la práctica aplicada de los principales paradigmas de la IA.
+Los solucionarios y archivos de examen pueden estar restringidos por las reglas propias de cada asignatura. No deben publicarse contenidos que el curso indique mantener privados.
 
 ## Autor
 
