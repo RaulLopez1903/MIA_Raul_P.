@@ -1,0 +1,114 @@
+1. Una variable de precio tiene varios valores idénticos en un máximo artificial (censura, no un valor real).
+Explica por qué el boxplot y la regla del IQR, por sí solos, no distinguen esto de un valor atípico genuino.
+
+Respuesta: 
+El boxplot y el IQR dan una idea de la distribución de los valores. Un límite o un atípico caen fuera de los bigotes sin distinción; 
+para poder distinguir es necesario un histograma o conocer el proceso de recopilación de datos.
+
+
+2. Explica, con un ejemplo, qué fuga de datos (data leakage) ocurre si ajustas un imputador o un escalador usando todo el conjunto de datos
+antes de dividirlo en entrenamiento y prueba.
+
+Respuesta: 
+El imputador o escalador leen información de los datos de prueba y el entrenamiento obtiene información
+que no tendría al introducir datos nuevos y la evaluación resulta demasiado optimista.
+
+
+3. Explica cómo funciona, paso a paso, la Eliminación Recursiva de Variables (RFE), y menciona una desventaja práctica frente a un método
+de filtro simple (como la correlación).
+
+Respuesta: 
+RFE ajusta un modelo con las variables disponibles, las ordena según su importancia, elimina la menos importante y
+repite el proceso hasta alcanzar la cantidad deseada. Es más costoso que un filtro simple porque debe ajustar el modelo muchas veces.
+
+
+4. Un modelo polinomial de grado alto se ajusta casi perfectamente a los datos de entrenamiento, pero su error es mucho mayor en datos nuevos.
+Nombra este fenómeno y explica, en términos de sesgo y varianza, por qué ocurre.
+
+Respuesta: 
+Es sobreajuste, el modelo tiene bajo sesgo, pero alta varianza. Ocurre porque minimiza el error de entrenamiento al maximo pero lo que aprende
+no le sirve al integrar datos nuevos.
+
+
+5. Explica por qué Lasso (L1) puede llevar coeficientes exactamente a cero mientras que Ridge (L2) no, y qué efecto práctico tiene
+esto para la selección de variables.
+
+Respuesta: 
+L1 tiene una geometría con esquinas que busca soluciones donde algunos coeficientes son exactamente cero,
+L2 los reduce, pero no los anula. Por eso Lasso puede descartar variables y producir un modelo más sencillo.
+
+
+6. En una Support Vector Regression con kernel RBF, explica qué controla el hiperparámetro gamma y qué le pasa al modelo si gamma
+es demasiado grande.
+
+Respuesta: 
+Gamma controla la influencia de cada punto, con gamma grande esa influencia es poca. Si es demasiado grande,
+el modelo se vuelve muy flexible, se ajusta a los datos de entrenamiento y puede sobreajustar.
+
+
+7. Explica por qué un árbol de decisión sin restricciones (max_depth=None) casi siempre sobreajusta, y nombra una forma concreta de controlarlo.
+
+Respuesta: 
+Puede seguir dividiendo hasta crear hojas que representen casos individuales y capturar ruido del entrenamiento.
+Se puede limitar su profundidad fijando max_depth.
+
+
+8. Explica qué es la maldición de la dimensionalidad y por qué afecta particularmente a un clasificador como k vecinos más cercanos (kNN).
+
+Respuesta: 
+Al aumentar las dimensiones, los datos se vuelven dispersos y las distancias entre puntos pierden capacidad para distinguir cercanía. 
+Como kNN depende de esas distancias, sus vecinos pueden dejar de ser realmente similares.
+
+
+9. Explica el supuesto de independencia condicional («naive») detrás de Naive Bayes, 
+y por qué el modelo suele funcionar razonablemente bien en la práctica aunque ese supuesto casi nunca se cumpla exactamente.
+
+Respuesta: 
+Naive Bayes supone que las variables predictoras son independientes entre sí una vez conocida la clase. 
+Aunque no siempre sea cierto, las probabilidades estimadas son suficiente para ordenar las clases y que la clasificación funcione bien.
+
+
+10. Explica qué es el truco del kernel en una SVM y por qué permite separar clases que no son linealmente separables en el espacio original, 
+sin construir explícitamente las variables transformadas.
+
+Respuesta: 
+El kernel calcula productos internos para proyectar los datos a una dimension superior, similar a una transformación. 
+Ahí, puede existir un hiperplano que separe las clases aunque no haya una separación lineal en el espacio original.
+
+
+11. Explica por qué un perceptrón simple no puede resolver el problema XOR, y qué lo hace posible en una red neuronal multicapa (MLP).
+
+Respuesta: 
+XOR no es linealmente separable, así que un único perceptrón no puede trazar una frontera que clasifique correctamente sus cuatro casos.
+Una MLP combina capas y activaciones no lineales para construir una frontera más compleja.
+
+
+12. En un problema de clasificación con clases muy desbalanceadas, explica por qué la exactitud (accuracy) puede ser una métrica engañosa,
+y qué mide en su lugar el coeficiente kappa de Cohen o el MCC.
+
+Respuesta: 
+Si una clase domina, predecir siempre esa clase puede dar alta exactitud sin identificar la minoritaria.
+Kappa mide el acuerdo por encima del esperado por azar, MCC resume la relación entre predicciones y etiquetas usando la información
+de la matriz de confusión.
+
+
+13. Explica por qué el bagging reduce la varianza de un modelo, y qué condición debe cumplirse entre los árboles individuales 
+para que ese beneficio ocurra.
+
+Respuesta: 
+Al promediar árboles entrenados con muestras bootstrap, las fluctuaciones particulares de cada árbol tienden a compensarse.
+Para que la reducción sea efectiva, sus errores no deben estar muy correlacionados.
+
+
+14. Explica la diferencia fundamental entre cómo construye sus modelos el bagging (en paralelo, de forma independiente) y
+el boosting (de forma secuencial), y por qué el boosting reduce principalmente el sesgo.
+
+Respuesta: 
+El bagging entrena modelos independientes en paralelo y combina sus predicciones, el boosting los entrena secuencialmente,
+dando más atención a los errores anteriores. Al añadir modelos que corrigen esos errores, puede representar patrones que un modelo débil
+no capturaba y reducir el sesgo.
+
+
+15. Para cerrar, nos interesa tu opinión honesta sobre el curso completo: ¿qué te pareció bien (temas, actividades, ritmo, materiales)?, 
+¿qué te pareció mal o se podría mejorar?, y ¿qué sugerencias concretas harías para las próximas generaciones? 
+Esta pregunta no se califica como conocimiento técnico; responde con la mayor honestidad y detalle posible."
