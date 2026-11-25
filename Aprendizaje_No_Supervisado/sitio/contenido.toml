@@ -1,0 +1,301 @@
+# =====================================================================
+#  Contenido de la página web del curso
+#  La página se genera con:  python3 sitio/construir.py
+#
+#  Marcado permitido en los textos:
+#    `código`     -> código       *cursiva*    -> cursiva
+#    **negrita**  -> negrita      [texto](url) -> enlace
+#
+#  Las presentaciones NO se anotan aquí: el script busca solo
+#  Sesion_N/SesionN-*.pdf y los notebooks Sesion_N/*.ipynb.
+# =====================================================================
+
+[curso]
+titulo = "Aprendizaje No Supervisado"
+etiqueta = "Maestría en Inteligencia Artificial · FMAT"
+subtitulo = "Planeación y presentaciones del curso"
+descripcion = """Una introducción práctica al aprendizaje automático no supervisado: el descubrimiento de estructura en \
+datos que no tienen etiquetas. El curso cubre dos metodologías básicas, los algoritmos de agrupamiento y la reducción \
+de la dimensionalidad, y una aplicación práctica, la detección de anomalías. Cada sesión combina fundamentos \
+conceptuales con implementación en Python (`scikit-learn`, `pandas`, `NumPy`, `Matplotlib`)."""
+competencia = """Implementa modelos de aprendizaje no supervisado mediante técnicas estadísticas y algoritmos \
+computacionales para la resolución de problemas de sectores productivos y sociales, con evidencia de rigurosidad \
+técnica y sensibilidad respecto a su impacto en la toma de decisiones informadas."""
+requisitos = """programación introductoria en Python, estadística y probabilidad básicas, fundamentos de álgebra \
+lineal y familiaridad con NumPy y pandas."""
+planeacion_pdf = "Planeacion_Didactica-Aprendizaje_No_Supervisado.pdf"
+pie = """Material del curso de Aprendizaje No Supervisado · Maestría en Inteligencia Artificial, Facultad de \
+Matemáticas. Los temas pueden ajustarse al ritmo del grupo."""
+# Para los enlaces «Abrir en Colab» de los notebooks
+repositorio = "CursosFMAT/Aprendizaje_No_Supervisado"
+rama = "main"
+
+# Tarjetas de datos generales
+[[datos]]
+titulo = "14 sesiones"
+texto = "de 2 horas (28 horas presenciales)"
+
+[[datos]]
+titulo = "3 unidades"
+texto = "agrupamiento, reducción de dimensionalidad y anomalías"
+
+[[datos]]
+titulo = "3 miniproyectos"
+texto = "uno al cierre de cada unidad"
+
+[[datos]]
+titulo = "8 créditos"
+texto = "128 horas en total, primer semestre"
+
+# Tabla de evaluación
+[[evaluacion]]
+elemento = "Miniproyecto 1 · Algoritmos de agrupamiento"
+entrega = "Sesión 6"
+peso = "30 %"
+
+[[evaluacion]]
+elemento = "Miniproyecto 2 · Reducción de dimensionalidad"
+entrega = "Sesión 10"
+peso = "35 %"
+
+[[evaluacion]]
+elemento = "Miniproyecto 3 · Detección de anomalías"
+entrega = "Sesión 14"
+peso = "35 %"
+
+# ---------------------------------------------------------------------
+#  Unidades (color: u0 gris, u1 azul, u2 naranja, u3 rojo)
+# ---------------------------------------------------------------------
+[[unidades]]
+id = "introduccion"
+nombre = "Introducción"
+titulo = "Introducción"
+resumen = "Fundamentos del aprendizaje no supervisado."
+mapa = "Sesión 1 · Fundamentos"
+color = "u0"
+
+[[unidades]]
+id = "unidad1"
+nombre = "Unidad 1"
+titulo = "Unidad 1 · Algoritmos de agrupamiento"
+resumen = "Sesiones 2 a 6. Cierra con la entrega del miniproyecto 1."
+mapa = "Sesiones 2–6 · Agrupamiento"
+color = "u1"
+
+[[unidades]]
+id = "unidad2"
+nombre = "Unidad 2"
+titulo = "Unidad 2 · Reducción de dimensionalidad"
+resumen = "Sesiones 7 a 10. Cierra con la entrega del miniproyecto 2."
+mapa = "Sesiones 7–10 · Reducción de dimensionalidad"
+color = "u2"
+
+[[unidades]]
+id = "unidad3"
+nombre = "Unidad 3"
+titulo = "Unidad 3 · Detección de anomalías"
+resumen = "Sesiones 11 a 14. Cierra con la entrega del miniproyecto 3."
+mapa = "Sesiones 11–14 · Detección de anomalías"
+color = "u3"
+
+# ---------------------------------------------------------------------
+#  Sesiones
+#  Campos opcionales: laboratorio, entrega, insignia,
+#  presentacion (ruta a un PDF con otro nombre)
+# ---------------------------------------------------------------------
+[[sesiones]]
+numero = 1
+unidad = "introduccion"
+titulo = "Introducción al aprendizaje no supervisado"
+temas = [
+  "Aprendizaje supervisado vs. no supervisado; tipos de problemas.",
+  "Preprocesamiento: valores faltantes, escalamiento y estandarización.",
+  "Medidas de distancia y similitud: euclidiana, Manhattan, coseno y Mahalanobis.",
+  "La maldición de la dimensionalidad.",
+]
+
+[[sesiones]]
+numero = 2
+unidad = "unidad1"
+titulo = "k-medias (*k-means*)"
+temas = [
+  "Algoritmo de Lloyd y función objetivo (inercia).",
+  "Inicialización k-means++ y múltiples reinicios.",
+  "Elección de *k*: método del codo y coeficiente de silueta.",
+  "Limitaciones: forma esférica, escala y valores atípicos.",
+]
+laboratorio = """demostración de k-medias con el conjunto Iris: elección de *k*, interpretación de los centros, \
+comparación con las especies y efecto de estandarizar. Incluido en la presentación."""
+
+[[sesiones]]
+numero = 3
+unidad = "unidad1"
+titulo = "Agrupamiento jerárquico"
+temas = [
+  "Enfoques aglomerativo y divisivo.",
+  "Criterios de enlace: simple, completo, promedio y Ward.",
+  "Dendrogramas y corte del árbol.",
+  "Complejidad computacional y escalabilidad.",
+]
+laboratorio = """demostración con el conjunto Iris y SciPy: construcción del árbol, elección del corte, \
+comparación de los criterios de enlace, lectura del dendrograma y comparación con k-medias. Incluido en la \
+presentación y en el notebook."""
+
+[[sesiones]]
+numero = 4
+unidad = "unidad1"
+titulo = "Modelos de mezclas gaussianas (GMM)"
+temas = [
+  "Agrupamiento probabilístico y asignaciones suaves.",
+  "Algoritmo de esperanza-maximización (EM).",
+  "Tipos de matriz de covarianza.",
+  "Selección de modelo con BIC y AIC.",
+]
+laboratorio = """demostración con el conjunto Iris y scikit-learn: ajuste de la mezcla, \
+asignaciones suaves, comparación de los tipos de covarianza, elección de K con BIC y AIC, y \
+comparación con k-medias en grupos elípticos. Incluido en la presentación y en el notebook."""
+
+[[sesiones]]
+numero = 5
+unidad = "unidad1"
+titulo = "Agrupamiento por densidad y espectral"
+temas = [
+  "DBSCAN: puntos núcleo, frontera y ruido; parámetros ε y `min_samples`.",
+  "HDBSCAN y OPTICS.",
+  "Agrupamiento espectral: grafo de similitud y laplaciano.",
+  "Grupos no convexos y de densidad variable.",
+]
+laboratorio = """demostración con datos sintéticos (lunas, círculos y grupos de densidades \
+distintas con ruido): elección de ε con la gráfica de k-distancia, límites de DBSCAN con densidades \
+distintas, y comparación de k-medias, DBSCAN, HDBSCAN y agrupamiento espectral. Incluido en la \
+presentación y en el notebook."""
+
+[[sesiones]]
+numero = 6
+unidad = "unidad1"
+titulo = "Validación e interpretación de agrupamientos"
+insignia = "Miniproyecto 1"
+temas = [
+  "Índices internos: silueta, Davies-Bouldin y Calinski-Harabasz.",
+  "Índices externos: índice de Rand ajustado (ARI) e información mutua normalizada.",
+  "Estabilidad de los agrupamientos (remuestreo).",
+  "Perfilado de grupos y comunicación de resultados.",
+]
+entrega = "miniproyecto 1, algoritmos de agrupamiento (30 %)."
+
+[[sesiones]]
+numero = 7
+unidad = "unidad2"
+titulo = "Análisis de componentes principales (PCA)"
+temas = [
+  "Varianza, covarianza y direcciones de máxima varianza.",
+  "Eigendescomposición de la matriz de covarianza.",
+  "Descomposición en valores singulares (SVD).",
+  "PCA como minimización del error de reconstrucción.",
+]
+laboratorio = "implementación de PCA con NumPy."
+
+[[sesiones]]
+numero = 8
+unidad = "unidad2"
+titulo = "PCA en la práctica y PCA con kernel"
+temas = [
+  "Varianza explicada, gráfico de sedimentación y elección de componentes.",
+  "Interpretación de cargas y biplots.",
+  "PCA con kernel para estructuras no lineales.",
+  "PCA incremental y aleatorizado para datos grandes.",
+]
+laboratorio = "PCA con scikit-learn sobre imágenes de dígitos y Fashion-MNIST."
+
+[[sesiones]]
+numero = 9
+unidad = "unidad2"
+titulo = "Aprendizaje de variedades (*manifold learning*)"
+temas = [
+  "Escalamiento multidimensional (MDS) e Isomap.",
+  "t-SNE: similitudes probabilísticas y perplejidad.",
+  "Riesgos al interpretar proyecciones no lineales.",
+]
+laboratorio = "comparación visual de PCA, MDS, Isomap y t-SNE sobre Fashion-MNIST."
+
+[[sesiones]]
+numero = 10
+unidad = "unidad2"
+titulo = "Modelos de variables latentes"
+insignia = "Miniproyecto 2"
+temas = [
+  "Análisis factorial y PCA probabilístico.",
+  "Análisis de componentes independientes (ICA).",
+  "Comparación de métodos lineales y no lineales.",
+]
+entrega = "miniproyecto 2, reducción de dimensionalidad (35 %)."
+
+[[sesiones]]
+numero = 11
+unidad = "unidad3"
+titulo = "Enfoques estadísticos y basados en densidad"
+temas = [
+  "Tipos de anomalías: puntuales, contextuales y colectivas.",
+  "Puntuación *z*, IQR y distancia de Mahalanobis.",
+  "Estimación de densidad con kernels y GMM.",
+  "Factor de valor atípico local (LOF).",
+]
+laboratorio = "detección de anomalías en conjuntos de ODDS. Planteamiento del miniproyecto 3."
+
+[[sesiones]]
+numero = 12
+unidad = "unidad3"
+titulo = "Métodos basados en modelos y su evaluación (I)"
+temas = [
+  "Bosque de aislamiento (*Isolation Forest*).",
+  "SVM de una clase (*One-Class SVM*).",
+]
+laboratorio = "comparativa de detectores con PyOD en un conjunto de fraude con tarjetas."
+
+[[sesiones]]
+numero = 13
+unidad = "unidad3"
+titulo = "Métodos basados en modelos y su evaluación (II)"
+temas = [
+  "Error de reconstrucción con PCA y autoencoders.",
+  "Evaluación con pocas etiquetas: precisión@k, curva PR y ROC-AUC.",
+]
+laboratorio = "comparativa de detectores con PyOD en un conjunto de fraude con tarjetas."
+
+[[sesiones]]
+numero = 14
+unidad = "unidad3"
+titulo = "Flujo integrador y cierre del curso"
+insignia = "Miniproyecto 3"
+temas = [
+  "Diseño del flujo completo: preparación, reducción, agrupamiento y anomalías.",
+  "Selección e interpretación de métricas.",
+  "Impacto de los resultados en la toma de decisiones.",
+  "Ética y sesgos en el análisis no supervisado.",
+  "Síntesis del curso y temas avanzados.",
+]
+entrega = "miniproyecto 3, detección de anomalías (35 %)."
+
+# ---------------------------------------------------------------------
+#  Software y recursos
+# ---------------------------------------------------------------------
+[recursos]
+software = [
+  "Python 3.10 o posterior",
+  "scikit-learn, pandas, NumPy, SciPy, Matplotlib, seaborn",
+  "PyOD y PyTorch (autoencoders)",
+  "Jupyter Notebook / JupyterLab, VS Code o Google Colab",
+]
+documentacion = [
+  "[Guía de scikit-learn: aprendizaje no supervisado](https://scikit-learn.org/stable/unsupervised_learning.html)",
+  "[Documentación de PyOD](https://pyod.readthedocs.io/)",
+  "`sklearn.datasets`, Fashion-MNIST, [Repositorio UCI](https://archive.ics.uci.edu/), [ODDS](https://odds.cs.stonybrook.edu/), Kaggle, datos abiertos de INEGI y datos.gob.mx",
+]
+bibliografia_basica = [
+  "James, G., Witten, D., Hastie, T., Tibshirani, R. y Taylor, J. (2023). *An Introduction to Statistical Learning: With Applications in Python*. Springer. ISBN 978-3-031-38747-0. (Cap. 12)",
+  "Bishop, C. M. (2006). *Pattern Recognition and Machine Learning*. Springer. ISBN 978-0387310732. (Caps. 9 y 12)",
+  "Murphy, K. P. (2022). *Probabilistic Machine Learning: An Introduction*. MIT Press. ISBN 978-0262046824. (Caps. 20 y 21)",
+]
+bibliografia_complementaria = [
+  "Hinton, G. E. y Sejnowski, T. J. (Eds.) (1999). *Unsupervised Learning: Foundations of Neural Computation*. MIT Press. ISBN 978-0262581684.",
+]

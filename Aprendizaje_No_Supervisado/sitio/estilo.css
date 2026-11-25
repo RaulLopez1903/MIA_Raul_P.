@@ -1,0 +1,97 @@
+/* Estilo de la página del curso Aprendizaje No Supervisado.
+   Colores tomados de las presentaciones Beamer del curso (marino, azul, naranja). */
+:root{
+  --primario:#1F3864; --secundario:#2E75B6; --acento:#E07B22;
+  --fondo:#ffffff; --fondo2:#F2F6FB; --texto:#1A1F2E; --suave:#55606E; --borde:#D3DEEA;
+  --u0:#6B7280; --u1:#2E75B6; --u2:#C46A1C; --u3:#A63A3A;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-tema="claro"]){
+    --primario:#9DBCE6; --secundario:#7FB0E0; --acento:#F0A25A;
+    --fondo:#11161f; --fondo2:#19212d; --texto:#E6ECF3; --suave:#A3B0BF; --borde:#2C3a4b;
+    --u0:#9CA3AF; --u1:#7FB0E0; --u2:#F0A25A; --u3:#E68A8A;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fondo);color:var(--texto);
+  font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--secundario)}
+code{font-size:.92em}
+.contenedor{max-width:900px;margin:0 auto;padding:0 16px}
+
+/* Portada */
+header.portada{background:linear-gradient(135deg,#1F3864,#2E75B6);color:#fff;padding:56px 16px 48px}
+header.portada .contenedor{padding:0}
+header.portada h1{margin:0 0 6px;font-size:clamp(28px,5vw,42px);line-height:1.15}
+header.portada p{margin:0;font-size:18px;opacity:.92}
+header.portada .etiqueta{display:inline-block;margin-bottom:14px;padding:3px 10px;border:1px solid rgba(255,255,255,.55);
+  border-radius:99px;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+
+/* Navegación */
+nav.indice{position:sticky;top:0;z-index:5;background:var(--fondo);border-bottom:1px solid var(--borde)}
+nav.indice .contenedor{display:flex;gap:4px 18px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;font-size:15px}
+nav.indice a{text-decoration:none;color:var(--suave);font-weight:600}
+nav.indice a:hover,nav.indice a:focus-visible{color:var(--primario)}
+
+main{padding:32px 0 56px}
+h2{font-size:24px;margin:44px 0 12px;color:var(--primario);scroll-margin-top:60px}
+h2:first-child{margin-top:0}
+
+/* Datos generales */
+.cuadricula{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.dato{background:var(--fondo2);border:1px solid var(--borde);border-radius:10px;padding:12px 14px}
+.dato b{display:block;font-size:22px;color:var(--primario)}
+.dato span{color:var(--suave);font-size:14px}
+.competencia{border-left:4px solid var(--acento);background:var(--fondo2);padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0}
+
+/* Tabla de evaluación */
+.tabla{width:100%;border-collapse:collapse;margin:12px 0;font-size:16px}
+.tabla th,.tabla td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--borde)}
+.tabla th{background:var(--fondo2);color:var(--primario)}
+.tabla td.num{text-align:right;font-weight:700;white-space:nowrap}
+
+/* Mapa de unidades */
+.mapa{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:12px 0}
+.mapa a{display:block;text-decoration:none;color:var(--texto);border:1px solid var(--borde);border-top:5px solid var(--color);
+  border-radius:10px;padding:10px 14px;background:var(--fondo)}
+.mapa a:hover,.mapa a:focus-visible{background:var(--fondo2)}
+.mapa b{display:block;color:var(--color)}
+.mapa span{font-size:14px;color:var(--suave)}
+
+/* Encabezado de cada unidad */
+.bloque{margin-top:36px;scroll-margin-top:60px}
+.bloque > p{margin:4px 0 8px;color:var(--suave)}
+.bloque h2{margin:0 0 4px;color:var(--color)}
+
+/* Tarjeta de sesión */
+.sesion{border:1px solid var(--borde);border-left:5px solid var(--color);border-radius:12px;overflow:hidden;margin:14px 0;background:var(--fondo);scroll-margin-top:60px}
+.sesion > header{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;background:var(--fondo2);padding:12px 18px;border-bottom:1px solid var(--borde)}
+.sesion > header .num{font-weight:700;color:var(--fondo);background:var(--color);border-radius:6px;padding:2px 10px;font-size:14px;white-space:nowrap}
+.sesion > header h3{margin:0;font-size:20px}
+.sesion .cuerpo{padding:14px 18px}
+.sesion ul{margin:4px 0 12px;padding-left:20px}
+.sesion .cuerpo > p:first-child{margin:0}
+
+.u0{--color:var(--u0)} .u1{--color:var(--u1)} .u2{--color:var(--u2)} .u3{--color:var(--u3)}
+
+/* Botones */
+.botones{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.boton{display:inline-block;padding:8px 16px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;
+  background:var(--primario);color:var(--fondo);border:2px solid var(--primario)}
+.boton.sec{background:transparent;color:var(--primario)}
+.boton:hover,.boton:focus-visible{filter:brightness(1.1);outline:3px solid var(--acento);outline-offset:2px}
+.boton[aria-disabled="true"]{opacity:.45;pointer-events:none;background:transparent;color:var(--suave);border-color:var(--borde)}
+.nota{font-size:14px;color:var(--suave);margin:10px 0 0}
+.entrega{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:99px;font-size:12px;font-weight:700;
+  background:var(--acento);color:#fff;vertical-align:middle}
+
+/* Recursos */
+.recursos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.recursos section{background:var(--fondo2);border:1px solid var(--borde);border-radius:10px;padding:12px 16px}
+.recursos h3{margin:0 0 6px;font-size:17px;color:var(--primario)}
+.recursos ul{margin:0;padding-left:18px;font-size:15px}
+.bibliografia li{margin-bottom:8px}
+
+footer{border-top:1px solid var(--borde);padding:20px 0;color:var(--suave);font-size:14px}
+[hidden]{display:none!important}

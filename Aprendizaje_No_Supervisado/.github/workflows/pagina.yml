@@ -1,0 +1,50 @@
+# Publica la página del curso en GitHub Pages.
+# Se ejecuta en cada push a main que cambie la página, las sesiones o la planeación,
+# y también a mano desde la pestaña Actions (o con: gh workflow run pagina.yml).
+# Requiere que en Settings → Pages la fuente sea «GitHub Actions».
+name: Página del curso
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "sitio/**"
+      - "Sesion_*/**"
+      - "Planeacion_Didactica-Aprendizaje_No_Supervisado.pdf"
+      - ".github/workflows/pagina.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Construir la página
+        run: python sitio/construir.py --salida _site
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - name: Publicar en GitHub Pages
+        id: despliegue
+        uses: actions/deploy-pages@v4

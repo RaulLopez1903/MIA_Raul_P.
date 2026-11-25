@@ -1,0 +1,63 @@
+
+% =====================================================================
+\section{Laboratorio}
+% =====================================================================
+
+\begin{frame}[fragile]{Configuración del entorno}
+\begin{lstlisting}[language=bash]
+# Opcion A: conda
+conda create -n ans python=3.12
+conda activate ans
+pip install numpy scipy pandas scikit-learn matplotlib seaborn jupyterlab umap-learn pyod
+
+# Opcion B: uv
+uv venv && source .venv/bin/activate
+uv pip install numpy scipy pandas scikit-learn matplotlib seaborn jupyterlab umap-learn pyod
+
+# Verificar
+python -c "import sklearn; print(sklearn.__version__)"
+jupyter lab
+\end{lstlisting}
+  \small Alternativa sin instalación: Google Colab. Crear un repositorio en GitHub para los notebooks del curso.
+\end{frame}
+
+\begin{frame}[fragile]{Exploración de un conjunto de datos sin etiquetas}
+\begin{lstlisting}
+import pandas as pd
+from sklearn.datasets import load_wine
+from sklearn.pipeline import make_pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import pairwise_distances
+
+df = load_wine(as_frame=True).data           # ignoramos la etiqueta a proposito
+print(df.shape); print(df.describe().T)      # escalas muy distintas
+print(df.isna().mean())                      # proporcion de faltantes
+
+prep = make_pipeline(SimpleImputer(strategy="median"), StandardScaler())
+X = prep.fit_transform(df)
+
+for metrica in ["euclidean", "manhattan", "cosine"]:
+    D = pairwise_distances(X, metric=metrica)
+    print(metrica, D.mean().round(2))
+
+df.corr().style.background_gradient(cmap="coolwarm")  # correlaciones
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Actividad y tarea}
+  \begin{block}{En clase}
+    \begin{enumerate}
+      \item Instalar el entorno y crear el repositorio de notebooks.
+      \item Explorar el conjunto de vinos: escalas, faltantes, correlaciones, histogramas.
+      \item Comparar los 5 vecinos más cercanos de una observación con y sin estandarizar, usando distancia euclidiana y coseno.
+    \end{enumerate}
+  \end{block}
+  \begin{exampleblock}{Para la sesión 2}
+    \begin{itemize}
+      \item Subir el notebook de la sesión al repositorio.
+      \item Leer: James et al.\ (2023), cap.~12.1 y 12.4.1 (k-medias); Bishop (2006), cap.~9.1.
+      \item Repasar distancia euclidiana y estandarización: k-medias depende de ambas.
+    \end{itemize}
+  \end{exampleblock}
+\end{frame}

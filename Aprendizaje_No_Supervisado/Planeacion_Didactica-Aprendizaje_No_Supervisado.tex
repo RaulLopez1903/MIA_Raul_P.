@@ -1,0 +1,330 @@
+% =====================================================================
+%  Planeación didáctica — Aprendizaje No Supervisado (FMAT-MIA-ANS)
+%  Basada en Carta_Descriptiva-Aprendizaje_No_Supervisado.md
+%  Formato tomado del modelo PD.pdf
+%  Compilar con: pdflatex (dos veces) o latexmk -pdf
+% =====================================================================
+\documentclass[11pt,letterpaper]{article}
+
+% ---------- Idioma y codificación ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noshorthands,es-tabla]{babel}
+
+% ---------- Tipografía (sans serif, como el modelo) ----------
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{microtype}
+
+% ---------- Página ----------
+\usepackage[letterpaper,margin=2cm,top=1.8cm]{geometry}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\pagestyle{plain}
+
+% ---------- Colores y tablas ----------
+\usepackage[table]{xcolor}
+\usepackage{array,longtable,tabularx}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{marino}{HTML}{1F3864}   % títulos y encabezados de tabla
+\definecolor{azul}{HTML}{2E75B6}     % subtítulo y reglas
+\definecolor{texto}{HTML}{333333}
+\definecolor{reqfondo}{HTML}{EAF2FA}
+\definecolor{resfondo}{HTML}{EEF6EE}
+\definecolor{filaclara}{HTML}{F5F9FD}
+
+% Colores por bloque del calendario (oscuro / claro, alternados)
+\definecolor{introA}{HTML}{E7E6E6}
+\definecolor{uniUnoA}{HTML}{D6E7F2} \definecolor{uniUnoB}{HTML}{EAF3F9}
+\definecolor{uniDosA}{HTML}{FFE3B8} \definecolor{uniDosB}{HTML}{FFF2DC}
+\definecolor{uniTresA}{HTML}{F8C6DE} \definecolor{uniTresB}{HTML}{FCE4EF}
+\definecolor{proyA}{HTML}{D5EAD2} \definecolor{proyB}{HTML}{E9F5E7}
+
+\color{texto}
+
+% ---------- Encabezados de sección ----------
+\titleformat{\section}
+  {\color{marino}\large\bfseries}
+  {}{0pt}{\MakeUppercase}[{\color{marino}\titlerule[0.6pt]}]
+\titlespacing*{\section}{0pt}{18pt}{10pt}
+
+% ---------- Utilidades ----------
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\C}[1]{\centering #1\\}
+\newcommand{\bul}{\textbullet~}
+% Texto blanco en negritas para encabezados de tabla
+\newcommand{\hd}[1]{\leavevmode\color{white}\textbf{#1}}
+% Celda de unidad: \unidad{Unidad 1}{Reducción de dimensionalidad}
+\newcommand{\unidad}[2]{\leavevmode{\color{marino}\textbf{#1}}\newline{\footnotesize\itshape #2}}
+% Celda de actividad (cursiva, como el modelo)
+\newcommand{\act}[1]{{\itshape #1}}
+
+% =====================================================================
+\begin{document}
+
+% ---------- Portada / encabezado ----------
+\begin{center}
+  {\color{marino}\fontsize{28}{32}\selectfont\bfseries Aprendizaje No Supervisado}\\[10pt]
+  {\color{azul}\Large\itshape Planeación didáctica}\\[10pt]
+  {\large 14 sesiones \;$\cdot$\; 2 horas por sesión \;$\cdot$\; 28 horas presenciales}\\[-4pt]
+  {\color{azul}\rule{\textwidth}{0.8pt}}
+\end{center}
+
+% =====================================================================
+\section{Descripción del curso}
+
+Este curso ofrece a los estudiantes una introducción práctica al aprendizaje automático no supervisado: el descubrimiento de estructura en datos que no tienen etiquetas. Se cubrirán dos metodologías básicas --algoritmos de agrupamiento y reducción de la dimensionalidad-- así como el tema de detección de anomalías como una aplicación práctica. Cada sesión combina fundamentos conceptuales con implementación práctica en Python (scikit-learn, pandas, NumPy, Matplotlib).
+
+\textbf{Competencia de la asignatura.} Implementa modelos de aprendizaje no
+supervisado mediante técnicas estadísticas y algoritmos computacionales para la
+resolución de problemas de sectores productivos y sociales, con evidencia de
+rigurosidad técnica y sensibilidad respecto a su impacto en la toma de
+decisiones informadas.
+
+% =====================================================================
+\section{Requisitos previos y resultados de aprendizaje}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{|>{\columncolor{reqfondo}}p{0.44\textwidth}|>{\columncolor{resfondo}}p{0.48\textwidth}|}
+\hline
+{\color{marino}\textbf{Requisitos previos}}
+\begin{itemize}[leftmargin=1.4em,topsep=2pt,itemsep=0pt]
+  \item Programación introductoria en Python
+  \item Estadística y probabilidad básicas
+  \item Fundamentos de álgebra lineal
+  \item Familiaridad con NumPy / pandas (recomendable)
+\end{itemize}
+&
+{\color{marino}\textbf{Resultados de aprendizaje}}
+\begin{itemize}[leftmargin=1.4em,topsep=2pt,itemsep=0pt]
+  \item Preparar, escalar y explorar conjuntos de datos reales sin etiquetas
+  \item Construir, comparar y validar modelos de agrupamiento
+  \item Aplicar e interpretar técnicas de reducción de dimensionalidad
+  \item Detectar anomalías con enfoques estadísticos, de densidad y basados en modelos
+  \item Entregar un flujo de aprendizaje no supervisado completo (de extremo a
+        extremo) y comunicar su impacto en la toma de decisiones
+\end{itemize}
+\\ \hline
+\end{tabular}
+\end{center}
+
+{\footnotesize\itshape La carta descriptiva no establece requisitos académicos
+previos; los anteriores son recomendaciones para seguir el ritmo del curso.}
+
+% =====================================================================
+\needspace{8\baselineskip}
+\section{Evaluación}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\rowcolors{2}{filaclara}{white}
+\begin{tabularx}{\textwidth}{|X|c|}
+\hline
+\rowcolor{marino}
+{\hd{Elemento de evaluación}} & {\hd{Peso}} \\ \hline
+Miniproyecto -- Agrupamiento (sesión 6)                               & \textbf{30 \%} \\ \hline
+Miniproyecto -- Reducción de dimensionalidad (sesión 10)                & \textbf{35 \%} \\ \hline
+Miniproyecto -- Detección de anomalías (sesión 14)                     & \textbf{35 \%} \\ \hline
+\end{tabularx}
+\end{center}
+
+
+% =====================================================================
+\vspace{4pt}
+\section{Calendario de sesiones}
+
+{\small
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{|p{0.75 cm}|L{2.3cm}|L{3.0cm}|L{6.2cm}|L{3.0cm}|}
+\hline
+\rowcolor{marino}
+{\centering \hd{\#}\\} &
+{\hd{Unidad}} &
+{\hd{Título de la sesión}} &
+\centering{\hd{Temas principales}} &
+{\hd{Laboratorio / Actividad}} \\ \hline
+\endfirsthead
+\hline
+\rowcolor{marino}
+{\centering \hd{\#}\\} &
+{\hd{Unidad}} &
+{\hd{Título de la sesión}} &
+\centering{\hd{Temas principales}} &
+{\hd{Laboratorio / Actividad}} \\ \hline
+\endhead
+
+% ---------------- Introducción ----------------
+\rowcolor{introA}
+\C{1} & \unidad{Introducción}{Fundamentos} &
+\textbf{Introducción al aprendizaje no supervisado} &
+\bul Aprendizaje supervisado vs.\ no supervisado; tipos de problemas\newline
+\bul Preprocesamiento: valores faltantes, escalamiento y estandarización\newline
+\bul Medidas de distancia y similitud (euclidiana, Manhattan, coseno, Mahalanobis)\newline
+\bul La maldición de la dimensionalidad &
+\act{Configuración del entorno; exploración de un conjunto de datos sin etiquetas} \\ \hline
+
+% ---------------- Unidad 1 ----------------
+\rowcolor{uniUnoA}
+\C{2} & \unidad{Unidad 1}{Algoritmos de agrupamiento} &
+\textbf{k-medias (\emph{k-means})} &
+\bul Algoritmo de Lloyd y función objetivo (inercia)\newline
+\bul Inicialización k-means++ y múltiples reinicios\newline
+\bul Elección de $k$: método del codo y coeficiente de silueta\newline
+\bul Limitaciones: forma esférica, escala y valores atípicos &
+\act{Segmentación de clientes con k-medias} \\ \hline
+
+\rowcolor{uniUnoB}
+\C{3} & \unidad{Unidad 1}{Algoritmos de agrupamiento} &
+\textbf{Agrupamiento jerárquico} &
+\bul Enfoques aglomerativo y divisivo\newline
+\bul Criterios de enlace: simple, completo, promedio y Ward\newline
+\bul Dendrogramas y corte del árbol\newline
+\bul Complejidad computacional y escalabilidad &
+\act{Agrupamiento jerárquico con SciPy e interpretación de dendrogramas} \\ \hline
+
+\rowcolor{uniUnoA}
+\C{4} & \unidad{Unidad 1}{Algoritmos de agrupamiento} &
+\textbf{Modelos de mezclas gaussianas (GMM)} &
+\bul Agrupamiento probabilístico y asignaciones suaves\newline
+\bul Algoritmo de esperanza-maximización (EM)\newline
+\bul Tipos de matriz de covarianza\newline
+\bul Selección de modelo con BIC y AIC &
+\act{Comparación de GMM y k-medias en datos con grupos elípticos} \\ \hline
+
+\rowcolor{uniUnoB}
+\C{5} & \unidad{Unidad 1}{Algoritmos de agrupamiento} &
+\textbf{Agrupamiento por densidad y espectral} &
+\bul DBSCAN: puntos núcleo, frontera y ruido; parámetros $\varepsilon$ y \texttt{min\_samples}\newline
+\bul HDBSCAN y OPTICS\newline
+\bul Agrupamiento espectral: grafo de similitud y laplaciano\newline
+\bul Grupos no convexos y de densidad variable &
+\act{Comparación de DBSCAN, HDBSCAN y agrupamiento espectral en formas no convexas} \\ \hline
+
+\rowcolor{uniUnoA}
+\C{6} & \unidad{Unidad 1}{Algoritmos de agrupamiento} &
+\textbf{Validación e interpretación de agrupamientos} &
+\bul Índices internos: silueta, Davies-Bouldin, Calinski-Harabasz\newline
+\bul Índices externos: ARI, información mutua normalizada\newline
+\bul Estabilidad de los agrupamientos (remuestreo)\newline
+\bul Perfilado de grupos y comunicación de resultados &
+\act{Entrega del miniproyecto 1} \\ \hline
+
+% ---------------- Unidad 2 ----------------
+\rowcolor{uniDosA}
+\C{7} & \unidad{Unidad 2}{Reducción de dimensionalidad} &
+\textbf{Análisis de componentes principales (PCA)} &
+\bul Varianza, covarianza y direcciones de máxima varianza\newline
+\bul Eigendescomposición de la matriz de covarianza\newline
+\bul Descomposición en valores singulares (SVD)\newline
+\bul PCA como minimización del error de reconstrucción &
+\act{Implementación de PCA desde cero con NumPy} \\ \hline
+
+\rowcolor{uniDosB}
+\C{8} & \unidad{Unidad 2}{Reducción de dimensionalidad} &
+\textbf{PCA en la práctica y PCA con kernel} &
+\bul Varianza explicada, gráfico de sedimentación y elección de componentes\newline
+\bul Interpretación de cargas y biplots\newline
+\bul PCA con kernel para estructuras no lineales\newline
+\bul PCA incremental y aleatorizado para datos grandes &
+\act{PCA con scikit-learn sobre imágenes de dígitos y Fashion-MNIST} \\ \hline
+
+\rowcolor{uniDosA}
+\C{9} & \unidad{Unidad 2}{Reducción de dimensionalidad} &
+\textbf{Aprendizaje de variedades (\emph{manifold learning})} &
+\bul Escalamiento multidimensional (MDS) e Isomap\newline
+\bul t-SNE: similitudes probabilísticas y perplejidad\newline
+\bul Riesgos al interpretar proyecciones no lineales &
+\act{Comparación visual de PCA, MDS, Isomap y t-SNE sobre Fashion-MNIST} \\ \hline
+
+\rowcolor{uniDosB}
+\C{10} & \unidad{Unidad 2}{Reducción de dimensionalidad} &
+\textbf{Modelos de variables latentes y autoencoders} &
+\bul Análisis factorial y PCA probabilístico\newline
+\bul Análisis de componentes independientes (ICA)\newline
+%\bul Autoencoders: codificador, decodificador y espacio latente\newline
+\bul Comparación de métodos lineales y no lineales &
+\act{Entrega del miniproyecto 2} \\ \hline
+
+
+% ---------------- Unidad 3 ----------------
+\rowcolor{uniTresA}
+\C{11} & \unidad{Unidad 3}{Detección de anomalías} &
+\textbf{Enfoques estadísticos y basados en densidad} &
+\bul Tipos de anomalías: puntuales, contextuales y colectivas\newline
+\bul Puntuación $z$, IQR y distancia de Mahalanobis\newline
+\bul Estimación de densidad con kernels y GMM\newline
+\bul Factor de valor atípico local (LOF) &
+\act{planteamiento del miniproyecto 3: Detección de anomalías en conjuntos de ODDS.} \\ \hline
+
+\rowcolor{uniTresB}
+\C{12} & \unidad{Unidad 3}{Detección de anomalías} &
+\textbf{Métodos basados en modelos y su evaluación (I)} &
+\bul Bosque de aislamiento (\emph{Isolation Forest}) \newline
+\bul SVM de una clase (\emph{One-Class SVM}) &
+\act{Comparativa de detectores con PyOD en un conjunto de fraude con tarjetas} \\ \hline
+
+\rowcolor{uniTresA}
+\C{13} & \unidad{Unidad 3}{Detección de anomalías} &
+\textbf{Métodos basados en modelos y su evaluación (II)} &
+\bul Error de reconstrucción con PCA y autoencoders \newline
+\bul Evaluación con pocas etiquetas: precisión@k, curva PR, ROC-AUC &
+\act{Comparativa de detectores con PyOD en un conjunto de fraude con tarjetas} \\ \hline
+
+% -------------- Flujo integrador y Cierre ------------------
+\rowcolor{uniTresB}
+\C{14} & \unidad{Unidad 3}{Detección de anomalías} &
+\textbf{Flujo integrador y cierre del curso} &
+\bul Diseño del flujo completo: preparación, reducción, agrupamiento y anomalías\newline
+\bul Selección e interpretación de métricas\newline
+\bul Impacto de los resultados en la toma de decisiones\newline
+\bul Ética y sesgos en el análisis no supervisado \newline
+\bul Síntesis del curso y temas avanzados &
+\act{Entrega del miniproyecto 3} \\ \hline
+
+\end{longtable}
+}
+
+% =====================================================================
+\section{Software y recursos}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\rowcolors{1}{filaclara}{white}
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash\leavevmode\color{marino}\bfseries}p{4.2cm}|X|}
+\hline
+Lenguaje de programación & Python 3.10+ \\ \hline
+Bibliotecas principales  & scikit-learn, pandas, NumPy, SciPy, Matplotlib, seaborn \\ \hline
+Bibliotecas avanzadas    & PyOD, PyTorch (autoencoders) \\ \hline
+Entorno de desarrollo    & Jupyter Notebook / JupyterLab, VS Code con la extensión de Python o Google Colab \\ \hline
+Bibliografía básica      &
+James, G., Witten, D., Hastie, T., Tibshirani, R. y Taylor, J. (2023).
+\emph{An Introduction to Statistical Learning: With Applications in Python}.
+Springer. ISBN 978-3-031-38747-0. (Cap.~12)\par\vspace{3pt}
+Bishop, C. M. (2006). \emph{Pattern Recognition and Machine Learning}.
+Springer. ISBN 978-0387310732. (Caps.~9 y 12)\par\vspace{3pt}
+Murphy, K. P. (2022). \emph{Probabilistic Machine Learning: An Introduction}.
+MIT Press. ISBN 978-0262046824. (Caps.~20 y 21) \\ \hline
+Bibliografía complementaria &
+Hinton, G. E. y Sejnowski, T. J. (Eds.) (1999). \emph{Unsupervised Learning:
+Foundations of Neural Computation}. MIT Press. ISBN 978-0262581684. \\ \hline
+Documentación en línea   &
+Guía de usuario de scikit-learn (\emph{Unsupervised learning}); documentación de PyOD \\ \hline
+Conjuntos de datos       &
+\texttt{sklearn.datasets}, Fashion-MNIST, Repositorio UCI ML, ODDS (Outlier
+Detection DataSets), Kaggle, datos abiertos de INEGI y datos.gob.mx \\ \hline
+\end{tabularx}
+\end{center}
+
+{\footnotesize\itshape\color{gray}
+Nota: Los temas de las sesiones pueden ajustarse al ritmo del grupo. Todos los
+archivos de laboratorio y los conjuntos de datos se distribuirán a través de la
+plataforma del curso.}\\[-6pt]
+{\color{gray}\rule{\textwidth}{0.4pt}}
+
+\end{document}
